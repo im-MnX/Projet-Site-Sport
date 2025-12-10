@@ -2,17 +2,23 @@
 
 namespace App\Controller;
 
+use App\Entity\Evenement;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
 
-final class HomeController extends AbstractController
+class HomeController extends AbstractController
 {
-    #[Route('/', name: 'home')]
-    public function index(): Response
+    public function index(ManagerRegistry $doctrine): Response
     {
+        // Récupérer le repository de l'entité Evenement
+        $repository = $doctrine->getRepository(Evenement::class);
+
+        // Récupérer tous les événements
+        $evenements = $repository->findAll();
+
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
+            'evenements' => $evenements,
         ]);
     }
 }

@@ -1,0 +1,4 @@
+evenements_list:
+    path: /evenements
+    controller: App\Controller\EvenementController::index
+    methods: GET
