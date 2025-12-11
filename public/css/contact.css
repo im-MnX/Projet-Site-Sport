@@ -1,8 +1,5 @@
-/* Contact Page Styles - Modern Redesign */
-
 .main-content {
     max-width: 1600px;
-    /* Très large */
     width: 95%;
     margin: 0 auto;
     padding: 60px 20px 140px 20px;
@@ -19,7 +16,6 @@
     font-weight: 800;
     margin-bottom: 15px;
     letter-spacing: -1px;
-    /* Look moderne */
 }
 
 .header-title p {
@@ -33,19 +29,15 @@
 .container-grid2 {
     display: grid;
     grid-template-columns: 1fr 1.2fr;
-    /* Formulaire un peu plus large */
     gap: 60px;
     align-items: start;
     background: #fff;
     border-radius: 20px;
     padding: 0;
-    /* On retire le padding du conteneur grid */
 }
 
-/* Infos de contact - Look minimaliste */
 .form-left {
     background-color: transparent;
-    /* Plus de fond gris */
     padding: 40px;
     height: auto;
     display: flex;
@@ -59,7 +51,6 @@
     font-size: 2.2rem;
     font-weight: 700;
     border: none;
-    /* On enlève le soulignement jaune */
 }
 
 .form-left h3 {
@@ -69,7 +60,6 @@
     font-size: 1.4rem;
 }
 
-/* Style des cartes info */
 .info-item {
     display: flex;
     align-items: flex-start;
@@ -82,7 +72,6 @@
 
 .info-item:hover {
     background-color: #f0f9fd;
-    /* Très léger bleu au survol */
     transform: translateX(10px);
 }
 
@@ -90,7 +79,6 @@
     width: 50px;
     height: 50px;
     background-color: #e6f6fc;
-    /* Fond bleu très pâle */
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -100,7 +88,6 @@
 
 .icon-circle i {
     color: #2eb6e6;
-    /* Icône bleue */
     font-size: 1.4rem;
 }
 
@@ -128,7 +115,6 @@
     color: #2eb6e6;
 }
 
-/* Liens sociaux modernes */
 .social-links {
     display: flex;
     gap: 15px;
@@ -143,7 +129,6 @@
     color: #2eb6e6;
     border: 2px solid #e6f6fc;
     border-radius: 12px;
-    /* Carré arrondi moderne */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -161,25 +146,22 @@
 
 .social-link:hover i {
     color: #ffffff !important;
-    /* Force l'icône en blanc */
 }
 
-/* Formulaire - Look carte flottante */
 .form-right {
     background-color: #fff;
     padding: 50px;
     border-radius: 24px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-    /* Ombre large et diffuse */
     border: none;
 }
 
 .form-right h2 {
-    color: #222;
+    color: #2eb6e6;
+    /* Remis en bleu comme demandé implicitement par le design moderne */
     margin-bottom: 40px;
     font-size: 2rem;
     text-align: left;
-    /* Alignement gauche plus moderne */
     border: none;
     font-weight: 700;
 }
@@ -205,13 +187,9 @@
 .form-textarea {
     width: 100%;
     padding: 16px 20px;
-    /* Plus grand padding */
     border: 2px solid #f0f0f0;
-    /* Bordure très claire */
     border-radius: 12px;
-    /* Arrondi plus prononcé */
     background-color: #fbfbfb;
-    /* Fond très légèrement gris */
     font-family: 'Inter', sans-serif;
     font-size: 1.05rem;
     color: #333;
@@ -230,7 +208,6 @@
 .btn-primary {
     padding: 18px 30px;
     background: linear-gradient(135deg, #2eb6e6 0%, #0099cc 100%);
-    /* Dégradé */
     color: #fff;
     border: none;
     border-radius: 12px;
@@ -246,7 +223,6 @@
     margin-top: 20px;
     width: 100%;
     box-shadow: 0 10px 25px rgba(46, 182, 230, 0.3);
-    /* Ombre colorée */
 }
 
 .btn-primary:hover {
@@ -254,7 +230,6 @@
     box-shadow: 0 15px 35px rgba(46, 182, 230, 0.4);
 }
 
-/* Responsive */
 @media (max-width: 900px) {
     .container-grid2 {
         grid-template-columns: 1fr;
@@ -270,20 +245,14 @@
     }
 }
 
-/* Google Map Section - Modern Style */
 .contact-map-section {
     background-color: #fff;
     padding: 50px;
     border-radius: 24px;
-    /* Same border-radius as form-right */
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-    /* Same shadow as form-right */
     border: none;
-    /* AUCUNE bordure ! */
     margin-top: 60px;
-    /* Spacing from the grid */
     overflow: hidden;
-    /* Ensures content respects rounded corners */
 }
 
 .contact-map-section h2 {
@@ -298,14 +267,12 @@
     width: 100%;
     border-radius: 12px;
     overflow: hidden;
-    /* Clips the iframe corners */
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
 }
 
 .contact-map-placeholder {
     position: relative;
     padding-bottom: 400px;
-    /* Hauteur fixe ou aspect ratio */
     height: 0;
     overflow: hidden;
 }
