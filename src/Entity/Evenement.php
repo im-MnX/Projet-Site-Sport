@@ -7,32 +7,33 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EvenementRepository::class)]
+#[ORM\Table(name: "evenement")]
 class Evenement
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(name: "idEvenement", type: "integer")]
+    private ?int $idEvenement = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(name: "nom", length: 100)]
     private ?string $nom = null;
 
-    #[ORM\Column]
+    #[ORM\Column(name: "dateEvenement", type: Types::DATE_MUTABLE)]
     private ?\DateTime $dateEvenement = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $image = null;
+    #[ORM\Column(name: "images", length: 255, nullable: true)]
+    private ?string $images = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[ORM\Column(name: "description", type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\ManyToOne(inversedBy: 'evenements')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(targetEntity: TypeEvenement::class, inversedBy: "evenements")]
+    #[ORM\JoinColumn(name: "idTypeEvenement", referencedColumnName: "idTypeEvenement", nullable: false)]
     private ?TypeEvenement $typeEvenement = null;
 
-    public function getId(): ?int
+    public function getIdEvenement(): ?int
     {
-        return $this->id;
+        return $this->idEvenement;
     }
 
     public function getNom(): ?string
@@ -43,7 +44,6 @@ class Evenement
     public function setNom(string $nom): static
     {
         $this->nom = $nom;
-
         return $this;
     }
 
@@ -55,19 +55,17 @@ class Evenement
     public function setDateEvenement(\DateTime $dateEvenement): static
     {
         $this->dateEvenement = $dateEvenement;
-
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImages(): ?string
     {
-        return $this->image;
+        return $this->images;
     }
 
-    public function setImage(?string $image): static
+    public function setImages(?string $images): static
     {
-        $this->image = $image;
-
+        $this->images = $images;
         return $this;
     }
 
@@ -79,7 +77,6 @@ class Evenement
     public function setDescription(?string $description): static
     {
         $this->description = $description;
-
         return $this;
     }
 
@@ -91,7 +88,6 @@ class Evenement
     public function setTypeEvenement(?TypeEvenement $typeEvenement): static
     {
         $this->typeEvenement = $typeEvenement;
-
         return $this;
     }
 }

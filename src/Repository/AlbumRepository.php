@@ -2,14 +2,14 @@
 
 namespace App\Repository;
 
-use App\Entity\Evenement;
+use App\Entity\Album;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-class EvenementRepository extends ServiceEntityRepository
+class AlbumRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Evenement::class);
+        parent::__construct($registry, Album::class);
     }
 }
