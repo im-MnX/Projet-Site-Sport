@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact - NatSynchro{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/contact.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="main-content">
+        <div class="header-title">
+            <h1>Contactez-nous</h1>
+            <p>Une question ? N'hésitez pas à nous contacter !</p>
+        </div>
+        
+        <div class="container-grid2">
+                <div class="form-left">
+                    <h2>Informations de contact</h2>
+
+                    <div style="margin: 2rem 0;">
+                        <div class="info-item">
+                            <div class="icon-circle">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Adresse</h4>
+                                <p>Piscine Jean-Bouin<br>131 Bd Pierre de Coubertin<br>49000 Angers, France</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="icon-circle">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4>Téléphone</h4>
+                                <p><a href="tel:+33241476123">02 41 47 61 23</a></p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="icon-circle">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4>Email</h4>
+                                <p><a href="mailto:secretariat.ans49@gmail.com">secretariat.ans49@gmail.com</a></p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="icon-circle">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                        </div>
+                        <h3>Suivez-nous</h3>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            <div class="form-right">
+                <form id="contactForm" action="php/process-contact.php" method="POST" class="contact-form">
+                    <h2>Envoyez-nous un message</h2>
+
+                    <div class="form-group">
+                        <label class="form-label" for="nom">Nom *</label>
+                        <input type="text" id="nom" name="nom" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email *</label>
+                        <input type="email" id="email" name="email" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="telephone">Téléphone</label>
+                        <input type="tel" id="telephone" name="telephone" class="form-input">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="sujet">Sujet *</label>
+                        <select id="sujet" name="sujet" class="form-select" required>
+                            <option value="">Choisissez un sujet...</option>
+                            <option value="inscription">Inscription au club</option>
+                            <option value="renseignement">Demande de renseignement</option>
+                            <option value="evenement">Question sur un événement</option>
+                            <option value="boutique">Question sur la boutique</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="message">Message *</label>
+                        <textarea id="message" name="message" class="form-textarea" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Envoyer le message
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="contact-map-section">
+            <h2>Plan d'accès</h2>
+            <div class="contact-map-container">
+                <div class="contact-map-placeholder">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2697.5085481609217!2d-0.5350852231980175!3d47.4605185980533!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48087889ce505471%3A0x98448c9a4461c617!2s31%20Bd%20Pierre%20de%20Coubertin%2C%2049000%20Angers!5e0!3m2!1sfr!2sfr!4v1765450159949!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

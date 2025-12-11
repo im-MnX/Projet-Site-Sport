@@ -1,88 +1,222 @@
 /* ===================== */
-/* Navbar existante */
+/* STYLE GLOBAL & VARIABLES */
 /* ===================== */
-.navbar { 
-  background-color: #2eb6e6; 
-  border-bottom: 4px solid #ffd700; 
-  padding: 10px 0; 
+:root {
+  /* Charte NatSynchro */
+  --primary-blue: #2eb6e6;
+  --dark-blue: #0099cc;
+  /* Pour le dégradé */
+  --accent-yellow: #ffd700;
+  --white: #ffffff;
+  --black: #000000;
+  --text-gray: #444;
+  --bg-gray: #f9f9f9;
+
+  /* Espacement & Ombres (Inspiré de badminteam) */
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+  --radius-md: 8px;
+  --transition-fast: 0.2s ease;
 }
 
-.nav-menu { 
-  display: flex; 
-  align-items: center; 
-  justify-content: space-between; 
-  position: relative; 
-  max-width: 1200px; 
-  margin: 0 auto; 
-  padding: 0 20px; 
-}
-
-.nav-left, .nav-right { 
-  display: flex; 
-  align-items: center; 
-  gap: 18px; 
-}
-
-.nav-item { 
-  color: black; 
-  font-size: 16px; 
-  text-decoration: none; 
-  cursor: pointer; 
-  display: inline-flex; 
-  align-items: center; 
-  gap: 6px; 
-}
-
-/* logo centré */
-.logo { 
-  height: 80px; 
-  position: absolute; 
-  left: 50%; 
-  transform: translateX(-50%); 
-  top: -10px; 
-}
-
-/* dropdown */
-.dropdown { position: relative; }
-.dropdown-toggle { 
-  background: transparent; 
-  border: none; 
-  font-size: 16px; 
-  cursor: pointer; 
-  display: inline-flex; 
-  align-items: center; 
-  gap: 6px; 
-}
-.chevron { font-size: 12px; line-height: 1; }
-
-/* menu déroulant caché par défaut */
-.dropdown-menu {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  min-width: 200px;
-  background: #fff;
-  border-radius: 6px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-  display: none;
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  margin: 0;
+  display: flex;
   flex-direction: column;
-  padding: 8px 0;
-  z-index: 1000;
+  min-height: 100vh;
 }
-.dropdown.open .dropdown-menu { display: flex; }
+
+/* ===================== */
+/* NAVBAR STYLE BADMINTEAM (CORRECTED) */
+/* ===================== */
+.navbar {
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+  border-bottom: 4px solid var(--accent-yellow);
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: var(--shadow-md);
+  height: auto;
+}
+
+/* Structure principale */
+.nav-menu {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  height: 90px;
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+/* Style des liens et boutons */
+.nav-item,
+.dropdown-toggle {
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  color: var(--white);
+  font-size: 1.05rem;
+  font-weight: 500;
+  padding: 8px 16px;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: var(--radius-md);
+  transition: all 0.3s ease;
+}
+
+/* Survol */
+.nav-item:hover,
+.dropdown-toggle:hover,
+.nav-item[data-dropdown]:hover .dropdown-toggle {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--white);
+}
+
+/* Gestion du chevron */
+.chevron {
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+  padding-left: 2px;
+}
+
+/* Rotation du chevron au survol du parent dropdown */
+.nav-item[data-dropdown]:hover .chevron,
+.dropdown.open .chevron {
+  transform: rotate(180deg);
+}
+
+/* Logo */
+.logo {
+  height: 90px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 10px;
+  z-index: 10;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: translateX(-50%) scale(1.05);
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  display: none;
+  /* Caché par défaut */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 240px;
+  background: var(--white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: 10px 0;
+  z-index: 1000;
+  margin-top: 10px;
+  flex-direction: column;
+
+  /* Animation */
+  animation: fadeInDown 0.3s ease;
+}
+
+/* Affichage du dropdown au survol du parent nav-item */
+.nav-item[data-dropdown]:hover .dropdown-menu {
+  display: flex;
+}
 
 .dropdown-item {
-  padding: 8px 14px;
+  display: block;
+  padding: 12px 20px;
   text-decoration: none;
-  color: #222;
-  font-size: 15px;
-  white-space: nowrap;
+  color: #333;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
 }
-.dropdown-item:hover { background: #f2f2f2; }
 
-@media (max-width: 800px) {
-  .logo { height: 60px; top: -6px; }
-  .nav-left, .nav-right { gap: 10px; font-size: 14px; }
+.dropdown-item:hover {
+  background: var(--bg-gray);
+  color: var(--primary-blue);
+  padding-left: 25px;
+}
+
+/* Retire les anciens styles parasites */
+.nav-item::after,
+.dropdown-toggle::after {
+  content: none;
+}
+
+.dropdown {
+  position: relative;
+  /* Indispensable pour positionner le menu */
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .logo {
+    position: relative;
+    left: auto;
+    transform: none;
+    height: 60px;
+    margin: 0 15px;
+    top: 0;
+  }
+
+  .logo:hover {
+    transform: scale(1.05);
+  }
+
+  .nav-menu {
+    flex-wrap: wrap;
+    justify-content: center;
+    height: auto;
+    padding: 15px;
+  }
+
+  .nav-left,
+  .nav-right {
+    gap: 10px;
+    margin: 5px 0;
+  }
+
+  .nav-item,
+  .dropdown-toggle {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
 }
 
 /* ===================== */
@@ -90,59 +224,76 @@
 /* ===================== */
 
 /* Footer sticky */
+/* ===================== */
+/* Footer en bas de page */
+/* ===================== */
+
+/* Pour que le footer soit toujours en bas même si peu de contenu */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.main-content,
+/* Permet au contenu principal de prendre toute la place disponible */
+body>*:not(footer):not(header) {
+  flex: 1;
+}
+
+/* Footer standard */
 footer {
-    position: fixed;   /* collé en bas de la fenêtre */
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #2eb6e6;
-    border-top: 4px solid #ffd700;
-    color: #000000;
-    padding: 20px 0;
-    z-index: 1000;
+  width: 100%;
+  background-color: #2eb6e6;
+  border-top: 4px solid #ffd700;
+  color: #000000;
+  padding: 20px 0;
+  margin-top: auto;
+  /* Pousse le footer en bas */
 }
 
 /* Conteneur interne du footer */
 footer .footer-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    gap: 20px;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 footer .footer-content p {
-    margin: 0;
-    padding: 0;
-    font-size: 16px;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
 }
 
 footer .footer-content .logo {
-    height: 40px;
-    vertical-align: middle;
+  height: 40px;
+  vertical-align: middle;
 }
 
-/* Évite que le contenu soit caché sous le footer */
+/* On supprime le padding-bottom du main-content qui n'est plus nécessaire */
 .main-content {
-    padding-bottom: 100px;  /* correspond à la hauteur du footer */
+  padding-bottom: 20px;
 }
 
 /* Responsive */
 @media (max-width: 800px) {
-    footer .footer-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
-    }
+  footer .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
 
-    footer .footer-content p {
-        font-size: 14px;
-    }
+  footer .footer-content p {
+    font-size: 14px;
+  }
 
-    footer .footer-content .logo {
-        height: 30px;
-    }
+  footer .footer-content .logo {
+    height: 30px;
+  }
 }
