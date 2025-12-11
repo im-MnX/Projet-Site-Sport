@@ -1,5 +1,6 @@
 .main-content {
-    max-width: 1600px;
+    max-width: 1400px;
+    /* Un peu plus large */
     width: 95%;
     margin: 0 auto;
     padding: 60px 20px 140px 20px;
@@ -28,21 +29,31 @@
 
 .container-grid2 {
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 60px;
-    align-items: start;
-    background: #fff;
-    border-radius: 20px;
+    grid-template-columns: 1fr 1fr;
+    /* Même taille (50/50) */
+    gap: 40px;
+    /* Gap légèrement réduit */
+    align-items: stretch;
+    /* Force l'égalité des hauteurs */
+    background: transparent;
+    /* Le background est maintenant sur les cartes individuelles */
+    border-radius: 0;
     padding: 0;
 }
 
 .form-left {
-    background-color: transparent;
+    background-color: #fff;
+    /* Fond blanc comme la carte de droite */
     padding: 40px;
+    border-radius: 24px;
+    /* Même arrondi */
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+    /* Même ombre */
     height: auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    /* Aligne le contenu en haut au départ */
 }
 
 .form-left h2 {
@@ -53,11 +64,16 @@
     border: none;
 }
 
+/* Pousse le bloc social vers le bas */
+.social-section {
+    margin-top: auto;
+}
+
 .form-left h3 {
     color: #222;
-    margin-top: 40px;
     margin-bottom: 20px;
     font-size: 1.4rem;
+    margin-top: 0;
 }
 
 .info-item {

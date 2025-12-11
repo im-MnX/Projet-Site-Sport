@@ -52,6 +52,14 @@ body {
   gap: 30px;
 }
 
+.nav-left {
+  margin-right: 80px;
+}
+
+.nav-right {
+  margin-left: 80px;
+}
+
 .nav-item,
 .dropdown-toggle {
   background: transparent;
@@ -70,17 +78,22 @@ body {
   transition: all 0.3s ease;
 }
 
-.nav-item:hover,
-.dropdown-toggle:hover,
-.nav-item[data-dropdown]:hover .dropdown-toggle {
-  background: rgba(255, 255, 255, 0.15);
+/* On remet le background transparent au survol */
+a.nav-item:hover,
+.dropdown-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--white);
+}
+
+.nav-item.dropdown:hover .dropdown-toggle {
+  background: rgba(255, 255, 255, 0.1);
   color: var(--white);
 }
 
 .chevron {
   font-size: 0.8rem;
-  transition: transform 0.3s ease;
-  padding-left: 2px;
+  transition: transform 0.2s ease;
+  padding-left: 4px;
 }
 
 .nav-item[data-dropdown]:hover .chevron,
@@ -108,39 +121,42 @@ body {
   position: absolute;
   top: 100%;
   left: 0;
-  min-width: 240px;
+  min-width: 200px;
   background: var(--white);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-lg);
   padding: 10px 0;
   z-index: 1000;
-  margin-top: 10px;
+  margin-top: 0.5rem;
   flex-direction: column;
   animation: fadeInDown 0.3s ease;
 }
 
 .nav-item[data-dropdown]:hover .dropdown-menu {
-  display: flex;
+  display: block;
+  animation: fadeInDown 0.3s ease;
 }
 
 .dropdown-item {
   display: block;
-  padding: 12px 20px;
+  padding: 1rem 1.5rem;
   text-decoration: none;
   color: #333;
-  font-size: 0.95rem;
+  font-size: 1rem;
   transition: all 0.2s ease;
+  border-radius: 0;
 }
 
 .dropdown-item:hover {
   background: var(--bg-gray);
   color: var(--primary-blue);
-  padding-left: 25px;
+  padding-left: 2rem;
 }
 
 .nav-item::after,
 .dropdown-toggle::after {
-  content: none;
+  content: none !important;
+  display: none !important;
 }
 
 .dropdown {
@@ -195,8 +211,6 @@ body {
     font-size: 0.9rem;
   }
 }
-
-
 
 .main-content,
 body>*:not(footer):not(header) {
