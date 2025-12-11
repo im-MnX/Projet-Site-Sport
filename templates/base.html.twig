@@ -5,57 +5,57 @@
 		<title>
 			{% block title %}{% endblock %}
 		</title>
-
+		<!-- Import Bootstrap après ton CSS -->
 		{% block javascripts %}
 			{% block importmap %}
 				{{ importmap('app') }}
 			{% endblock %}
 		{% endblock %}
-        <link rel="stylesheet" href="{{ asset('style.css') }}">
-        <script src="{{ asset('js/dropdowns.js') }}"></script>
+
+		<script src="{{ asset('js/dropdowns.js') }}"></script>
 	</head>
 	<header class="navbar">
-  <nav class="nav-menu" role="navigation" aria-label="Main navigation">
-    <div class="nav-left">
-      <div class="nav-item dropdown" data-dropdown>
-        <button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-          Le Club <span class="chevron">⌄</span>
-        </button>
-        <div class="dropdown-menu" role="menu">
-          <a class="dropdown-item" href="#">Présentations du club</a>
-          <a class="dropdown-item" href="#">Événements</a>
-          <a class="dropdown-item" href="#">Actualités</a>
-          <a class="dropdown-item" href="#">Inscriptions au club</a>
-          <a class="dropdown-item" href="#">Inscriptions aux événements</a>
-        </div>
-      </div>
+		<nav class="nav-menu" role="navigation" aria-label="Main navigation">
+			<div class="nav-left">
+				<div class="nav-item dropdown" data-dropdown>
+					<button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+						Le Club
+					</button>
+					<div class="dropdown-menu" role="menu">
+						<a class="dropdown-item" href="#">Présentations du club</a>
+						<a class="dropdown-item" href="#">Événements</a>
+						<a class="dropdown-item" href="#">Actualités</a>
+						<a class="dropdown-item" href="#">Inscriptions au club</a>
+						<a class="dropdown-item" href="#">Inscriptions aux événements</a>
+					</div>
+				</div>
 
-      <div class="nav-item dropdown" data-dropdown>
-        <button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-          Galerie <span class="chevron">⌄</span>
-        </button>
-        <div class="dropdown-menu" role="menu">
-          <a class="dropdown-item" href="#">Albums photos</a>
-          <a class="dropdown-item" href="#">Galerie vidéos</a>
-        </div>
-      </div>
+				<div class="nav-item dropdown" data-dropdown>
+					<button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+						Galerie
+					</button>
+					<div class="dropdown-menu" role="menu">
+						<a class="dropdown-item" href="#">Albums photos</a>
+						<a class="dropdown-item" href="#">Galerie vidéos</a>
+					</div>
+				</div>
 
-      <a class="nav-item" href="#">FAQ</a>
-    </div>
+				<a class="nav-item" href="#">FAQ</a>
+			</div>
 
-    <img src="{{ asset('images/Logo_60ans.png') }}" alt="logo" class="logo">
+			<img src="{{ asset('images/Logo_60ans.png') }}" alt="logo" class="logo">
 
-    <div class="nav-right">
-      <a class="nav-item" href="#">Boutique en ligne</a>
-      <a class="nav-item" href="#">Se connecter / s’inscrire</a>
-    </div>
-  </nav>
-</header>
+			<div class="nav-right">
+				<a class="nav-item" href="#">Boutique en ligne</a>
+				<a class="nav-item" href="#">Se connecter / s’inscrire</a>
+			</div>
+		</nav>
+	</header>
 
 	<body>
 		{% block body %}{% endblock %}
 
-        {% include 'partials/footer.html.twig' %}
+		{% include 'partials/footer.html.twig' %}
 	</body>
 
 
