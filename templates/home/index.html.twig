@@ -19,17 +19,11 @@
             <li>
                 <strong>{{ event.nom }}</strong> <br>
                 Date : {{ event.dateEvenement ? event.dateEvenement|date('d/m/Y H:i') : 'Date non définie' }} <br>
-                Type : {{ event.typeEvenement ? event.typeEvenement.nom : 'Type non défini' }} <br>
+                Type : {{ event.typeEvenement ? event.typeEvenement.libelleTypeEvenement : 'Type non défini' }} <br>
                 Description : {{ event.description ?: 'Pas de description' }} <br>
             </li>
         {% else %}
             <li>Aucun événement trouvé.</li>
         {% endfor %}
     </ul>   
-
-
-
 {% endblock %}
-
-
-
