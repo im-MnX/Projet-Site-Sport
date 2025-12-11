@@ -4,7 +4,13 @@
     background-color: #2eb6e6;
     border-bottom: 4px solid #ffd700;
     padding: 10px 0;
+    height: 80px;
     position: relative;
+}
+
+.body{
+    width: 100%;
+    margin:0;
 }
 
 /* --- CONTENEUR GLOBAL DU MENU --- */
@@ -42,20 +48,25 @@
 
 /* --- LOGO AU CENTRE --- */
 .logo {
-    height: 80px;
+    height: 150px;
     position: absolute;
     left: 50%;
-    top: -10px;
+    top: -20px;
     transform: translateX(-50%);
 }
 
 /* --- DROPDOWN --- */
-.dropdown { position: relative; }
+/* --- DROPDOWN --- */
+.dropdown {
+    position: relative;
+    display: inline-block; /* utile pour que le menu soit positionné correctement */
+}
 
+/* Menu caché par défaut */
 .dropdown-menu {
     display: none;
     position: absolute;
-    top: calc(100% + 8px);
+    top: 100%; /* juste sous le bouton */
     left: 0;
     background: white;
     border-radius: 6px;
@@ -65,11 +76,13 @@
     z-index: 2000;
 }
 
-
-.dropdown.open .dropdown-menu {
+/* Affiche le menu quand on survole le bouton ou le menu lui-même */
+.dropdown:hover .dropdown-menu,
+.dropdown-menu:hover {
     display: block;
 }
 
+/* Items du menu */
 .dropdown-item {
     padding: 8px 12px;
     color: black;
@@ -81,17 +94,10 @@
     background: #eee;
 }
 
-/* Ouvre le menu au survol */
-.dropdown:hover .dropdown-menu {
-    display: block;
-}
-
+/* Bouton dropdown */
 .dropdown-toggle {
     background: transparent;
     border: none;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
     font-size: 18px;
     cursor: pointer;
     display: flex;
@@ -99,3 +105,11 @@
     gap: 6px;
 }
 
+/* Optionnel : changer couleur du bouton au hover */
+.dropdown:hover .dropdown-toggle {
+    color: #cacaca; /* ou une autre couleur */
+}
+
+.nav-item:hover{
+    color: #cacaca;
+}
