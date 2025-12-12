@@ -1,0 +1,148 @@
+/* ===================== */
+/* Navbar existante */
+/* ===================== */
+.navbar {
+  background-color: #2eb6e6;
+  border-bottom: 4px solid #ffd700;
+  padding: 10px 0;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.nav-left, .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.nav-item {
+  color: black;
+  font-size: 16px;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* logo centré */
+.logo {
+  height: 80px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -10px;
+}
+
+/* dropdown */
+.dropdown { position: relative; }
+.dropdown-toggle {
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.chevron { font-size: 12px; line-height: 1; }
+
+/* menu déroulant caché par défaut */
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 200px;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  display: none;
+  flex-direction: column;
+  padding: 8px 0;
+  z-index: 1000;
+}
+.dropdown.open .dropdown-menu { display: flex; }
+
+.dropdown-item {
+  padding: 8px 14px;
+  text-decoration: none;
+  color: #222;
+  font-size: 15px;
+  white-space: nowrap;
+}
+.dropdown-item:hover { background: #f2f2f2; }
+
+@media (max-width: 800px) {
+  .logo { height: 60px; top: -6px; }
+  .nav-left, .nav-right { gap: 10px; font-size: 14px; }
+}
+
+/* ===================== */
+/* Footer fixe en bas */
+/* ===================== */
+
+/* Footer sticky */
+footer {
+    position: fixed;   /* collé en bas de la fenêtre */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #2eb6e6;
+    border-top: 4px solid #ffd700;
+    color: #000000;
+    padding: 20px 0;
+    z-index: 1000;
+}
+
+/* Conteneur interne du footer */
+footer .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+footer .footer-content p {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+
+footer .footer-content .logo {
+    height: 40px;
+    vertical-align: middle;
+}
+
+/* Évite que le contenu soit caché sous le footer */
+.main-content {
+    padding-bottom: 100px;  /* correspond à la hauteur du footer */
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+    footer .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    footer .footer-content p {
+        font-size: 14px;
+    }
+
+    footer .footer-content .logo {
+        height: 30px;
+    }
+}
