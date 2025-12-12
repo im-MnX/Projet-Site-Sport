@@ -55,6 +55,21 @@
 					<a class="nav-item" href="#">Se connecter / s'inscrire</a>
 				</div>
 			</nav>
+			{# Afficher le panier uniquement si on est sur la page boutique #}
+        		{% if app.request.get('_route') == 'app_boutique' %}
+            		<div class="header-top">
+                		<a href="{{ path('app_panier') }}" class="panier-header">
+                    		Panier
+                    		{% set totalCount = 0 %}
+                    		{% for quantite in app.session.get('panier')|default([]) %}
+                        		{% set totalCount = totalCount + quantite %}
+                    		{% endfor %}
+                    		{% if totalCount > 0 %}
+                        		<span class="panier-count">{{ totalCount }}</span>
+                    		{% endif %}
+                		</a>
+            		</div>
+        		{% endif %}
 		</header>
 <div class="main-content">
 		{% block body %}{% endblock %}
