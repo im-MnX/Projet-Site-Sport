@@ -72,7 +72,7 @@ body {
   background: transparent;
   border: none;
   font-family: inherit;
-  color: var(--white);
+  color: #000000;
   font-size: 1.05rem;
   font-weight: 500;
   padding: 8px 16px;
@@ -123,6 +123,8 @@ a.nav-item:hover,
   font-size: 0.8rem;
   transition: transform 0.2s ease;
   padding-left: 4px;
+  transition: transform 0.2s ease;
+  padding-left: 4px;
 }
 
 .nav-item[data-dropdown]:hover .chevron,
@@ -152,11 +154,13 @@ a.nav-item:hover,
   top: 100%;
   left: 0;
   min-width: 200px;
+  min-width: 200px;
   background: var(--white);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-lg);
   padding: 10px 0;
   z-index: 1000;
+  margin-top: 0.5rem;
   margin-top: 0.5rem;
   flex-direction: column;
   animation: fadeInDown 0.3s ease;
@@ -165,15 +169,20 @@ a.nav-item:hover,
 .nav-item[data-dropdown]:hover .dropdown-menu {
   display: block;
   animation: fadeInDown 0.3s ease;
+  display: block;
+  animation: fadeInDown 0.3s ease;
 }
 
 .dropdown-item {
   display: block;
   padding: 1rem 1.5rem;
+  padding: 1rem 1.5rem;
   text-decoration: none;
   color: #333;
   font-size: 1rem;
+  font-size: 1rem;
   transition: all 0.2s ease;
+  border-radius: 0;
   border-radius: 0;
 }
 
@@ -181,10 +190,13 @@ a.nav-item:hover,
   background: var(--bg-gray);
   color: var(--primary-blue);
   padding-left: 2rem;
+  padding-left: 2rem;
 }
 
 .nav-item::after,
 .dropdown-toggle::after {
+  content: none !important;
+  display: none !important;
   content: none !important;
   display: none !important;
 }
@@ -296,4 +308,100 @@ footer .footer-content .logo {
   footer .footer-content .logo {
     height: 30px;
   }
+}
+
+/* Conteneur général des événements */
+.evenements-list {
+  display: flex;
+  flex-direction: column;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  gap: 0.5rem;
+  /* espace entre chaque événement */
+}
+
+/* Chaque événement */
+.evenement {
+  background-color: #f8f9fa;
+  /* couleur légère de fond */
+  border-left: 4px solid #0d6efd;
+  /* accent bleu Bootstrap */
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Effet au survol */
+.evenement:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Titre et date */
+.evenement h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #000000;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* Date affichée à droite pour les grands écrans */
+.evenement h2 span.date {
+  font-weight: 400;
+  font-size: 0.95rem;
+  color: #6c757d;
+}
+
+/* Description du contenu */
+.evenement p {
+  font-size: 1rem;
+  color: #495057;
+  margin: 0;
+}
+
+/* Responsive : empilement sur petits écrans */
+@media (max-width: 576px) {
+  .evenement h2 {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}
+
+.evenement.gala {
+  border-left-color: #ff6b6b;
+  background-color: #fff5f5;
+}
+
+.evenement.inscription {
+  border-left-color: #479c55;
+  background-color: #f3fff4;
+}
+
+.evenement.championnat {
+  border-left-color: #339af0;
+  background-color: #e7f1ff;
+}
+
+/* Wrapper principal qui englobe le contenu des pages */
+.main-content {
+  padding-top: 40px;
+  /* espace sous le header */
+  padding-bottom: 40px;
+  /* espace au-dessus du footer */
+  min-height: calc(100vh - 140px);
+  /* pour que le contenu remplisse l'écran */
+}
+
+h1 {
+  color: #2eb6e6 !important;
+  font-size: 3.5rem !important;
+  font-weight: 800 !important;
+  margin-bottom: 15px !important;
+  letter-spacing: -1px !important;
+  text-align: center !important;
 }

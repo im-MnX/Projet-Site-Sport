@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Boutique{% endblock %}
+
+{% block body %}
+<h1>Bienvenue sur la boutique</h1>
+
+<div class="produits-list">
+    {% for produit in produits %}
+        <div class="produit">
+            <h2>{{ produit.nomProduit }}</h2>
+            <p>{{ produit.description }}</p>
+            <p><strong>Prix :</strong> {{ produit.prix|number_format(2, ',', ' ') }} €</p>
+            <a href="{{ path('app_panier_ajouter', {'id': produit.idProduit}) }}">Ajouter au panier</a>
+        </div>
+    {% else %}
+        <p>Aucun produit disponible.</p>
+    {% endfor %}
+</div>
+{% endblock %}

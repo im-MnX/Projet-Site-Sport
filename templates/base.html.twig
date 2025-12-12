@@ -28,7 +28,7 @@
 						</button>
 						<div class="dropdown-menu" role="menu">
 							<a class="dropdown-item" href="#">Présentations du club</a>
-							<a class="dropdown-item" href="#">Événements</a>
+							<a class="dropdown-item" href="{{ path('app_evenement') }}">Événements</a>
 							<a class="dropdown-item" href="#">Actualités</a>
 							<a class="dropdown-item" href="#">Inscriptions au club</a>
 							<a class="dropdown-item" href="#">Inscriptions aux événements</a>
@@ -47,6 +47,7 @@
 				</div>
 
 				<a href="{{ path('home') }}"><img src="{{ asset('images/Logo_60ans.png') }}" alt="logo" class="logo"></a>
+				<a href="{{ path('home') }}"><img src="{{ asset('images/Logo_60ans.png') }}" alt="logo" class="logo"></a>
 
 				<div class="nav-right">
                     <div class="nav-links">
@@ -61,8 +62,23 @@
                     </a>
                 {% endif %}
 			</nav>
+			{# Afficher le panier uniquement si on est sur la page boutique #}
+        		{% if app.request.get('_route') == 'app_boutique' %}
+            		<div class="header-top">
+                		<a href="{{ path('app_panier') }}" class="panier-header">
+                    		Panier
+                    		{% set totalCount = 0 %}
+                    		{% for quantite in app.session.get('panier')|default([]) %}
+                        		{% set totalCount = totalCount + quantite %}
+                    		{% endfor %}
+                    		{% if totalCount > 0 %}
+                        		<span class="panier-count">{{ totalCount }}</span>
+                    		{% endif %}
+                		</a>
+            		</div>
+        		{% endif %}
 		</header>
-
+<div class="main-content">
 		{% block body %}{% endblock %}
 
 		{% include 'partials/footer.html.twig' %}
