@@ -91,7 +91,6 @@
 
 /* Footer sticky */
 footer {
-    position: fixed;   /* collé en bas de la fenêtre */
     bottom: 0;
     left: 0;
     width: 100%;
