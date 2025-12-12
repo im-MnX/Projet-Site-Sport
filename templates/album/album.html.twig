@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Album - NatSynchro{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/album.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="main-content">
+
+    <div class="album-page-container">
+        <!-- Sidebar catégories + albums -->
+        <aside class="album-selector">  
+            <ul>
+                {% for categorie in categories %}
+                    {% set isActiveCategory = albumsByCategorie[categorie.idCategorieAlbum]|filter(a => a.idAlbum == album.idAlbum)|length > 0 %}
+                    <li class="categorie-item {% if isActiveCategory %}open{% endif %}">
+                        <strong class="categorie-title">{{ categorie.libelleCategorieAlbum }}</strong>
+                        <ul class="albums-list">
+                            {% for a in albumsByCategorie[categorie.idCategorieAlbum] %}
+                                <li {% if a.idAlbum == album.idAlbum %}class="active"{% endif %}>
+                                    <a href="{{ path('album_show', {'idAlbum': a.idAlbum}) }}">
+                                        {{ a.description }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        </aside>
+
+        <!-- Galerie des photos -->
+        <section class="album-gallery">
+            {% if photos is not empty %}
+                <div class="gallery-grid">
+                    {% for photo in photos %}
+                        <div class="photo-item">
+                            <img src="{{ asset('photos/album_' ~ album.idAlbum ~ '/' ~ photo.cheminImage) }}" alt="Photo">
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>Aucune photo dans cet album.</p>
+            {% endif %}
+        </section>
+    </div>
+</div>
+
+<!-- JS pour l'accordion -->
+<script>
+document.querySelectorAll('.categorie-title').forEach(title => {
+    title.addEventListener('click', () => {
+        const categorieItem = title.parentElement;
+        categorieItem.classList.toggle('open'); // ouvre/ferme la catégorie
+    });
+});
+</script>
+{% endblock %}

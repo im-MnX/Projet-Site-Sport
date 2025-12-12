@@ -1,0 +1,119 @@
+/* Conteneur principal */
+.main-content {
+    padding: 2rem;
+    background-color: #f9f9f9;
+}
+
+/* Layout : sidebar + galerie */
+.album-page-container {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+/* Sidebar catégories + albums */
+.album-selector {
+    width: 220px;
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+    text-align: left;
+}
+
+.album-selector ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.albums-list {
+    display: none; /* caché par défaut */
+    padding-left: 20px;
+}
+
+.categorie-item.open .albums-list {
+    display: block; /* visible si la catégorie est ouverte */
+}
+
+.categorie-item strong {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    cursor: pointer; /* indique que c’est cliquable */
+}
+
+/* Albums */
+.albums-list li {
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+.albums-list li a {
+    display: block;
+    text-align: right;
+    padding: 2px 0;
+    text-decoration: none;
+    color: #333;
+    transition: color 0.2s;
+}
+
+.albums-list li.active a {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.albums-list li a:hover {
+    color: #007bff;
+}
+
+/* Galerie */
+.album-gallery {
+    flex: 1;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+.photo-item img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+}
+
+.photo-item img:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .album-page-container {
+        flex-direction: column;
+    }
+
+    .album-selector {
+        width: 100%;
+        margin-bottom: 20px;
+        position: static;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+}
