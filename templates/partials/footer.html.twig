@@ -1,9 +1,29 @@
 {# templates/partials/footer.html.twig #}
 <footer>
   <div class="footer-content">
-    <p> Logo / 31 Bd Pierre de Coubertin, 49000 Angers / 02 41 47 61 23 </p>
-    <p>&copy; 2025 MonSite. Tous droits réservés.</p>
-    <a class="nav-item" href="{{ path('contact') }}">Nous contacter</a>
+    <div class="footer-section info">
+        <h3>Contact</h3>
+        <p><i class="fas fa-map-marker-alt"></i> 31 Bd Pierre de Coubertin<br>49000 Angers</p>
+        <p><i class="fas fa-phone"></i> 02 41 47 61 23</p>
+    </div>
 
+    <div class="footer-section links">
+        <h3>Liens rapides</h3>
+        <a href="{{ path('home') }}">Accueil</a>
+        <a href="{{ path('app_boutique') }}">Boutique</a>
+        <a href="{{ path('app_faq') }}">FAQ</a>
+        <a href="{{ path('contact') }}">Nous contacter</a>
+    </div>
+
+    <div class="footer-section social">
+        <h3>Suivez-nous</h3>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/angers.nat.synchro?locale=fr_FR" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/angers_nat_synchro/" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; {{ 'now'|date('Y') }} Angers Nat Synchro. Tous droits réservés.</p>
   </div>
 </footer>

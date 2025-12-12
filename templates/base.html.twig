@@ -27,7 +27,7 @@
 							Le Club <span class="chevron">⌄</span>
 						</button>
 						<div class="dropdown-menu" role="menu">
-							<a class="dropdown-item" href="#">Présentations du club</a>
+							<a class="dropdown-item" href="{{ path('app_about') }}">Présentations du club</a>
 							<a class="dropdown-item" href="{{ path('app_evenement') }}">Événements</a>
 							<a class="dropdown-item" href="#">Actualités</a>
 							<a class="dropdown-item" href="#">Inscriptions au club</a>
@@ -35,24 +35,15 @@
 						</div>
 					</div>
 
-					<div class="nav-item dropdown" data-dropdown>
-						<button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-							Galerie <span class="chevron">⌄</span>
-						</button>
-						<div class="dropdown-menu" role="menu">
-							<a class="dropdown-item" href="#">Albums photos</a>
-							<a class="dropdown-item" href="#">Galerie vidéos</a>
-						</div>
-					</div>
+					<a class="nav-item" href="#">Galerie</a>
 				</div>
 
-				<a href="{{ path('home') }}"><img src="{{ asset('images/Logo_60ans.png') }}" alt="logo" class="logo"></a>
 				<a href="{{ path('home') }}"><img src="{{ asset('images/Logo_60ans.png') }}" alt="logo" class="logo"></a>
 
 				<div class="nav-right">
                     <div class="nav-links">
-					    <a class="nav-item" href="#">Boutique en ligne</a>
-					    <a class="nav-item" href="#">FAQ</a>
+					    <a class="nav-item" href="{{ path('app_boutique') }}">Boutique</a>
+					    <a class="nav-item" href="{{ path('app_faq') }}">FAQ</a>
                     </div>
 				</div>
 
@@ -80,6 +71,8 @@
 		</header>
 <div class="main-content">
 		{% block body %}{% endblock %}
+
+</div>
 
 		{% include 'partials/footer.html.twig' %}
 
