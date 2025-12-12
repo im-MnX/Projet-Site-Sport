@@ -276,11 +276,6 @@ footer .footer-content .logo {
   vertical-align: middle;
 }
 
-/* On supprime le padding-bottom du main-content qui n'est plus nécessaire */
-.main-content {
-  padding-bottom: 20px;
-}
-
 /* Responsive */
 @media (max-width: 800px) {
   footer .footer-content {
@@ -296,4 +291,87 @@ footer .footer-content .logo {
   footer .footer-content .logo {
     height: 30px;
   }
+}
+
+/* Conteneur général des événements */
+.evenements-list {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    gap: 0.5rem; /* espace entre chaque événement */
+}
+
+/* Chaque événement */
+.evenement {
+    background-color: #f8f9fa; /* couleur légère de fond */
+    border-left: 4px solid #0d6efd; /* accent bleu Bootstrap */
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Effet au survol */
+.evenement:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Titre et date */
+.evenement h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+/* Date affichée à droite pour les grands écrans */
+.evenement h2 span.date {
+    font-weight: 400;
+    font-size: 0.95rem;
+    color: #6c757d;
+}
+
+/* Description du contenu */
+.evenement p {
+    font-size: 1rem;
+    color: #495057;
+    margin: 0;
+}
+
+/* Responsive : empilement sur petits écrans */
+@media (max-width: 576px) {
+    .evenement h2 {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+}
+
+.evenement.gala {
+    border-left-color: #ff6b6b;
+    background-color: #fff5f5;
+}
+.evenement.inscription {
+    border-left-color: #479c55;
+    background-color: #f3fff4;
+}
+.evenement.championnat {
+    border-left-color: #339af0;
+    background-color: #e7f1ff;
+}
+
+/* Wrapper principal qui englobe le contenu des pages */
+.main-content {
+    padding-top: 40px;  /* espace sous le header */
+    padding-bottom: 40px; /* espace au-dessus du footer */
+    min-height: calc(100vh - 140px); /* pour que le contenu remplisse l'écran */
+}
+
+h1{
+  text-align: center;
 }

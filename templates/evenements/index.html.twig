@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Événements
+{% endblock %}
+
+{% block body %}
+
+	<div class="evenements-list">
+		<h1>
+			Évenements du club
+		</h1>
+
+		{% for item in evenements %}
+			{% set type = item.typeEvenement.libelleTypeEvenement|lower %}
+			<div class="evenement {{ type }}">
+				<h2>
+					{{ item.nom }}
+					<span class="date">{{ item.dateEvenement|date('d F Y') }}</span>
+				</h2>
+				<p>{{ item.description }}</p>
+			</div>
+		{% endfor %}
+
+
+	</div>
+</div>{% endblock %}
