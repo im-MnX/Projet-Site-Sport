@@ -347,6 +347,11 @@ footer .footer-content .logo {
     min-height: calc(100vh - 140px); /* pour que le contenu remplisse l'écran */
 }
 
-h1{
-  text-align: center;
+h1 {
+    color: #2eb6e6 !important;
+    font-size: 3.5rem !important;
+    font-weight: 800 !important;
+    margin-bottom: 15px  !important;
+    letter-spacing: -1px  !important;
+    text-align: center  !important;
 }
