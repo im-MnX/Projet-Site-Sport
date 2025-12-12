@@ -28,7 +28,7 @@
 						</button>
 						<div class="dropdown-menu" role="menu">
 							<a class="dropdown-item" href="#">Présentations du club</a>
-							<a class="dropdown-item" href="#">Événements</a>
+							<a class="dropdown-item" href="{{ path('app_evenement') }}">Événements</a>
 							<a class="dropdown-item" href="#">Actualités</a>
 							<a class="dropdown-item" href="#">Inscriptions au club</a>
 							<a class="dropdown-item" href="#">Inscriptions aux événements</a>
@@ -45,10 +45,10 @@
 						</div>
 					</div>
 
-					<a class="nav-item" href="#">FAQ</a>
+					<a class="nav-item" href="{{ path('app_faq') }}">FAQ</a>
 				</div>
 
-				<img src="{{ asset('images/Logo_60ans.png') }}" alt="logo" class="logo">
+				<a href="{{ path('home') }}"><img src="{{ asset('images/Logo_60ans.png') }}" alt="logo" class="logo"></a>
 
 				<div class="nav-right">
 					<a class="nav-item" href="#">Boutique en ligne</a>
