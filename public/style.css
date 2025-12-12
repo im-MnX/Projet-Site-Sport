@@ -65,7 +65,7 @@ body {
   background: transparent;
   border: none;
   font-family: inherit;
-  color: var(--white);
+  color: #000000;
   font-size: 1.05rem;
   font-weight: 500;
   padding: 8px 16px;
@@ -130,6 +130,10 @@ a.nav-item:hover,
   margin-top: 0.5rem;
   flex-direction: column;
   animation: fadeInDown 0.3s ease;
+}
+
+button{
+  color: #000000;
 }
 
 .nav-item[data-dropdown]:hover .dropdown-menu {
