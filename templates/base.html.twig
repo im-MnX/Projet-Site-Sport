@@ -49,9 +49,17 @@
 				<a href="{{ path('home') }}"><img src="{{ asset('images/Logo_60ans.png') }}" alt="logo" class="logo"></a>
 
 				<div class="nav-right">
-					<a class="nav-item" href="#">Boutique en ligne</a>
-					<a class="nav-item" href="#">FAQ</a>
+                    <div class="nav-links">
+					    <a class="nav-item" href="#">Boutique en ligne</a>
+					    <a class="nav-item" href="#">FAQ</a>
+                    </div>
 				</div>
+
+                {% if app.user %}
+                    <a class="nav-item logout-btn" href="{{ path('app_logout') }}" title="Déconnexion">
+                        <i class="fa-solid fa-power-off"></i>
+                    </a>
+                {% endif %}
 			</nav>
 		</header>
 
