@@ -10,14 +10,17 @@
 {% block body %}
 
 
-    <div class="album-page-container">
+    <div class="page-container" style="display: flex; gap: 40px;">
         <!-- Sidebar catégories + albums -->
-        <aside class="album-selector">  
+        <aside class="album-selector" style="flex: 0 0 280px;">
+            <h3>Albums</h3>
             <ul>
                 {% for categorie in categories %}
                     {% set isActiveCategory = albumsByCategorie[categorie.idCategorieAlbum]|filter(a => a.idAlbum == album.idAlbum)|length > 0 %}
                     <li class="categorie-item {% if isActiveCategory %}open{% endif %}">
-                        <strong class="categorie-title">{{ categorie.libelleCategorieAlbum }}</strong>
+                        <div class="categorie-title">
+                            {{ categorie.libelleCategorieAlbum }}
+                        </div>
                         <ul class="albums-list">
                             {% for a in albumsByCategorie[categorie.idCategorieAlbum] %}
                                 <li {% if a.idAlbum == album.idAlbum %}class="active"{% endif %}>
@@ -33,7 +36,7 @@
         </aside>
 
         <!-- Galerie des photos -->
-        <section class="album-gallery">
+        <section class="album-gallery" style="flex: 1;">
             {% if photos is not empty %}
                 <div class="gallery-grid">
                     {% for photo in photos %}
@@ -43,7 +46,10 @@
                     {% endfor %}
                 </div>
             {% else %}
-                <p>Aucune photo dans cet album.</p>
+                <div style="text-align: center; padding: 40px; color: #666; background: #f9f9f9; border-radius: 12px;">
+                    <i class="far fa-images" style="font-size: 3rem; margin-bottom: 20px; color: #ddd;"></i>
+                    <p>Aucune photo dans cet album pour le moment.</p>
+                </div>
             {% endif %}
         </section>
     </div>

@@ -5,22 +5,24 @@
 
 {% block body %}
 
-	<div class="evenements-list">
+	<div class="page-container">
 		<h1>
-			Évenements du club
+			Événements du club
 		</h1>
 
-		{% for item in evenements %}
-			{% set type = item.typeEvenement.libelleTypeEvenement|lower %}
-			<div class="evenement {{ type }}">
-				<h2>
-					{{ item.nom }}
-					<span class="date">{{ item.dateEvenement|date('d F Y') }}</span>
-				</h2>
-				<p>{{ item.description }}</p>
-			</div>
-		{% endfor %}
+        <div class="evenements-list">
+    		{% for item in evenements %}
+	    		{% set type = item.typeEvenement.libelleTypeEvenement|lower %}
+		    	<div class="evenement {{ type }}">
+			    	<h2>
+				    	{{ item.nom }}
+					    <span class="date">{{ item.dateEvenement|date('d F Y') }}</span>
+    				</h2>
+	    			<p>{{ item.description }}</p>
+		    	</div>
+    		{% endfor %}
+        </div>
 
 
 	</div>
-</div>{% endblock %}
+{% endblock %}

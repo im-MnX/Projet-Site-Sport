@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/inscription.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="page-container">
+        <h1>Inscriptions</h1>
+
+        <div class="inscription-wrapper">
+            
+            <!-- Section 1 : Permanences & HelloAsso -->
+            <div class="permanences-section">
+                <div class="permanences-info">
+                    <h2>Des permanences auront lieu au club :</h2>
+                    <div class="permanences-list">
+                        <p>Le Mercredi 3 septembre 2025 de 17h à 19h</p>
+                        <p>Le Samedi 6 septembre de 10h à 12h avec les inscriptions des nouveaux</p>
+                        <p>Le mercredi 10 septembre 2025 de 17h à 19h</p>
+                    </div>
+                </div>
+                
+                <a href="#" class="btn-helloasso">Inscription par HelloAsso</a>
+            </div>
+
+            <!-- Section 2 : Préparation & Documents -->
+            <div class="preparation-section">
+                <div class="prep-card">
+                    <i class="fas fa-lightbulb bulb-icon"></i>
+                    <span>PREPARATION</span>
+                </div>
+
+                <div class="documents-list">
+                    <a href="{{ asset('FichiersInscription/Feuille-inscription.docx') }}" class="doc-link">Fiche d'inscription</a>
+                    <a href="{{ asset('FichiersInscription/Feuille-urgence.pdf') }}" class="doc-link">Feuille d'urgence</a>
+                    <a href="{{ asset('FichiersInscription/Feuille-inscription-comptabilite.docx') }}" class="doc-link">Moyen de paiement</a>
+                    <br> <!-- Spacer -->
+                    <a href="{{ asset('FichiersInscription/Formulairelicencemineur20252026remplissable.pdf') }}" class="doc-link">Formulaire licence FFN-Mineur</a>
+                </div>
+            </div>
+
+            <!-- Section 3 : Contact -->
+            <div class="contact-section-inscription">
+                <div class="contact-person">
+                    <!-- Placeholder image if real one missing -->
+                    <div class="contact-avatar" style="display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #fff; background: #bbb;">
+                        <img src="{{ asset('images/RachelLeBozec.jpg') }}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
+                    </div>
+                    <strong>Rachel le Bozec</strong>
+                </div>
+                
+                <div class="contact-details">
+                    <p>Pour toutes nouvelles inscriptions, contactez le secrétariat par mail</p>
+                    <p>(<a href="mailto:secretariat.ans49@gmail.com">secretariat.ans49@gmail.com</a>).</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

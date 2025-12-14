@@ -1,0 +1,173 @@
+.inscription-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.page-container h1 {
+    text-align: center;
+    color: var(--primary-blue);
+    margin: 40px 0 5rem;
+    font-weight: 600;
+}
+
+.permanences-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #eee;
+    flex-wrap: wrap;
+}
+
+.permanences-info h2 {
+    font-size: 1.4rem;
+    color: var(--dark-blue);
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-style: italic;
+}
+
+.permanences-list p {
+    margin-bottom: 12px;
+    color: #444;
+    font-size: 1.05rem;
+    position: relative;
+    padding-left: 20px;
+}
+
+.permanences-list p::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--primary-blue);
+    font-weight: bold;
+}
+
+.btn-helloasso {
+    background-color: #3a4d5c;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(58, 77, 92, 0.3);
+}
+
+.btn-helloasso:hover {
+    background-color: #2c3e4d;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(58, 77, 92, 0.4);
+}
+
+.preparation-section {
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.prep-card {
+    background-color: #f0e68c;
+    width: 300px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--black);
+    position: relative;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.bulb-icon {
+    font-size: 3rem;
+    color: var(--primary-blue);
+    opacity: 0.8;
+}
+
+.documents-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex: 1;
+}
+
+.doc-link {
+    font-size: 1.2rem;
+    color: #d4a017;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.doc-link:hover {
+    color: #b8860b;
+    text-decoration: underline;
+}
+
+.doc-link-grey {
+    font-size: 1.2rem;
+    color: #888;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.contact-section-inscription {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-top: 40px;
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 16px;
+}
+
+.contact-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 12px;
+    object-fit: cover;
+    background-color: #ddd;
+}
+
+.contact-info strong {
+    display: block;
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #333;
+}
+
+.contact-details p {
+    font-size: 1.1rem;
+    color: #555;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.contact-details a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+@media (max-width: 800px) {
+
+    .permanences-section,
+    .preparation-section,
+    .contact-section-inscription {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .prep-card {
+        width: 100%;
+    }
+}

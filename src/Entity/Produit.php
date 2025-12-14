@@ -26,6 +26,9 @@ class Produit
     #[ORM\Column(name: "stock", type: "integer")]
     private ?int $stock = null;
 
+    #[ORM\Column(name: "image", type: "string", length: 255, nullable: true)]
+    private ?string $image = null;
+
     public function getIdProduit(): ?int { return $this->idProduit; }
     public function getNomProduit(): ?string { return $this->nomProduit; }
     public function setNomProduit(string $nomProduit): static { $this->nomProduit = $nomProduit; return $this; }
@@ -35,4 +38,6 @@ class Produit
     public function setPrix(string $prix): static { $this->prix = $prix; return $this; }
     public function getStock(): ?int { return $this->stock; }
     public function setStock(int $stock): static { $this->stock = $stock; return $this; }
+    public function getImage(): ?string { return $this->image; }
+    public function setImage(?string $image): static { $this->image = $image; return $this; }
 }

@@ -1,20 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AboutController!{% endblock %}
+{% block title %}Présentation du club{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="page-container">
+    <h1>Présentation du club</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: var(--shadow-md);">
+        <h2>Notre Histoire</h2>
+        <p style="margin-bottom: 20px;">
+            Bienvenue chez Angers Nat' Synchro ! Depuis plus de 60 ans, nous formons des athlètes de tous niveaux dans une ambiance conviviale et performante.
+            Notre club est une référence dans la région pour la natation artistique, alliant rigueur sportive et créativité.
+        </p>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/home/etud/Documents/LP INFO/PROJET_2/GIT/projet_site_ans/src/Controller/AboutController.php</code></li>
-        <li>Your template at <code>/home/etud/Documents/LP INFO/PROJET_2/GIT/projet_site_ans/templates/about/index.html.twig</code></li>
-    </ul>
+        <h2>Nos Valeurs</h2>
+        <p>
+            Esprit d'équipe, dépassement de soi et passion sont les maîtres mots de notre association.
+            Que ce soit pour le loisir ou la compétition, chaque nageuse et nageur trouve sa place au sein de nos groupes.
+        </p>
+    </div>
 </div>
 {% endblock %}
