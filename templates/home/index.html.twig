@@ -69,14 +69,14 @@
                         <div class="card-image-wrapper">
                             <!-- Placeholder ou image réelle si dispo -->
                             <div class="card-placeholder-img">
-                            <img src="{{ asset('images/Affiche-Baby-Synchro.jpg') }}" alt="actualité">
+                            <img src="{{ asset('images/' ~ news.images) }}" alt="{{ news.titre }}" class="actualite-image">
                             </div>
                         </div>
 						<div class="card-body">
                             <span class="card-date">{{ news.date ? news.date|date('d/m/Y') : '' }}</span>
                             <h3 class="card-title">{{ news.titre ?: 'Actualité' }}</h3>
                             <p class="card-excerpt">{{ news.description|striptags|slice(0, 100) ~ '...' }}</p>
-                            <a href="#" class="read-more">Lire la suite <i class="fas fa-arrow-right"></i></a>
+                            <a href="{{ path('app_actualites_show', { id: news.idActualite }) }}" class="read-more">Lire la suite <i class="fas fa-arrow-right"></i></a>
                         </div>
 					</article>
 				{% else %}
