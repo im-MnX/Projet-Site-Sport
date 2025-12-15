@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class AlbumController extends AbstractController
 {
-    #[Route('/album/{idAlbum}', name: 'album_show')]
+    #[Route('/album/{idAlbum?1}', name: 'album_show')]
     public function show(int $idAlbum, ManagerRegistry $doctrine): Response
     {
         $albumRepo = $doctrine->getRepository(Album::class);
