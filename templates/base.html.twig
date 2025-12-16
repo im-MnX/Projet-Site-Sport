@@ -8,7 +8,7 @@
 
 		{% block stylesheets %}
 			<link rel="stylesheet" href="{{ asset('css/style.css') }}">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 		{% endblock %}
 
@@ -25,50 +25,60 @@
 				<div class="nav-left">
 					<div class="nav-item dropdown" data-dropdown>
 						<button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-							Le Club <span class="chevron">⌄</span>
+							Le Club
+							<span class="chevron">⌄</span>
 						</button>
 						<div class="dropdown-menu" role="menu">
 							<a class="dropdown-item" href="{{ path('app_about') }}">Présentations du club</a>
 							<a class="dropdown-item" href="{{ path('app_evenement') }}">Événements</a>
 							<a class="dropdown-item" href="{{ path('app_actualites') }}">Actualités</a>
+							<a class="dropdown-item" href="#">Planning des cours</a>
+							<a class="dropdown-item" href="#">Planning des compétitions</a>
+						</div>
+					</div>
+
+					<div class="nav-item dropdown" data-dropdown>
+						<button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+							Inscriptions
+							<span class="chevron">⌄</span>
+						</button>
+						<div class="dropdown-menu" role="menu">
 							<a class="dropdown-item" href="{{ path('app_inscription') }}">Inscriptions au club</a>
 							<a class="dropdown-item" href="#">Inscriptions aux événements</a>
 						</div>
 					</div>
-
-					<a class="nav-item" href="{{ path('album_show') }}">Galerie</a> 
 				</div>
 
 				<a href="{{ path('home') }}"><img src="{{ asset('images/Logo_60ans.png') }}" alt="logo" class="logo"></a>
 
 				<div class="nav-right">
-                    <div class="nav-links">
-					    <a class="nav-item" href="{{ path('app_boutique') }}">Boutique</a>
-					    <a class="nav-item" href="{{ path('app_faq') }}">FAQ</a>
-                    </div>
+					<div class="nav-links">
+						<a class="nav-item" href="{{ path('album_show') }}">Galerie</a>
+						<a class="nav-item" href="{{ path('app_boutique') }}">Boutique</a>
+					</div>
 				</div>
 
-                {% if app.user %}
-                    <a class="nav-item logout-btn" href="{{ path('app_logout') }}" title="Déconnexion">
-                        <i class="fa-solid fa-power-off"></i>
-                    </a>
-                {% endif %}
+				{% if app.user %}
+					<a class="nav-item logout-btn" href="{{ path('app_logout') }}" title="Déconnexion">
+						<i class="fa-solid fa-power-off"></i>
+					</a>
+				{% endif %}
 			</nav>
 			{# Afficher le panier uniquement si on est sur la page boutique #}
-        		{% if app.request.get('_route') == 'app_boutique' %}
-            		<div class="header-top">
-                		<a href="{{ path('app_panier') }}" class="panier-header">
-                    		Panier
-                    		{% set totalCount = 0 %}
-                    		{% for quantite in app.session.get('panier')|default([]) %}
-                        		{% set totalCount = totalCount + quantite %}
-                    		{% endfor %}
-                    		{% if totalCount > 0 %}
-                        		<span class="panier-count">{{ totalCount }}</span>
-                    		{% endif %}
-                		</a>
-            		</div>
-        		{% endif %}
+			{% if app.request.get('_route') == 'app_boutique' %}
+				<div class="header-top">
+					<a href="{{ path('app_panier') }}" class="panier-header">
+						Panier
+						{% set totalCount = 0 %}
+						{% for quantite in app.session.get('panier')|default([]) %}
+							{% set totalCount = totalCount + quantite %}
+						{% endfor %}
+						{% if totalCount > 0 %}
+							<span class="panier-count">{{ totalCount }}</span>
+						{% endif %}
+					</a>
+				</div>
+			{% endif %}
 		</header>
 		{% block body %}{% endblock %}
 

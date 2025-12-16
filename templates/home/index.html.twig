@@ -44,7 +44,7 @@
                         </div>
                         <div class="event-time">
                             <i class="fas fa-clock"></i>
-                            <span>{{ nextEvent.dateEvenement|date('H:i') }}</span>
+                            <span>{{ nextEvent.horaire|date('H:i') }}</span>
                         </div>
                     {% endif %}
                     <p class="event-desc">{{ nextEvent.description ?: 'Venez nombreux !' }}</p>

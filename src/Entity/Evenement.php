@@ -31,6 +31,10 @@ class Evenement
     #[ORM\JoinColumn(name: "idTypeEvenement", referencedColumnName: "idTypeEvenement", nullable: false)]
     private ?TypeEvenement $typeEvenement = null;
 
+    #[ORM\Column(name: "horaire", type: Types::TIME_MUTABLE)]
+    private ?\DateTime $horaire = null;
+
+
     public function getIdEvenement(): ?int
     {
         return $this->idEvenement;
@@ -88,6 +92,17 @@ class Evenement
     public function setTypeEvenement(?TypeEvenement $typeEvenement): static
     {
         $this->typeEvenement = $typeEvenement;
+        return $this;
+    }
+
+    public function getHoraire(): ?\DateTime
+    {
+        return $this->horaire;
+    }
+
+    public function setHoraire(?\DateTime $horaire): static
+    {
+        $this->horaire = $horaire;
         return $this;
     }
 }
