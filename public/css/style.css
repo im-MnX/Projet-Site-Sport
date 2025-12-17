@@ -787,3 +787,44 @@ h1 {
     border-radius: 0;
   }
 }
+
+/* ============================= */
+/* Section Partenaires */
+/* ============================= */
+
+.partners-section {
+  margin-top: 80px;
+  padding: 60px 20px;
+  background-color: var(--bg-gray);
+}
+
+.partners-grid {
+  max-width: 1100px;
+  margin: 40px auto 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 40px;
+  align-items: center;
+}
+
+.partners-grid img {
+  max-width: 100%;
+  max-height: 140px;
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
+
+.partners-grid img:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .partners-grid {
+    gap: 25px;
+  }
+
+  .partners-grid img {
+    max-height: 60px;
+  }
+}

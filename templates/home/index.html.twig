@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Accueil
+{% endblock %}
 
 {% block body %}
 	<!-- Hero Section -->
@@ -13,76 +14,97 @@
 		</div>
 	</div>
 
-	<div class="home-container">
-		
-        <!-- Section: A la une (Event + Presentation) -->
-        <div class="featured-section">
-            
-            <div class="welcome-text">
-                <h2>Bienvenue au club</h2>
-                <p>
-                    Depuis 60 ans, <strong>Angers Nat' Synchro</strong> forme des athlètes passionnés de natation artistique. 
-                    Que vous soyez débutant ou compétiteur chevronné, rejoignez une famille dynamique où dépassement de soi rime avec esprit d'équipe.
-                </p>
-                <div class="stats-row">
-                    <div class="stat-item">
-                        <span class="stat-number">60+</span>
-                        <span class="stat-label">Années</span>
-                    </div>
-                </div>
-            </div>
+	<div
+		class="home-container">
 
-            <div class="next-event-card">
-                <div class="card-badge">Prochain événement</div>
-                {% if upcomingEvents is not empty %}
-                    {% set nextEvent = upcomingEvents[0] %}
-                    <h3>{{ nextEvent.nom }}</h3>
-                    {% if nextEvent.dateEvenement %}
-                        <div class="event-time">
-                            <i class="fas fa-calendar-day"></i>
-                            <span>{{ nextEvent.dateEvenement|date('d F Y') }}</span>
-                        </div>
-                        <div class="event-time">
-                            <i class="fas fa-clock"></i>
-                            <span>{{ nextEvent.horaire|date('H:i') }}</span>
-                        </div>
-                    {% endif %}
-                    <p class="event-desc">{{ nextEvent.description ?: 'Venez nombreux !' }}</p>
-                {% else %}
-                    <h3>Saison à venir</h3>
-                    <p class="event-desc">Le calendrier des événements sera bientôt disponible. Restez connectés !</p>
-                {% endif %}
-            </div>
+		<!-- Section: A la une (Event + Presentation) -->
+		<div class="featured-section">
 
-        </div>
+			<div class="welcome-text">
+				<h2>Bienvenue au club</h2>
+				<p>
+					Depuis 60 ans,
+					<strong>Angers Nat' Synchro</strong>
+					forme des athlètes passionnés de natation artistique. 
+					                    Que vous soyez débutant ou compétiteur chevronné, rejoignez une famille dynamique où dépassement de soi rime avec esprit d'équipe.
+				</p>
+				<div class="stats-row">
+					<div class="stat-item">
+						<span class="stat-number">60+</span>
+						<span class="stat-label">Années</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="next-event-card">
+				<div class="card-badge">Prochain événement</div>
+				{% if upcomingEvents is not empty %}
+					{% set nextEvent = upcomingEvents[0] %}
+					<h3>{{ nextEvent.nom }}</h3>
+					{% if nextEvent.dateEvenement %}
+						<div class="event-time">
+							<i class="fas fa-calendar-day"></i>
+							<span>{{ nextEvent.dateEvenement|date('d F Y') }}</span>
+						</div>
+						<div class="event-time">
+							<i class="fas fa-clock"></i>
+							<span>{{ nextEvent.horaire|date('H:i') }}</span>
+						</div>
+					{% endif %}
+					<p class="event-desc">{{ nextEvent.description ?: 'Venez nombreux !' }}</p>
+				{% else %}
+					<h3>Saison à venir</h3>
+					<p class="event-desc">Le calendrier des événements sera bientôt disponible. Restez connectés !</p>
+				{% endif %}
+			</div>
+
+		</div>
 
 		<!-- Section: Dernières Actualités -->
 		<div class="modern-news-section">
 			<div class="section-header">
-                <h2>Actualités</h2>
-                <div class="header-line"></div>
-            </div>
+				<h2>Actualités</h2>
+				<div class="header-line"></div>
+			</div>
 
 			<div class="modern-grid">
 				{% for news in latestNews %}
 					<article class="modern-card">
-                        <div class="card-image-wrapper">
-                            <!-- Placeholder ou image réelle si dispo -->
-                            <div class="card-placeholder-img">
-                            <img src="{{ asset('images/' ~ news.images) }}" alt="{{ news.titre }}" class="actualite-image">
-                            </div>
-                        </div>
+						<div
+							class="card-image-wrapper">
+							<!-- Placeholder ou image réelle si dispo -->
+							<div class="card-placeholder-img">
+								<img src="{{ asset('images/' ~ news.images) }}" alt="{{ news.titre }}" class="actualite-image">
+							</div>
+						</div>
 						<div class="card-body">
-                            <span class="card-date">{{ news.date ? news.date|date('d/m/Y') : '' }}</span>
-                            <h3 class="card-title">{{ news.titre ?: 'Actualité' }}</h3>
-                            <p class="card-excerpt">{{ news.description|striptags|slice(0, 100) ~ '...' }}</p>
-                            <a href="{{ path('app_actualites_show', { id: news.idActualite }) }}" class="read-more">Lire la suite <i class="fas fa-arrow-right"></i></a>
-                        </div>
+							<span class="card-date">{{ news.date ? news.date|date('d/m/Y') : '' }}</span>
+							<h3 class="card-title">{{ news.titre ?: 'Actualité' }}</h3>
+							<p class="card-excerpt">{{ news.description|striptags|slice(0, 100) ~ '...' }}</p>
+							<a href="{{ path('app_actualites_show', { id: news.idActualite }) }}" class="read-more">Lire la suite
+								<i class="fas fa-arrow-right"></i>
+							</a>
+						</div>
 					</article>
 				{% else %}
-                    <p>Aucune actualité disponible</p>
+					<p>Aucune actualité disponible</p>
 				{% endfor %}
 			</div>
 		</div>
+
+		<!-- Section Partenaires -->
+		<div class="partners-section">
+			<div class="section-header">
+				<h2>Nos partenaires</h2>
+				<div class="header-line"></div>
+			</div>
+
+			<div class="partners-grid">
+				<a href="https://www.barthelaix49.com/pain-gateau-petit-four-chocolat-angers/" target="_blank"><img src="{{ asset('images/partenaire/blanc-barthelaix.png') }}" alt="Partenaire 1"></a>
+				<a href="https://www.flunch.fr/" target="_blank"><img src="{{ asset('images/partenaire/flunch.jpg') }}" alt="Partenaire 2"></a>
+				<a href="https://www.synchroloc.fr/" target="_blank"><img src="{{ asset('images/partenaire/synchroloc-flocage.jpg') }}" alt="Partenaire 3"></a>
+			</div>
+		</div>
+
 	</div>
 {% endblock %}
