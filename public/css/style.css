@@ -467,6 +467,7 @@ footer .footer-content {
 .page-container {
   max-width: 1200px;
   margin: 0 auto;
+  margin-top: 20px;
   padding: 40px 20px;
   width: 100%;
 }

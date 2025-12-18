@@ -189,6 +189,7 @@
 @media (max-width: 900px) {
     .page-container[style*="flex"] {
         flex-direction: column;
+        margin-top: 100px;
     }
 
     .album-selector {
