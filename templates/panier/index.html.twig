@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block body %}
+<div class="page-container">
 <h1>Votre panier</h1>
 
 {% if produitsPanier is empty %}
@@ -38,4 +39,5 @@
 
     <p class="total-panier"><strong>Total :</strong> {{ total|number_format(2, ',', ' ') }} €</p>
 {% endif %}
+</div>
 {% endblock %}
