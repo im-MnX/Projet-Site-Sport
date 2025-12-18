@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : mer. 10 déc. 2025 à 12:12
+-- Généré le : jeu. 11 déc. 2025 à 10:39
 -- Version du serveur : 10.11.14-MariaDB-0+deb12u2
 -- Version de PHP : 8.2.29
 
@@ -24,6 +24,56 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `actualite`
+--
+
+CREATE TABLE `actualite` (
+  `idActualite` int(11) NOT NULL,
+  `titre` varchar(255) NOT NULL,
+  `date` date NOT NULL,
+  `images` varchar(255) DEFAULT NULL,
+  `description` longtext DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `album`
+--
+
+CREATE TABLE `album` (
+  `idAlbum` int(11) NOT NULL,
+  `description` longtext DEFAULT NULL,
+  `idCategorieAlbum` int(11) NOT NULL,
+  `priorite` int(11) NOT NULL DEFAULT 0,
+  `archive` tinyint(4) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `categoriealbum`
+--
+
+CREATE TABLE `categoriealbum` (
+  `idCategorieAlbum` int(11) NOT NULL,
+  `libelleCategorieAlbum` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `commande`
+--
+
+CREATE TABLE `commande` (
+  `idCommande` int(11) NOT NULL,
+  `dateCommande` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `doctrine_migration_versions`
 --
 
@@ -33,13 +83,6 @@ CREATE TABLE `doctrine_migration_versions` (
   `execution_time` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Déchargement des données de la table `doctrine_migration_versions`
---
-
-INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
-('DoctrineMigrations\\Version20251210111723', '2025-12-10 11:17:53', 20);
-
 -- --------------------------------------------------------
 
 --
@@ -47,60 +90,134 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 --
 
 CREATE TABLE `evenement` (
-  `id` int(11) NOT NULL,
-  `nom` varchar(255) NOT NULL,
-  `date_evenement` datetime NOT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `description` longtext DEFAULT NULL,
-  `type_evenement_id` int(11) NOT NULL
+  `idEvenement` int(11) NOT NULL,
+  `nom` varchar(100) NOT NULL,
+  `dateEvenement` date NOT NULL,
+  `idTypeEvenement` int(11) NOT NULL,
+  `images` varchar(255) DEFAULT NULL,
+  `description` longtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `evenement`
 --
 
-INSERT INTO `evenement` (`id`, `nom`, `date_evenement`, `image`, `description`, `type_evenement_id`) VALUES
-(1, 'Compétition fin d\'année', '2025-12-31 12:27:25', NULL, 'compétition de fin d\'année sur l\'ensemble des catégorie etctcczddddddddddddddddddddd\r\ntest\r\ntest', 1);
+INSERT INTO `evenement` (`idEvenement`, `nom`, `dateEvenement`, `idTypeEvenement`, `images`, `description`) VALUES
+(1, 'Evenement Test', '2025-12-20', 1, 'image_test.jpg', 'Description aléatoire pour l\'evenement.');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `messenger_messages`
+-- Structure de la table `facture`
 --
 
-CREATE TABLE `messenger_messages` (
-  `id` bigint(20) NOT NULL,
-  `body` longtext NOT NULL,
-  `headers` longtext NOT NULL,
-  `queue_name` varchar(190) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `available_at` datetime NOT NULL,
-  `delivered_at` datetime DEFAULT NULL
+CREATE TABLE `facture` (
+  `idCommande` int(11) NOT NULL,
+  `idProduit` int(11) NOT NULL,
+  `quantite` int(11) NOT NULL,
+  `prixUnitaire` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `type_evenement`
+-- Structure de la table `faq`
 --
 
-CREATE TABLE `type_evenement` (
-  `id` int(11) NOT NULL,
-  `nom` varchar(255) NOT NULL
+CREATE TABLE `faq` (
+  `idFaq` int(11) NOT NULL,
+  `question` varchar(255) NOT NULL,
+  `reponse` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `photo`
+--
+
+CREATE TABLE `photo` (
+  `idPhoto` int(11) NOT NULL,
+  `idAlbum` int(11) NOT NULL,
+  `titre` varchar(255) DEFAULT NULL,
+  `cheminImage` varchar(255) DEFAULT NULL,
+  `datePhoto` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `produit`
+--
+
+CREATE TABLE `produit` (
+  `idProduit` int(11) NOT NULL,
+  `nomProduit` varchar(255) NOT NULL,
+  `description` longtext DEFAULT NULL,
+  `prix` decimal(10,2) NOT NULL,
+  `stock` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `typeEvenement`
+--
+
+CREATE TABLE `typeEvenement` (
+  `idTypeEvenement` int(11) NOT NULL,
+  `libelleTypeEvenement` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `type_evenement`
+-- Déchargement des données de la table `typeEvenement`
 --
 
-INSERT INTO `type_evenement` (`id`, `nom`) VALUES
-(1, 'Compétition'),
-(2, 'Gala'),
+INSERT INTO `typeEvenement` (`idTypeEvenement`, `libelleTypeEvenement`) VALUES
+(1, 'Gala'),
+(2, 'Championnat'),
 (3, 'Inscription');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `utilisateur`
+--
+
+CREATE TABLE `utilisateur` (
+  `idUtilisateur` int(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Index pour les tables déchargées
 --
+
+--
+-- Index pour la table `actualite`
+--
+ALTER TABLE `actualite`
+  ADD PRIMARY KEY (`idActualite`);
+
+--
+-- Index pour la table `album`
+--
+ALTER TABLE `album`
+  ADD PRIMARY KEY (`idAlbum`),
+  ADD KEY `IDX_39986E43E495F98` (`idCategorieAlbum`);
+
+--
+-- Index pour la table `categoriealbum`
+--
+ALTER TABLE `categoriealbum`
+  ADD PRIMARY KEY (`idCategorieAlbum`);
+
+--
+-- Index pour la table `commande`
+--
+ALTER TABLE `commande`
+  ADD PRIMARY KEY (`idCommande`);
 
 --
 -- Index pour la table `doctrine_migration_versions`
@@ -112,55 +229,140 @@ ALTER TABLE `doctrine_migration_versions`
 -- Index pour la table `evenement`
 --
 ALTER TABLE `evenement`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_B26681E88939516` (`type_evenement_id`);
+  ADD PRIMARY KEY (`idEvenement`),
+  ADD KEY `IDX_B26681EA00CD40F` (`idTypeEvenement`);
 
 --
--- Index pour la table `messenger_messages`
+-- Index pour la table `facture`
 --
-ALTER TABLE `messenger_messages`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_75EA56E0FB7336F0` (`queue_name`),
-  ADD KEY `IDX_75EA56E0E3BD61CE` (`available_at`),
-  ADD KEY `IDX_75EA56E016BA31DB` (`delivered_at`);
+ALTER TABLE `facture`
+  ADD PRIMARY KEY (`idCommande`,`idProduit`),
+  ADD KEY `IDX_FE866410391C87D5` (`idProduit`);
 
 --
--- Index pour la table `type_evenement`
+-- Index pour la table `faq`
 --
-ALTER TABLE `type_evenement`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `faq`
+  ADD PRIMARY KEY (`idFaq`);
+
+--
+-- Index pour la table `photo`
+--
+ALTER TABLE `photo`
+  ADD PRIMARY KEY (`idPhoto`),
+  ADD KEY `IDX_14B784182E5C2D5E` (`idAlbum`);
+
+--
+-- Index pour la table `produit`
+--
+ALTER TABLE `produit`
+  ADD PRIMARY KEY (`idProduit`);
+
+--
+-- Index pour la table `typeEvenement`
+--
+ALTER TABLE `typeEvenement`
+  ADD PRIMARY KEY (`idTypeEvenement`);
+
+--
+-- Index pour la table `utilisateur`
+--
+ALTER TABLE `utilisateur`
+  ADD PRIMARY KEY (`idUtilisateur`),
+  ADD UNIQUE KEY `UNIQ_1D1C63B3E7927C74` (`email`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
+-- AUTO_INCREMENT pour la table `actualite`
+--
+ALTER TABLE `actualite`
+  MODIFY `idActualite` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `album`
+--
+ALTER TABLE `album`
+  MODIFY `idAlbum` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `categoriealbum`
+--
+ALTER TABLE `categoriealbum`
+  MODIFY `idCategorieAlbum` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `commande`
+--
+ALTER TABLE `commande`
+  MODIFY `idCommande` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `evenement`
 --
 ALTER TABLE `evenement`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idEvenement` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT pour la table `messenger_messages`
+-- AUTO_INCREMENT pour la table `faq`
 --
-ALTER TABLE `messenger_messages`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `faq`
+  MODIFY `idFaq` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `type_evenement`
+-- AUTO_INCREMENT pour la table `photo`
 --
-ALTER TABLE `type_evenement`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `photo`
+  MODIFY `idPhoto` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `produit`
+--
+ALTER TABLE `produit`
+  MODIFY `idProduit` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `typeEvenement`
+--
+ALTER TABLE `typeEvenement`
+  MODIFY `idTypeEvenement` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT pour la table `utilisateur`
+--
+ALTER TABLE `utilisateur`
+  MODIFY `idUtilisateur` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Contraintes pour les tables déchargées
 --
 
 --
+-- Contraintes pour la table `album`
+--
+ALTER TABLE `album`
+  ADD CONSTRAINT `album_ibfk_1` FOREIGN KEY (`idCategorieAlbum`) REFERENCES `categoriealbum` (`idCategorieAlbum`);
+
+--
 -- Contraintes pour la table `evenement`
 --
 ALTER TABLE `evenement`
-  ADD CONSTRAINT `FK_B26681E88939516` FOREIGN KEY (`type_evenement_id`) REFERENCES `type_evenement` (`id`);
+  ADD CONSTRAINT `evenement_ibfk_1` FOREIGN KEY (`idTypeEvenement`) REFERENCES `typeEvenement` (`idTypeEvenement`);
+
+--
+-- Contraintes pour la table `facture`
+--
+ALTER TABLE `facture`
+  ADD CONSTRAINT `facture_ibfk_1` FOREIGN KEY (`idCommande`) REFERENCES `commande` (`idCommande`),
+  ADD CONSTRAINT `facture_ibfk_2` FOREIGN KEY (`idProduit`) REFERENCES `produit` (`idProduit`);
+
+--
+-- Contraintes pour la table `photo`
+--
+ALTER TABLE `photo`
+  ADD CONSTRAINT `photo_ibfk_1` FOREIGN KEY (`idAlbum`) REFERENCES `album` (`idAlbum`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

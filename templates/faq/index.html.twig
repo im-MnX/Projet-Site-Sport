@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FAQ{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    <h1> Questions fréquentes </h1>
+
+    <div class="faq">
+        {% for item in faq %}
+            <div class="question">
+                <h2>{{ item.question }}</h2>
+                <p>{{ item.reponse }}</p>
+            </div>
+        {% else %}
+            <p>Aucune question FAQ n’a encore été ajoutée.</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
