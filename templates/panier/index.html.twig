@@ -2,6 +2,11 @@
 
 {% block title %}Panier{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/panier.css') }}">
+{% endblock %}
+
 {% block body %}
 <h1>Votre panier</h1>
 

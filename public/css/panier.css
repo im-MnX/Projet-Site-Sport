@@ -1,0 +1,131 @@
+/* ===================== */
+/* Panier */
+/* ===================== */
+
+table {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto 30px auto;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+thead {
+    background: #2eb6e6;
+    color: #fff;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+a.delete {
+    color: #ff4c4c;
+}
+
+a.delete:hover {
+    color: #d32f2f;
+}
+
+p.total {
+    text-align: right;
+    max-width: 1000px;
+    margin: 10px auto 30px auto;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* ===================== */
+/* Panier en haut à droite sur la boutique */
+/* ===================== */
+
+.header-top {
+    position: fixed;           /* toujours visible */
+    top: 20px;
+    right: 20px;               /* changé à droite */
+    z-index: 1000;
+}
+
+.panier-header {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background-color: #2eb6e6;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transition: background-color 0.2s ease;
+    text-decoration: none;
+}
+
+.panier-header:hover {
+    background-color: #1b7fa3;
+}
+
+.panier-count {
+    display: inline-block;
+    min-width: 20px;
+    padding: 2px 6px;
+    background-color: #ffd700;
+    color: #000;
+    border-radius: 50%;
+    font-size: 0.9rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Responsive : réduire la taille sur mobile */
+@media (max-width: 768px) {
+    .header-top {
+        top: 10px;
+        right: 10px;           /* toujours à droite */
+    }
+
+    .panier-header {
+        padding: 6px 10px;
+        font-size: 0.9rem;
+    }
+
+    .panier-count {
+        font-size: 0.8rem;
+        min-width: 18px;
+        padding: 1px 5px;
+    }
+}
+
+
+
+/* ===================== */
+/* Responsive */
+/* ===================== */
+
+@media (max-width: 992px) {
+    .produits-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .produits-list {
+        grid-template-columns: 1fr;
+    }
+
+    table, th, td {
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+}
