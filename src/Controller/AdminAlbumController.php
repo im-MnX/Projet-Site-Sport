@@ -25,35 +25,35 @@ final class AdminAlbumController extends AbstractController
     #[Route('/new', name: 'app_admin_album_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $album = new Album();
-        $form = $this->createForm(AlbumType::class, $album);
+        $idAlbum = new Album();
+        $form = $this->createForm(AlbumType::class, $idAlbum);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($album);
+            $entityManager->persist($idAlbum);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_admin_album_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('admin_album/new.html.twig', [
-            'album' => $album,
+            'album' => $idAlbum,
             'form' => $form,
         ]);
     }
 
     #[Route('/{idAlbum}', name: 'app_admin_album_show', methods: ['GET'])]
-    public function show(Album $album): Response
+    public function show(Album $idAlbum): Response
     {
         return $this->render('admin_album/show.html.twig', [
-            'album' => $album,
+            'album' => $idAlbum,
         ]);
     }
 
     #[Route('/{idAlbum}/edit', name: 'app_admin_album_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Album $album, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Album $idAlbum, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(AlbumType::class, $album);
+        $form = $this->createForm(AlbumType::class, $idAlbum);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,16 +63,16 @@ final class AdminAlbumController extends AbstractController
         }
 
         return $this->render('admin_album/edit.html.twig', [
-            'album' => $album,
+            'album' => $idAlbum,
             'form' => $form,
         ]);
     }
 
     #[Route('/{idAlbum}', name: 'app_admin_album_delete', methods: ['POST'])]
-    public function delete(Request $request, Album $album, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Album $idAlbum, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$album->getIdAlbum(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($album);
+        if ($this->isCsrfTokenValid('delete'.$idAlbum->getIdAlbum(), $request->getPayload()->getString('_token'))) {
+            $entityManager->remove($idAlbum);
             $entityManager->flush();
         }
 
