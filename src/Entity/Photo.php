@@ -27,6 +27,11 @@ class Photo
     #[ORM\Column(name: "datePhoto", type: "date", nullable: true)]
     private ?\DateTime $datePhoto = null;
 
+    public function getId(): ?int
+{
+    return $this->idPhoto;
+}
+
     public function getIdPhoto(): ?int { return $this->idPhoto; }
     public function getIdAlbum(): ?Album { return $this->idAlbum; }
     public function setIdAlbum(?Album $idAlbum): static { $this->idAlbum = $idAlbum; return $this; }
