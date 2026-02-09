@@ -19,7 +19,7 @@ class PhotoType extends AbstractType
             ->add('datePhoto')
             ->add('idAlbum', EntityType::class, [
                 'class' => Album::class,
-                'choice_label' => 'id',
+                'choice_label' => 'description',
             ])
         ;
     }
