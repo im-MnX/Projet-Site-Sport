@@ -34,6 +34,10 @@ class Album
 
     public function __construct() { $this->photos = new ArrayCollection(); }
 
+    public function getId(): ?int
+    {
+    return $this->idAlbum;
+    }
     public function getIdAlbum(): ?int { return $this->idAlbum; }
     public function getDescription(): ?string { return $this->description; }
     public function setDescription(?string $description): static { $this->description = $description; return $this; }

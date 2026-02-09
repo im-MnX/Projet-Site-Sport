@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CategorieAlbum{% endblock %}
+
+{% block body %}
+    <h1>CategorieAlbum</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdCategorieAlbum</th>
+                <td>{{ categorie_album.idCategorieAlbum }}</td>
+            </tr>
+            <tr>
+                <th>LibelleCategorieAlbum</th>
+                <td>{{ categorie_album.libelleCategorieAlbum }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_categorie_album_index') }}">back to list</a>
+
+    <a href="{{ path('app_admin_categorie_album_edit', {'idCategorieAlbum': categorie_album.idCategorieAlbum}) }}">edit</a>
+
+    {{ include('admin_categorie_album/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Photo index{% endblock %}
+
+{% block body %}
+    <h1>Photo index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdPhoto</th>
+                <th>Titre</th>
+                <th>CheminImage</th>
+                <th>DatePhoto</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for photo in photos %}
+            <tr>
+                <td>{{ photo.idPhoto }}</td>
+                <td>{{ photo.titre }}</td>
+                <td>{{ photo.cheminImage }}</td>
+                <td>{{ photo.datePhoto ? photo.datePhoto|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_admin_photo_show', {'idPhoto': photo.idPhoto}) }}">show</a>
+                    <a href="{{ path('app_admin_photo_edit', {'idPhoto': photo.idPhoto}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_photo_new') }}">Create new</a>
+{% endblock %}

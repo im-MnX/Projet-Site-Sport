@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CategorieAlbum index{% endblock %}
+
+{% block body %}
+    <h1>CategorieAlbum index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdCategorieAlbum</th>
+                <th>LibelleCategorieAlbum</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorie_album in categorie_albums %}
+            <tr>
+                <td>{{ categorie_album.idCategorieAlbum }}</td>
+                <td>{{ categorie_album.libelleCategorieAlbum }}</td>
+                <td>
+                    <a href="{{ path('app_admin_categorie_album_show', {'idCategorieAlbum': categorie_album.idCategorieAlbum}) }}">show</a>
+                    <a href="{{ path('app_admin_categorie_album_edit', {'idCategorieAlbum': categorie_album.idCategorieAlbum}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_categorie_album_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Album index{% endblock %}
+
+{% block body %}
+    <h1>Album index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdAlbum</th>
+                <th>Description</th>
+                <th>Priorite</th>
+                <th>Archive</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for album in albums %}
+            <tr>
+                <td>{{ album.idAlbum }}</td>
+                <td>{{ album.description }}</td>
+                <td>{{ album.priorite }}</td>
+                <td>{{ album.archive ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_admin_album_show', {'idAlbum': album.idAlbum}) }}">show</a>
+                    <a href="{{ path('app_admin_album_edit', {'idAlbum': album.idAlbum}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_album_new') }}">Create new</a>
+{% endblock %}
