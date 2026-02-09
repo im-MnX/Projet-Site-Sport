@@ -25,9 +25,9 @@ class CategorieAlbum
     public function __construct() { $this->albums = new ArrayCollection(); }
 
     public function getId(): ?int
-{
+    {
     return $this->idCategorieAlbum;
-}
+    }
 
     public function getIdCategorieAlbum(): ?int { return $this->idCategorieAlbum; }
     public function getLibelleCategorieAlbum(): ?string { return $this->libelleCategorieAlbum; }

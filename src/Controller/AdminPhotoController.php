@@ -15,45 +15,45 @@ use Symfony\Component\Routing\Attribute\Route;
 final class AdminPhotoController extends AbstractController
 {
     #[Route(name: 'app_admin_photo_index', methods: ['GET'])]
-    public function index(PhotoRepository $photoRepository): Response
+    public function index(PhotoRepository $idPhotoRepository): Response
     {
         return $this->render('admin_photo/index.html.twig', [
-            'photos' => $photoRepository->findAll(),
+            'photos' => $idPhotoRepository->findAll(),
         ]);
     }
 
     #[Route('/new', name: 'app_admin_photo_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $photo = new Photo();
-        $form = $this->createForm(PhotoType::class, $photo);
+        $idPhoto = new Photo();
+        $form = $this->createForm(PhotoType::class, $idPhoto);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($photo);
+            $entityManager->persist($idPhoto);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_admin_photo_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('admin_photo/new.html.twig', [
-            'photo' => $photo,
+            'photo' => $idPhoto,
             'form' => $form,
         ]);
     }
 
     #[Route('/{idPhoto}', name: 'app_admin_photo_show', methods: ['GET'])]
-    public function show(Photo $photo): Response
+    public function show(Photo $idPhoto): Response
     {
         return $this->render('admin_photo/show.html.twig', [
-            'photo' => $photo,
+            'photo' => $idPhoto,
         ]);
     }
 
     #[Route('/{idPhoto}/edit', name: 'app_admin_photo_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Photo $photo, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Photo $idPhoto, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(PhotoType::class, $photo);
+        $form = $this->createForm(PhotoType::class, $idPhoto);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,16 +63,16 @@ final class AdminPhotoController extends AbstractController
         }
 
         return $this->render('admin_photo/edit.html.twig', [
-            'photo' => $photo,
+            'photo' => $idPhoto,
             'form' => $form,
         ]);
     }
 
     #[Route('/{idPhoto}', name: 'app_admin_photo_delete', methods: ['POST'])]
-    public function delete(Request $request, Photo $photo, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Photo $idPhoto, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$photo->getIdPhoto(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($photo);
+        if ($this->isCsrfTokenValid('delete'.$idPhoto->getIdPhoto(), $request->getPayload()->getString('_token'))) {
+            $entityManager->remove($idPhoto);
             $entityManager->flush();
         }
 
