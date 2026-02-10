@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Actualite{% endblock %}
+
+{% block body %}
+    <h1>Actualite</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdActualite</th>
+                <td>{{ actualite.idActualite }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ actualite.titre }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ actualite.date ? actualite.date|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Images</th>
+                <td>{{ actualite.images }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ actualite.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_actualite_index') }}">back to list</a>
+
+    <a href="{{ path('app_admin_actualite_edit', {'idActualite': actualite.idActualite}) }}">edit</a>
+
+    {{ include('admin_actualite/_delete_form.html.twig') }}
+{% endblock %}

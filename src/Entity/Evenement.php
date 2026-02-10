@@ -40,6 +40,12 @@ class Evenement
         return $this->idEvenement;
     }
 
+    public function getId(): ?int
+    {
+        return $this->idEvenement;
+    }
+
+
     public function getNom(): ?string
     {
         return $this->nom;

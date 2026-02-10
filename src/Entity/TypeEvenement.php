@@ -32,6 +32,11 @@ class TypeEvenement
         return $this->idTypeEvenement;
     }
 
+    public function getId(): ?int
+    {
+        return $this->idTypeEvenement;
+    }
+
     public function getLibelleTypeEvenement(): ?string
     {
         return $this->libelleTypeEvenement;
