@@ -6,8 +6,10 @@ use App\Entity\Album;
 use App\Entity\Photo;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class PhotoType extends AbstractType
 {
@@ -15,11 +17,25 @@ class PhotoType extends AbstractType
     {
         $builder
             ->add('titre')
-            ->add('cheminImage')
+            ->add('image', FileType::class, [
+                'label' => 'Image (fichier JPEG ou PNG)',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '5M',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Veuillez uploader une image valide (JPG, PNG)',
+                    ])
+                ],
+            ])
             ->add('datePhoto')
             ->add('idAlbum', EntityType::class, [
                 'class' => Album::class,
-                'choice_label' => 'id',
+                'choice_label' => 'description',
             ])
         ;
     }
