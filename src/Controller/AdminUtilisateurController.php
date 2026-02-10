@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/admin/utilisateur')]
@@ -23,13 +24,24 @@ final class AdminUtilisateurController extends AbstractController
     }
 
     #[Route('/new', name: 'app_admin_utilisateur_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
     {
         $idUtilisateur = new Utilisateur();
         $form = $this->createForm(UtilisateurType::class, $idUtilisateur);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Hash the password if provided
+            $plainPassword = $form->get('password')->getData();
+            if ($plainPassword) {
+                $idUtilisateur->setPassword(
+                    $passwordHasher->hashPassword(
+                        $idUtilisateur,
+                        $plainPassword
+                    )
+                );
+            }
+
             $entityManager->persist($idUtilisateur);
             $entityManager->flush();
 
@@ -51,12 +63,23 @@ final class AdminUtilisateurController extends AbstractController
     }
 
     #[Route('/{idUtilisateur}/edit', name: 'app_admin_utilisateur_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Utilisateur $idUtilisateur, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Utilisateur $idUtilisateur, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
     {
         $form = $this->createForm(UtilisateurType::class, $idUtilisateur);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Hash the password if provided
+            $plainPassword = $form->get('password')->getData();
+            if ($plainPassword) {
+                $idUtilisateur->setPassword(
+                    $passwordHasher->hashPassword(
+                        $idUtilisateur,
+                        $plainPassword
+                    )
+                );
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_admin_utilisateur_index', [], Response::HTTP_SEE_OTHER);
