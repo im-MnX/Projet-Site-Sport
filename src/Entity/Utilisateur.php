@@ -23,6 +23,11 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     // Getters & Setters
+
+    public function getId(): ?int
+    {
+        return $this->idUtilisateur;
+    }
     public function getIdUtilisateur(): ?int
     {
         return $this->idUtilisateur;
