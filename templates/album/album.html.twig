@@ -10,49 +10,60 @@
 {% block body %}
 
 
-    <div class="page-container" style="display: flex; gap: 40px;">
-        <!-- Sidebar catégories + albums -->
-        <aside class="album-selector" style="flex: 0 0 280px;">
-            <h3>Albums</h3>
-            <ul>
-                {% for categorie in categories %}
-                    {% set isActiveCategory = albumsByCategorie[categorie.idCategorieAlbum]|filter(a => a.idAlbum == album.idAlbum)|length > 0 %}
-                    <li class="categorie-item {% if isActiveCategory %}open{% endif %}">
-                        <div class="categorie-title">
-                            {{ categorie.libelleCategorieAlbum }}
-                        </div>
-                        <ul class="albums-list">
-                            {% for a in albumsByCategorie[categorie.idCategorieAlbum] %}
-                                <li {% if a.idAlbum == album.idAlbum %}class="active"{% endif %}>
-                                    <a href="{{ path('album_show', {'idAlbum': a.idAlbum}) }}">
-                                        {{ a.description }}
-                                    </a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </li>
-                {% endfor %}
-            </ul>
-        </aside>
 
-        <!-- Galerie des photos -->
-        <section class="album-gallery" style="flex: 1;">
-            {% if photos is not empty %}
-                <div class="gallery-grid">
-                    {% for photo in photos %}
-                        <div class="photo-item">
-                            <img src="{{ asset('photos/album_' ~ album.idAlbum ~ '/' ~ photo.cheminImage) }}" alt="Photo">
-                        </div>
+    {% if album is null %}
+        <div class="page-container" style="text-align: center; padding: 60px 20px;">
+            <div style="background: #f9f9f9; border-radius: 12px; padding: 60px; max-width: 600px; margin: 0 auto;">
+                <i class="far fa-images" style="font-size: 4rem; margin-bottom: 20px; color: #ddd;"></i>
+                <h2 style="color: #666; margin-bottom: 10px;">Aucun album disponible</h2>
+                <p style="color: #999;">La galerie est vide pour le moment. Les albums seront bientôt disponibles.</p>
+            </div>
+        </div>
+    {% else %}
+        <div class="page-container" style="display: flex; gap: 40px;">
+            <!-- Sidebar catégories + albums -->
+            <aside class="album-selector" style="flex: 0 0 280px;">
+                <h3>Albums</h3>
+                <ul>
+                    {% for categorie in categories %}
+                        {% set isActiveCategory = albumsByCategorie[categorie.idCategorieAlbum]|filter(a => a.idAlbum == album.idAlbum)|length > 0 %}
+                        <li class="categorie-item {% if isActiveCategory %}open{% endif %}">
+                            <div class="categorie-title">
+                                {{ categorie.libelleCategorieAlbum }}
+                            </div>
+                            <ul class="albums-list">
+                                {% for a in albumsByCategorie[categorie.idCategorieAlbum] %}
+                                    <li {% if a.idAlbum == album.idAlbum %}class="active"{% endif %}>
+                                        <a href="{{ path('album_show', {'idAlbum': a.idAlbum}) }}">
+                                            {{ a.description }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </li>
                     {% endfor %}
-                </div>
-            {% else %}
-                <div style="text-align: center; padding: 40px; color: #666; background: #f9f9f9; border-radius: 12px;">
-                    <i class="far fa-images" style="font-size: 3rem; margin-bottom: 20px; color: #ddd;"></i>
-                    <p>Aucune photo dans cet album pour le moment.</p>
-                </div>
-            {% endif %}
-        </section>
-    </div>
+                </ul>
+            </aside>
+
+            <!-- Galerie des photos -->
+            <section class="album-gallery" style="flex: 1;">
+                {% if photos is not empty %}
+                    <div class="gallery-grid">
+                        {% for photo in photos %}
+                            <div class="photo-item">
+                                <img src="{{ asset('photos/album_' ~ album.idAlbum ~ '/' ~ photo.cheminImage) }}" alt="Photo">
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div style="text-align: center; padding: 40px; color: #666; background: #f9f9f9; border-radius: 12px;">
+                        <i class="far fa-images" style="font-size: 3rem; margin-bottom: 20px; color: #ddd;"></i>
+                        <p>Aucune photo dans cet album pour le moment.</p>
+                    </div>
+                {% endif %}
+            </section>
+        </div>
+    {% endif %}
 
 
 <!-- JS pour l'accordion -->

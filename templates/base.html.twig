@@ -60,8 +60,17 @@
 				</div>
 
 				{% if app.user %}
+					{% if is_granted('ROLE_ADMIN') %}
+						<a class="nav-item" href="{{ path('app_admin_dashboard') }}" title="Administration">
+							<i class="fa-solid fa-screwdriver-wrench"></i>
+						</a>
+					{% endif %}
 					<a class="nav-item logout-btn" href="{{ path('app_logout') }}" title="Déconnexion">
 						<i class="fa-solid fa-power-off"></i>
+					</a>
+				{% else %}
+					<a class="nav-item" href="{{ path('app_login') }}" title="Connexion">
+						<i class="fa-solid fa-user"></i>
 					</a>
 				{% endif %}
 			</nav>

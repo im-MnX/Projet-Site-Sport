@@ -1,11 +1,13 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}New TypeEvenement{% endblock %}
-
+{% extends 'admin_base.html.twig' %}
+{% block title %}Nouveau Type d'Événement{% endblock %}
+{% block page_title %}Nouveau Type{% endblock %}
+{% block breadcrumb %}<span>Administration</span> / <a href="{{ path('app_admin_type_evenement_index') }}">Types</a> / <span>Nouveau</span>{% endblock %}
 {% block body %}
-    <h1>Create new TypeEvenement</h1>
-
+<div class="card" style="max-width: 800px; margin: 0 auto;">
+    <div class="card-header">
+        <h2 class="card-title">Ajouter un type d'événement</h2>
+        <a href="{{ path('app_admin_type_evenement_index') }}" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Retour</a>
+    </div>
     {{ include('admin_type_evenement/_form.html.twig') }}
-
-    <a href="{{ path('app_admin_type_evenement_index') }}">back to list</a>
+</div>
 {% endblock %}

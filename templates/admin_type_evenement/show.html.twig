@@ -1,26 +1,22 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}TypeEvenement{% endblock %}
-
+{% extends 'admin_base.html.twig' %}
+{% block title %}Détails du Type{% endblock %}
+{% block page_title %}Détails du Type{% endblock %}
+{% block breadcrumb %}<span>Administration</span> / <a href="{{ path('app_admin_type_evenement_index') }}">Types</a> / <span>Détails</span>{% endblock %}
 {% block body %}
-    <h1>TypeEvenement</h1>
-
+<div class="card" style="max-width: 800px; margin: 0 auto;">
+    <div class="card-header">
+        <h2 class="card-title">{{ typeEvenement.nomType }}</h2>
+        <div style="display: flex; gap: 0.5rem;">
+            <a href="{{ path('app_admin_type_evenement_index') }}" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Retour</a>
+            <a href="{{ path('app_admin_type_evenement_edit', {'idTypeEvenement': typeEvenement.idTypeEvenement}) }}" class="btn btn-warning"><i class="fa-solid fa-pen"></i> Modifier</a>
+            {{ include('admin_type_evenement/_delete_form.html.twig') }}
+        </div>
+    </div>
     <table class="table">
         <tbody>
-            <tr>
-                <th>IdTypeEvenement</th>
-                <td>{{ type_evenement.idTypeEvenement }}</td>
-            </tr>
-            <tr>
-                <th>LibelleTypeEvenement</th>
-                <td>{{ type_evenement.libelleTypeEvenement }}</td>
-            </tr>
+            <tr><th style="width: 30%;">Id</th><td>{{ typeEvenement.idTypeEvenement }}</td></tr>
+            <tr><th>Nom</th><td>{{ typeEvenement.nomType }}</td></tr>
         </tbody>
     </table>
-
-    <a href="{{ path('app_admin_type_evenement_index') }}">back to list</a>
-
-    <a href="{{ path('app_admin_type_evenement_edit', {'id': type_evenement.idTypeEvenement}) }}">edit</a>
-
-    {{ include('admin_type_evenement/_delete_form.html.twig') }}
+</div>
 {% endblock %}

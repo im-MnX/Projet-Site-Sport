@@ -1,43 +1,53 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Evenement index{% endblock %}
-
+{% extends 'admin_base.html.twig' %}
+{% block title %}Gestion des Événements{% endblock %}
+{% block page_title %}Événements{% endblock %}
 {% block body %}
-    <h1>Evenement index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>IdEvenement</th>
-                <th>Nom</th>
-                <th>DateEvenement</th>
-                <th>Images</th>
-                <th>Description</th>
-                <th>Horaire</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for evenement in evenements %}
-            <tr>
-                <td>{{ evenement.idEvenement }}</td>
-                <td>{{ evenement.nom }}</td>
-                <td>{{ evenement.dateEvenement ? evenement.dateEvenement|date('Y-m-d') : '' }}</td>
-                <td>{{ evenement.images }}</td>
-                <td>{{ evenement.description }}</td>
-                <td>{{ evenement.horaire ? evenement.horaire|date('H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_admin_evenement_show', {'id': evenement.idEvenement}) }}">show</a>
-                    <a href="{{ path('app_admin_evenement_edit', {'id': evenement.idEvenement}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_admin_evenement_new') }}">Create new</a>
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">Liste des Événements</h2>
+        <a href="{{ path('app_admin_evenement_new') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Nouvel Événement</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr><th>Image</th><th>Nom</th><th>Date</th><th>Horaire</th><th>Actions</th></tr>
+            </thead>
+            <tbody>
+            {% for evenement in evenements %}
+                <tr>
+                    <td style="width: 80px;">
+                        {% if evenement.images %}
+                            <img src="{{ asset(evenement.images) }}" alt="{{ evenement.nom }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
+                        {% else %}
+                            <span class="badge bg-secondary">No Image</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <div style="font-weight: 500;">{{ evenement.nom }}</div>
+                        <small style="color: var(--text-muted);">{{ evenement.description|slice(0, 50) }}...</small>
+                    </td>
+                    <td style="color: var(--text-muted);">{{ evenement.dateEvenement ? evenement.dateEvenement|date('d/m/Y') : '-' }}</td>
+                    <td style="color: var(--text-muted);">{{ evenement.horaire ? evenement.horaire|date('H:i') : '-' }}</td>
+                    <td>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <a href="{{ path('app_admin_evenement_show', {'id': evenement.idEvenement}) }}" class="btn btn-sm btn-info"><i class="fa-solid fa-eye"></i></a>
+                            <a href="{{ path('app_admin_evenement_edit', {'id': evenement.idEvenement}) }}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5" style="text-align: center; padding: 2rem;">
+                        <div style="color: var(--text-muted); margin-bottom: 1rem;">
+                            <i class="fa-regular fa-calendar" style="font-size: 2rem;"></i>
+                            <p style="margin-top: 0.5rem;">Aucun événement trouvé</p>
+                        </div>
+                        <a href="{{ path('app_admin_evenement_new') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Créer un événement</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}

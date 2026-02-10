@@ -1,34 +1,36 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Photo{% endblock %}
-
+{% extends 'admin_base.html.twig' %}
+{% block title %}Détails de la Photo{% endblock %}
+{% block page_title %}Détails de la Photo{% endblock %}
+{% block breadcrumb %}<span>Administration</span> / <a href="{{ path('app_admin_photo_index') }}">Photos</a> / <span>Détails</span>{% endblock %}
 {% block body %}
-    <h1>Photo</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>IdPhoto</th>
-                <td>{{ photo.idPhoto }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ photo.titre }}</td>
-            </tr>
-            <tr>
-                <th>CheminImage</th>
-                <td>{{ photo.cheminImage }}</td>
-            </tr>
-            <tr>
-                <th>DatePhoto</th>
-                <td>{{ photo.datePhoto ? photo.datePhoto|date('Y-m-d') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_admin_photo_index') }}">back to list</a>
-
-    <a href="{{ path('app_admin_photo_edit', {'idPhoto': photo.idPhoto}) }}">edit</a>
-
-    {{ include('admin_photo/_delete_form.html.twig') }}
+<div class="card" style="max-width: 800px; margin: 0 auto;">
+    <div class="card-header">
+        <h2 class="card-title">{{ photo.titre }}</h2>
+        <div style="display: flex; gap: 0.5rem;">
+            <a href="{{ path('app_admin_photo_index') }}" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Retour</a>
+            <a href="{{ path('app_admin_photo_edit', {'idPhoto': photo.idPhoto}) }}" class="btn btn-warning"><i class="fa-solid fa-pen"></i> Modifier</a>
+            {{ include('admin_photo/_delete_form.html.twig') }}
+        </div>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; padding: 1.5rem;">
+        <div>
+            {% if photo.cheminImage %}
+                <img src="{{ asset(photo.cheminImage) }}" alt="{{ photo.titre }}" style="width: 100%; border-radius: 8px;">
+            {% else %}
+                <div style="background: var(--background-color); padding: 3rem; text-align: center; border-radius: 8px;">
+                    <i class="fa-regular fa-image" style="font-size: 3rem; color: var(--text-muted);"></i>
+                </div>
+            {% endif %}
+        </div>
+        <div>
+            <table class="table">
+                <tbody>
+                    <tr><th style="width: 40%;">Titre</th><td>{{ photo.titre }}</td></tr>
+                    <tr><th>Date</th><td>{{ photo.datePhoto ? photo.datePhoto|date('d/m/Y') : '-' }}</td></tr>
+                    <tr><th>Chemin</th><td><code>{{ photo.cheminImage }}</code></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 {% endblock %}

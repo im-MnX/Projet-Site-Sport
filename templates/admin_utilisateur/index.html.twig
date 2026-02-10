@@ -1,37 +1,46 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Utilisateur index{% endblock %}
-
+{% extends 'admin_base.html.twig' %}
+{% block title %}Gestion des Utilisateurs{% endblock %}
+{% block page_title %}Utilisateurs{% endblock %}
 {% block body %}
-    <h1>Utilisateur index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>IdUtilisateur</th>
-                <th>Email</th>
-                <th>Password</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for utilisateur in utilisateurs %}
-            <tr>
-                <td>{{ utilisateur.idUtilisateur }}</td>
-                <td>{{ utilisateur.email }}</td>
-                <td>{{ utilisateur.password }}</td>
-                <td>
-                    <a href="{{ path('app_admin_utilisateur_show', {'idUtilisateur': utilisateur.idUtilisateur}) }}">show</a>
-                    <a href="{{ path('app_admin_utilisateur_edit', {'idUtilisateur': utilisateur.idUtilisateur}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_admin_utilisateur_new') }}">Create new</a>
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">Liste des Utilisateurs</h2>
+        <a href="{{ path('app_admin_utilisateur_new') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Nouvel Utilisateur</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr><th>Email</th><th>Rôles</th><th>Actions</th></tr>
+            </thead>
+            <tbody>
+            {% for utilisateur in utilisateurs %}
+                <tr>
+                    <td style="font-weight: 500;">{{ utilisateur.email }}</td>
+                    <td>
+                        {% for role in utilisateur.roles %}
+                            <span style="background-color: var(--secondary-color); color: white; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.75rem; margin-right: 0.25rem;">{{ role }}</span>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <a href="{{ path('app_admin_utilisateur_show', {'idUtilisateur': utilisateur.idUtilisateur}) }}" class="btn btn-sm btn-info"><i class="fa-solid fa-eye"></i></a>
+                            <a href="{{ path('app_admin_utilisateur_edit', {'idUtilisateur': utilisateur.idUtilisateur}) }}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3" style="text-align: center; padding: 2rem;">
+                        <div style="color: var(--text-muted); margin-bottom: 1rem;">
+                            <i class="fa-regular fa-user" style="font-size: 2rem;"></i>
+                            <p style="margin-top: 0.5rem;">Aucun utilisateur trouvé</p>
+                        </div>
+                        <a href="{{ path('app_admin_utilisateur_new') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Ajouter un utilisateur</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}

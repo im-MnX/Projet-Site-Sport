@@ -1,13 +1,16 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Edit Photo{% endblock %}
-
+{% extends 'admin_base.html.twig' %}
+{% block title %}Modifier la Photo{% endblock %}
+{% block page_title %}Modifier la Photo{% endblock %}
+{% block breadcrumb %}<span>Administration</span> / <a href="{{ path('app_admin_photo_index') }}">Photos</a> / <span>Modifier</span>{% endblock %}
 {% block body %}
-    <h1>Edit Photo</h1>
-
-    {{ include('admin_photo/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_admin_photo_index') }}">back to list</a>
-
-    {{ include('admin_photo/_delete_form.html.twig') }}
+<div class="card" style="max-width: 800px; margin: 0 auto;">
+    <div class="card-header">
+        <h2 class="card-title">Modifier {{ photo.titre }}</h2>
+        <div style="display: flex; gap: 0.5rem;">
+            <a href="{{ path('app_admin_photo_index') }}" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Retour</a>
+            {{ include('admin_photo/_delete_form.html.twig') }}
+        </div>
+    </div>
+    {{ include('admin_photo/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+</div>
 {% endblock %}

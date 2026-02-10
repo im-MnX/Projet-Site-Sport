@@ -1,35 +1,43 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}CategorieAlbum index{% endblock %}
-
+{% extends 'admin_base.html.twig' %}
+{% block title %}Gestion des Catégories d'Albums{% endblock %}
+{% block page_title %}Catégories d'Albums{% endblock %}
 {% block body %}
-    <h1>CategorieAlbum index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>IdCategorieAlbum</th>
-                <th>LibelleCategorieAlbum</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for categorie_album in categorie_albums %}
-            <tr>
-                <td>{{ categorie_album.idCategorieAlbum }}</td>
-                <td>{{ categorie_album.libelleCategorieAlbum }}</td>
-                <td>
-                    <a href="{{ path('app_admin_categorie_album_show', {'idCategorieAlbum': categorie_album.idCategorieAlbum}) }}">show</a>
-                    <a href="{{ path('app_admin_categorie_album_edit', {'idCategorieAlbum': categorie_album.idCategorieAlbum}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_admin_categorie_album_new') }}">Create new</a>
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">Liste des Catégories d'Albums</h2>
+        <a href="{{ path('app_admin_categorie_album_new') }}" class="btn btn-primary">
+            <i class="fa-solid fa-plus"></i> Nouvelle Catégorie
+        </a>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr><th>Nom</th><th>Actions</th></tr>
+            </thead>
+            <tbody>
+            {% for categorieAlbum in categorie_albums %}
+                <tr>
+                    <td style="font-weight: 500;">{{ categorieAlbum.libelleCategorieAlbum }}</td>
+                    <td>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <a href="{{ path('app_admin_categorie_album_show', {'idCategorieAlbum': categorieAlbum.idCategorieAlbum}) }}" class="btn btn-sm btn-info"><i class="fa-solid fa-eye"></i></a>
+                            <a href="{{ path('app_admin_categorie_album_edit', {'idCategorieAlbum': categorieAlbum.idCategorieAlbum}) }}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="2" style="text-align: center; padding: 2rem;">
+                        <div style="color: var(--text-muted); margin-bottom: 1rem;">
+                            <i class="fa-solid fa-folder-open" style="font-size: 2rem;"></i>
+                            <p style="margin-top: 0.5rem;">Aucune catégorie trouvée</p>
+                        </div>
+                        <a href="{{ path('app_admin_categorie_album_new') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Créer une catégorie</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}

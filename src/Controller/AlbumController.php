@@ -11,15 +11,32 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class AlbumController extends AbstractController
 {
-    #[Route('/album/{idAlbum?1}', name: 'album_show')]
-    public function show(int $idAlbum, ManagerRegistry $doctrine): Response
+    #[Route('/album/{idAlbum?}', name: 'album_show')]
+    public function show(?int $idAlbum, ManagerRegistry $doctrine): Response
     {
         $albumRepo = $doctrine->getRepository(Album::class);
         $categorieRepo = $doctrine->getRepository(CategorieAlbum::class);
 
-        $album = $albumRepo->find($idAlbum);
+        // If no ID provided or album not found, get the first available album
+        if ($idAlbum === null) {
+            $album = $albumRepo->findOneBy([], ['idAlbum' => 'ASC']);
+        } else {
+            $album = $albumRepo->find($idAlbum);
+        }
+
+        // If still no album found, get the first one
         if (!$album) {
-            throw $this->createNotFoundException('Album non trouvé');
+            $album = $albumRepo->findOneBy([], ['idAlbum' => 'ASC']);
+        }
+
+        // If there are no albums at all, show empty state
+        if (!$album) {
+            return $this->render('album/album.html.twig', [
+                'album' => null,
+                'photos' => [],
+                'categories' => $categorieRepo->findAll(),
+                'albumsByCategorie' => [],
+            ]);
         }
 
         $photos = $album->getPhotos();

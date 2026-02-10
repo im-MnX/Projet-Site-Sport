@@ -1,34 +1,53 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin_base.html.twig' %}
 
-{% block title %}Album{% endblock %}
+{% block title %}Détails de l'Album{% endblock %}
+
+{% block page_title %}Détails de l'Album{% endblock %}
+
+{% block breadcrumb %}
+    <span>Administration</span> / <a href="{{ path('app_admin_album_index') }}">Albums</a> / <span>Détails</span>
+{% endblock %}
 
 {% block body %}
-    <h1>Album</h1>
+    <div class="card" style="max-width: 800px; margin: 0 auto;">
+        <div class="card-header">
+            <h2 class="card-title">{{ album.description }}</h2>
+            <div style="display: flex; gap: 0.5rem;">
+                <a href="{{ path('app_admin_album_index') }}" class="btn btn-secondary">
+                    <i class="fa-solid fa-arrow-left"></i> Retour
+                </a>
+                <a href="{{ path('app_admin_album_edit', {'idAlbum': album.idAlbum}) }}" class="btn btn-warning">
+                    <i class="fa-solid fa-pen"></i> Modifier
+                </a>
+                {{ include('admin_album/_delete_form.html.twig') }}
+            </div>
+        </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>IdAlbum</th>
-                <td>{{ album.idAlbum }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ album.description }}</td>
-            </tr>
-            <tr>
-                <th>Priorite</th>
-                <td>{{ album.priorite }}</td>
-            </tr>
-            <tr>
-                <th>Archive</th>
-                <td>{{ album.archive ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_admin_album_index') }}">back to list</a>
-
-    <a href="{{ path('app_admin_album_edit', {'idAlbum': album.idAlbum}) }}">edit</a>
-
-    {{ include('admin_album/_delete_form.html.twig') }}
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th style="width: 30%;">Id</th>
+                    <td>{{ album.idAlbum }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ album.description }}</td>
+                </tr>
+                <tr>
+                    <th>Priorité</th>
+                    <td>{{ album.priorite }}</td>
+                </tr>
+                <tr>
+                    <th>Archivé</th>
+                    <td>
+                        {% if album.archive %}
+                            <span style="background-color: var(--secondary-color); color: white; padding: 0.25rem 0.5rem; border-radius: 0.25rem;">Oui</span>
+                        {% else %}
+                            <span style="background-color: var(--success-color); color: white; padding: 0.25rem 0.5rem; border-radius: 0.25rem;">Non</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

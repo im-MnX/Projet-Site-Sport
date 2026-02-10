@@ -1,0 +1,79 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Gestion des Produits{% endblock %}
+
+{% block page_title %}Produits{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">Liste des Produits</h2>
+            <a href="{{ path('app_admin_produit_new') }}" class="btn btn-primary">
+                <i class="fa-solid fa-plus"></i> Nouveau Produit
+            </a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Nom</th>
+                        <th>Prix</th>
+                        <th>Stock</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for produit in produits %}
+                    <tr>
+                        <td style="width: 80px;">
+                            {% if produit.image %}
+                                <img src="{{ asset(produit.image) }}" alt="{{ produit.nomProduit }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
+                            {% else %}
+                                <span class="badge bg-secondary">No Image</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div style="font-weight: 500;">{{ produit.nomProduit }}</div>
+                            <small style="color: var(--text-muted);">{{ produit.description|slice(0, 50) }}...</small>
+                        </td>
+                        <td style="font-weight: 600;">{{ produit.prix }} €</td>
+                        <td>
+                            {% if produit.stock > 10 %}
+                                <span style="color: var(--success-color); font-weight: 500;">{{ produit.stock }} en stock</span>
+                            {% elseif produit.stock > 0 %}
+                                <span style="color: var(--warning-color); font-weight: 500;">{{ produit.stock }} restants</span>
+                            {% else %}
+                                <span style="color: var(--danger-color); font-weight: 500;">Rupture</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <a href="{{ path('app_admin_produit_show', {'idProduit': produit.idProduit}) }}" class="btn btn-sm btn-info" title="Voir details">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                                <a href="{{ path('app_admin_produit_edit', {'idProduit': produit.idProduit}) }}" class="btn btn-sm btn-warning" title="Modifier">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5" style="text-align: center; padding: 2rem;">
+                            <div style="color: var(--text-muted); margin-bottom: 1rem;">
+                                <i class="fa-solid fa-box-open" style="font-size: 2rem;"></i>
+                                <p style="margin-top: 0.5rem;">Aucun produit disponible</p>
+                            </div>
+                            <a href="{{ path('app_admin_produit_new') }}" class="btn btn-primary">
+                                <i class="fa-solid fa-plus"></i> Ajouter un premier produit
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

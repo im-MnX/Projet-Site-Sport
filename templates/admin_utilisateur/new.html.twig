@@ -1,11 +1,13 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}New Utilisateur{% endblock %}
-
+{% extends 'admin_base.html.twig' %}
+{% block title %}Nouvel Utilisateur{% endblock %}
+{% block page_title %}Nouvel Utilisateur{% endblock %}
+{% block breadcrumb %}<span>Administration</span> / <a href="{{ path('app_admin_utilisateur_index') }}">Utilisateurs</a> / <span>Nouveau</span>{% endblock %}
 {% block body %}
-    <h1>Create new Utilisateur</h1>
-
+<div class="card" style="max-width: 800px; margin: 0 auto;">
+    <div class="card-header">
+        <h2 class="card-title">Ajouter un utilisateur</h2>
+        <a href="{{ path('app_admin_utilisateur_index') }}" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Retour</a>
+    </div>
     {{ include('admin_utilisateur/_form.html.twig') }}
-
-    <a href="{{ path('app_admin_utilisateur_index') }}">back to list</a>
+</div>
 {% endblock %}

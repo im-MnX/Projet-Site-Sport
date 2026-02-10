@@ -1,11 +1,22 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin_base.html.twig' %}
 
-{% block title %}New Actualite{% endblock %}
+{% block title %}Nouvelle Actualité{% endblock %}
+
+{% block page_title %}Nouvelle Actualité{% endblock %}
+
+{% block breadcrumb %}
+    <span>Administration</span> / <a href="{{ path('app_admin_actualite_index') }}">Actualités</a> / <span>Nouvelle</span>
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Actualite</h1>
+    <div class="card" style="max-width: 800px; margin: 0 auto;">
+        <div class="card-header">
+            <h2 class="card-title">Ajouter une actualité</h2>
+            <a href="{{ path('app_admin_actualite_index') }}" class="btn btn-secondary">
+                <i class="fa-solid fa-arrow-left"></i> Retour
+            </a>
+        </div>
 
-    {{ include('admin_actualite/_form.html.twig') }}
-
-    <a href="{{ path('app_admin_actualite_index') }}">back to list</a>
+        {{ include('admin_actualite/_form.html.twig') }}
+    </div>
 {% endblock %}

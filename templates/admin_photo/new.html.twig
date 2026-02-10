@@ -1,11 +1,13 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}New Photo{% endblock %}
-
+{% extends 'admin_base.html.twig' %}
+{% block title %}Nouvelle Photo{% endblock %}
+{% block page_title %}Nouvelle Photo{% endblock %}
+{% block breadcrumb %}<span>Administration</span> / <a href="{{ path('app_admin_photo_index') }}">Photos</a> / <span>Nouvelle</span>{% endblock %}
 {% block body %}
-    <h1>Create new Photo</h1>
-
+<div class="card" style="max-width: 800px; margin: 0 auto;">
+    <div class="card-header">
+        <h2 class="card-title">Ajouter une photo</h2>
+        <a href="{{ path('app_admin_photo_index') }}" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Retour</a>
+    </div>
     {{ include('admin_photo/_form.html.twig') }}
-
-    <a href="{{ path('app_admin_photo_index') }}">back to list</a>
+</div>
 {% endblock %}

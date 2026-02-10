@@ -1,0 +1,22 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Nouveau Produit{% endblock %}
+
+{% block page_title %}Nouveau Produit{% endblock %}
+
+{% block breadcrumb %}
+    <span>Administration</span> / <a href="{{ path('app_admin_produit_index') }}">Produits</a> / <span>Nouveau</span>
+{% endblock %}
+
+{% block body %}
+    <div class="card" style="max-width: 800px; margin: 0 auto;">
+        <div class="card-header">
+            <h2 class="card-title">Ajouter un produit</h2>
+            <a href="{{ path('app_admin_produit_index') }}" class="btn btn-secondary">
+                <i class="fa-solid fa-arrow-left"></i> Retour
+            </a>
+        </div>
+
+        {{ include('admin_produit/_form.html.twig') }}
+    </div>
+{% endblock %}
