@@ -1,0 +1,55 @@
+{% extends 'admin_base.html.twig' %}
+{% block title %}Gestion des Partenaires{% endblock %}
+{% block page_title %}Partenaires{% endblock %}
+{% block body %}
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">Liste des Partenaires</h2>
+        <a href="{{ path('app_admin_partenaires_new') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Nouveau Partenaire</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr><th>Logo</th><th>Nom</th><th>Lien</th><th>Actions</th></tr>
+            </thead>
+            <tbody>
+            {% for partenaire in partenaires %}
+                <tr>
+                    <td style="width: 80px;">
+                        {% if partenaire.logoPartenaire %}
+                            <img src="{{ asset('logos/' ~ partenaire.logoPartenaire) }}" alt="{{ partenaire.nomPartenaire }}" style="width: 50px; height: 50px; object-fit: contain; border-radius: 4px;">
+                        {% else %}
+                            <span class="badge bg-secondary">No Logo</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <div style="font-weight: 500;">{{ partenaire.nomPartenaire }}</div>
+                    </td>
+                    <td style="color: var(--text-muted);">
+                        <a href="{{ partenaire.lienPartenaire }}" target="_blank" rel="noopener noreferrer">
+                            {{ partenaire.lienPartenaire|slice(0, 40) }}...
+                        </a>
+                    </td>
+                    <td>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <a href="{{ path('app_admin_partenaires_show', {'id': partenaire.id}) }}" class="btn btn-sm btn-info"><i class="fa-solid fa-eye"></i></a>
+                            <a href="{{ path('app_admin_partenaires_edit', {'id': partenaire.id}) }}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4" style="text-align: center; padding: 2rem;">
+                        <div style="color: var(--text-muted); margin-bottom: 1rem;">
+                            <i class="fa-regular fa-handshake" style="font-size: 2rem;"></i>
+                            <p style="margin-top: 0.5rem;">Aucun partenaire trouvé</p>
+                        </div>
+                        <a href="{{ path('app_admin_partenaires_new') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Créer un partenaire</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -15,11 +15,11 @@
             <tbody>
             {% for typeEvenement in type_evenements %}
                 <tr>
-                    <td style="font-weight: 500;">{{ typeEvenement.nomType }}</td>
+                    <td style="font-weight: 500;">{{ typeEvenement.libelleTypeEvenement }}</td>
                     <td>
                         <div style="display: flex; gap: 0.5rem;">
-                            <a href="{{ path('app_admin_type_evenement_show', {'idTypeEvenement': typeEvenement.idTypeEvenement}) }}" class="btn btn-sm btn-info"><i class="fa-solid fa-eye"></i></a>
-                            <a href="{{ path('app_admin_type_evenement_edit', {'idTypeEvenement': typeEvenement.idTypeEvenement}) }}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen"></i></a>
+                            <a href="{{ path('app_admin_type_evenement_show', {'id': typeEvenement.idTypeEvenement}) }}" class="btn btn-sm btn-info"><i class="fa-solid fa-eye"></i></a>
+                            <a href="{{ path('app_admin_type_evenement_edit', {'id': typeEvenement.idTypeEvenement}) }}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen"></i></a>
                         </div>
                     </td>
                 </tr>

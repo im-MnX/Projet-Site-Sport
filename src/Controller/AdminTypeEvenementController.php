@@ -37,16 +37,17 @@ final class AdminTypeEvenementController extends AbstractController
         }
 
         return $this->render('admin_type_evenement/new.html.twig', [
-            'type_evenement' => $typeEvenement,
+            'typeEvenement' => $typeEvenement,
             'form' => $form,
         ]);
+
     }
 
     #[Route('/{id}', name: 'app_admin_type_evenement_show', methods: ['GET'])]
     public function show(TypeEvenement $typeEvenement): Response
     {
         return $this->render('admin_type_evenement/show.html.twig', [
-            'type_evenement' => $typeEvenement,
+            'typeEvenement' => $typeEvenement,
         ]);
     }
 
@@ -63,7 +64,7 @@ final class AdminTypeEvenementController extends AbstractController
         }
 
         return $this->render('admin_type_evenement/edit.html.twig', [
-            'type_evenement' => $typeEvenement,
+            'typeEvenement' => $typeEvenement,
             'form' => $form,
         ]);
     }
@@ -71,7 +72,7 @@ final class AdminTypeEvenementController extends AbstractController
     #[Route('/{id}', name: 'app_admin_type_evenement_delete', methods: ['POST'])]
     public function delete(Request $request, TypeEvenement $typeEvenement, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$typeEvenement->getIdTypeEvenement(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $typeEvenement->getIdTypeEvenement(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($typeEvenement);
             $entityManager->flush();
         }
