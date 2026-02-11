@@ -5,10 +5,12 @@ namespace App\Form;
 use App\Entity\Actualite;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class ActualiteType extends AbstractType
 {
@@ -24,10 +26,28 @@ class ActualiteType extends AbstractType
                 'label' => 'Date',
                 'attr' => ['class' => 'form-control']
             ])
-            ->add('images', TextType::class, [
-                'label' => 'URL de l\'image',
+            ->add('imageFile', FileType::class, [
+                'label' => 'Image',
+                'mapped' => false,
                 'required' => false,
-                'attr' => ['class' => 'form-control']
+                'attr' => [
+                    'class' => 'form-control',
+                    'accept' => 'image/*'
+                ],
+                'help' => 'Formats acceptés : JPG, PNG, GIF, WEBP (max 5 MB)',
+                'constraints' => [
+                    new File([
+                        'maxSize' => '5M',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/gif',
+                            'image/webp',
+                        ],
+                        'mimeTypesMessage' => 'Veuillez uploader une image valide (JPG, PNG, GIF, WEBP)',
+                        'maxSizeMessage' => 'L\'image ne doit pas dépasser 5 MB',
+                    ])
+                ],
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description',
