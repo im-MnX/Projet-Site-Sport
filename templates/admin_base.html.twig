@@ -25,9 +25,7 @@
                 <a href="{{ path('app_admin_dashboard') }}" class="nav-link {% if app.request.get('_route') == 'app_admin_dashboard' %}active{% endif %}">
                     <i class="fa-solid fa-chart-line"></i> Dashboard
                 </a>
-                
-                <div style="margin-top: 1rem; padding-left: 1rem; color: #94a3b8; font-size: 0.75rem; text-transform: uppercase; font-weight: 600;">Gestion</div>
-                
+
                 <a href="{{ path('app_admin_produit_index') }}" class="nav-link {% if 'admin_produit' in app.request.get('_route') %}active{% endif %}">
                     <i class="fa-solid fa-box"></i> Produits
                 </a>
@@ -59,30 +57,41 @@
                     <i class="fa-solid fa-handshake"></i> Partenaires
                 </a>
                 
+                <div class="nav-section-title">Liens Rapides</div>
+                
                 <a href="{{ path('home') }}" class="nav-link" target="_blank">
                     <i class="fa-solid fa-home"></i> Voir le site
                 </a>
             </nav>
-            
-             <div style="margin-top: auto;">
-                 <a href="{{ path('app_logout') }}" class="nav-link" style="color: #ef4444;">
-                    <i class="fa-solid fa-right-from-bracket"></i> Déconnexion
-                </a>
-             </div>
         </div>
 
         <div class="main-content">
-            <div class="top-bar">
-                <div class="breadcrumb">
-                    {% block breadcrumb %}
-                        <span>Administration</span> / <span>{% block page_title %}Dashboard{% endblock %}</span>
-                    {% endblock %}
-                </div>
-                
-                <div class="user-menu">
-                    <span>{{ app.user.email|default('Admin') }}</span>
-                    <div class="avatar" style="width: 32px; height: 32px; background: #e2e8f0; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                        <i class="fa-solid fa-user"></i>
+            <div class="top-bar">                
+                <div class="user-menu-wrapper">
+                    <div class="user-menu" onclick="toggleUserDropdown()">
+                        <span class="user-email">{{ app.user.email|default('Admin') }}</span>
+                        <div class="avatar">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+                    </div>
+                    
+                    <div class="user-dropdown" id="userDropdown">
+                        <div class="dropdown-header">
+                            <div class="dropdown-user-info">
+                                <i class="fa-solid fa-user-circle"></i>
+                                <div>
+                                    <div class="dropdown-email">{{ app.user.email|default('Admin') }}</div>
+                                    <div class="dropdown-role">Administrateur</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-divider"></div>
+                        <a href="{{ path('app_logout') }}" class="dropdown-item logout">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            <span>Déconnexion</span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -97,5 +106,22 @@
 
             {% block body %}{% endblock %}
         </div>
+
+        <script>
+            function toggleUserDropdown() {
+                const dropdown = document.getElementById('userDropdown');
+                dropdown.classList.toggle('show');
+            }
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(event) {
+                const userMenu = document.querySelector('.user-menu-wrapper');
+                const dropdown = document.getElementById('userDropdown');
+                
+                if (!userMenu.contains(event.target)) {
+                    dropdown.classList.remove('show');
+                }
+            });
+        </script>
     </body>
 </html>
