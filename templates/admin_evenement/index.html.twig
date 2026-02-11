@@ -17,7 +17,7 @@
                 <tr>
                     <td style="width: 80px;">
                         {% if evenement.images %}
-                            <img src="{{ asset(evenement.images) }}" alt="{{ evenement.nom }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
+                            <img src="{{ asset('uploads/evenements/' ~ evenement.images) }}" alt="{{ evenement.nom }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
                         {% else %}
                             <span class="badge bg-secondary">No Image</span>
                         {% endif %}

@@ -18,6 +18,11 @@
 				    	{{ item.nom }}
 					    <span class="date">{{ item.dateEvenement|date('d F Y') }}</span>
     				</h2>
+                    {% if item.images %}
+                        <div class="evenement-image">
+                            <img src="{{ asset('uploads/evenements/' ~ item.images) }}" alt="{{ item.nom }}" style="max-width: 100%; border-radius: 8px; margin-bottom: 1rem;">
+                        </div>
+                    {% endif %}
 	    			<p>{{ item.description }}</p>
 		    	</div>
     		{% endfor %}

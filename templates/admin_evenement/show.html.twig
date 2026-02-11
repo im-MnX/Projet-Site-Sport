@@ -15,7 +15,7 @@
     <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; padding: 1.5rem;">
         <div>
             {% if evenement.images %}
-                <img src="{{ asset(evenement.images) }}" alt="{{ evenement.nom }}" style="width: 100%; border-radius: 8px;">
+                <img src="{{ asset('uploads/evenements/' ~ evenement.images) }}" alt="{{ evenement.nom }}" style="width: 100%; border-radius: 8px;">
             {% else %}
                 <div style="background: var(--background-color); padding: 3rem; text-align: center; border-radius: 8px;">
                     <i class="fa-regular fa-image" style="font-size: 3rem; color: var(--text-muted);"></i>
