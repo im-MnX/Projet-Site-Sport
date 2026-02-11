@@ -1,39 +1,130 @@
-/* Centrer le titre */
-.faq-wrapper h1 {
-    text-align: center;
-    margin-bottom: 40px;
-    font-size: 2.5rem;
-    color: #333;
+/* FAQ Page Styles - Matching Site Design */
+
+/* Wrapper principal */
+.example-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
 }
 
-/* Grille pour les questions */
+/* Titre principal */
+.example-wrapper h1 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 3rem;
+    color: var(--primary-blue, #2eb6e6);
+    font-weight: 800;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.example-wrapper h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--accent-yellow, #ffd700);
+    border-radius: 2px;
+}
+
+/* Grille des questions */
 .faq {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 colonnes par défaut */
-    gap: 20px; /* espace entre les cases */
-    max-width: 900px; /* largeur max de la grille */
-    margin: 0 auto; /* centrer horizontalement */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
 }
 
-/* Style pour chaque question */
+/* Carte de question */
 .question {
-    background-color: #f7f7f7; /* couleur de fond */
-    border: 1px solid #ddd; /* bordure légère */
-    border-radius: 10px; /* coins arrondis */
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* légère ombre */
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+    border: 1px solid #f0f0f0;
+    padding: 30px;
+    position: relative;
 }
 
-/* Titres des questions */
+.question::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-yellow, #ffd700), var(--primary-blue, #2eb6e6));
+}
+
+.question:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+/* Titre de la question */
 .question h2 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    color: #222;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--dark-blue, #0099cc);
+    margin-bottom: 15px;
+    line-height: 1.4;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
 }
 
-/* Paragraphes */
+.question h2::before {
+    content: '?';
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
+    height: 28px;
+    background: var(--accent-yellow, #ffd700);
+    color: white;
+    border-radius: 50%;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 2px;
+}
+
+/* Réponse */
 .question p {
     font-size: 1rem;
-    line-height: 1.5;
-    color: #555;
+    color: #666;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* Message vide */
+.faq > p {
+    text-align: center;
+    color: #999;
+    font-size: 1.1rem;
+    grid-column: 1 / -1;
+    padding: 60px 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .example-wrapper h1 {
+        font-size: 2.2rem;
+    }
+    
+    .faq {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .question {
+        padding: 20px;
+    }
+    
+    .question h2 {
+        font-size: 1.1rem;
+    }
 }
