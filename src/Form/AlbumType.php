@@ -14,12 +14,19 @@ class AlbumType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('description')
-            ->add('priorite')
-            ->add('archive')
+            ->add('description', null, [
+                'label' => 'Description',
+            ])
+            ->add('priorite', null, [
+                'label' => 'Priorité',
+            ])
+            ->add('archive', null, [
+                'label' => 'Archivé',
+            ])
             ->add('idCategorieAlbum', EntityType::class, [
                 'class' => CategorieAlbum::class,
                 'choice_label' => 'libelleCategorieAlbum',
+                'label' => 'Catégorie Album',
             ])
         ;
     }
