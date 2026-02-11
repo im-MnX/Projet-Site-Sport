@@ -19,7 +19,7 @@ class AlbumType extends AbstractType
             ->add('archive')
             ->add('idCategorieAlbum', EntityType::class, [
                 'class' => CategorieAlbum::class,
-                'choice_label' => 'id',
+                'choice_label' => 'libelleCategorieAlbum',
             ])
         ;
     }
