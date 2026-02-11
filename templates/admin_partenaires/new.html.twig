@@ -1,0 +1,13 @@
+{% extends 'admin_base.html.twig' %}
+{% block title %}Nouveau Partenaire{% endblock %}
+{% block page_title %}Nouveau Partenaire{% endblock %}
+{% block breadcrumb %}<span>Administration</span> / <a href="{{ path('app_admin_partenaires_index') }}">Partenaires</a> / <span>Nouveau</span>{% endblock %}
+{% block body %}
+<div class="card" style="max-width: 800px; margin: 0 auto;">
+    <div class="card-header">
+        <h2 class="card-title">Ajouter un partenaire</h2>
+        <a href="{{ path('app_admin_partenaires_index') }}" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Retour</a>
+    </div>
+    {{ include('admin_partenaires/_form.html.twig') }}
+</div>
+{% endblock %}

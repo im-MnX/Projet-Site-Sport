@@ -1,0 +1,35 @@
+{% extends 'admin_base.html.twig' %}
+{% block title %}Détails du Partenaire{% endblock %}
+{% block page_title %}Détails du Partenaire{% endblock %}
+{% block breadcrumb %}<span>Administration</span> / <a href="{{ path('app_admin_partenaires_index') }}">Partenaires</a> / <span>Détails</span>{% endblock %}
+{% block body %}
+<div class="card" style="max-width: 800px; margin: 0 auto;">
+    <div class="card-header">
+        <h2 class="card-title">{{ partenaire.nomPartenaire }}</h2>
+        <div style="display: flex; gap: 0.5rem;">
+            <a href="{{ path('app_admin_partenaires_index') }}" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Retour</a>
+            <a href="{{ path('app_admin_partenaires_edit', {'id': partenaire.id}) }}" class="btn btn-warning"><i class="fa-solid fa-pen"></i> Modifier</a>
+            {{ include('admin_partenaires/_delete_form.html.twig') }}
+        </div>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; padding: 1.5rem;">
+        <div>
+            {% if partenaire.logoPartenaire %}
+                <img src="{{ asset('logos/' ~ partenaire.logoPartenaire) }}" alt="{{ partenaire.nomPartenaire }}" style="width: 100%; border-radius: 8px;">
+            {% else %}
+                <div style="background: var(--background-color); padding: 3rem; text-align: center; border-radius: 8px;">
+                    <i class="fa-regular fa-image" style="font-size: 3rem; color: var(--text-muted);"></i>
+                </div>
+            {% endif %}
+        </div>
+        <div>
+            <table class="table">
+                <tbody>
+                    <tr><th style="width: 40%;">Nom</th><td>{{ partenaire.nomPartenaire }}</td></tr>
+                    <tr><th>Lien</th><td><a href="{{ partenaire.lienPartenaire }}" target="_blank" rel="noopener noreferrer">{{ partenaire.lienPartenaire }}</a></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
