@@ -1,395 +1,399 @@
 {% extends 'admin_base.html.twig' %}
 
-{% block title %}Tableau de Bord Admin{% endblock %}
-{% block page_title %}Dashboard{% endblock %}
-{% block breadcrumb %}<span>Administration</span> / <span>Dashboard</span>{% endblock %}
+{% block title %}Tableau de Bord Admin
+{% endblock %}
+{% block page_title %}Dashboard
+{% endblock %}
+{% block breadcrumb %}
+	<span>Administration</span>
+	/
+	<span>Dashboard</span>
+{% endblock %}
 
 {% block body %}
-<div class="admin-dashboard-modern">
-    {# Welcome Banner #}
-    <div class="welcome-banner">
-        <div class="welcome-content">
-            <h1><i class="fa-solid fa-gauge-high"></i> Tableau de Bord</h1>
-            <p>Bienvenue dans l'espace d'administration</p>
-        </div>
-        <div class="welcome-icon">
-            <i class="fa-solid fa-chart-line"></i>
-        </div>
-    </div>
+	<div
+		class="admin-dashboard-modern">
+		{# Welcome Banner #}
+		<div class="welcome-banner">
+			<div class="welcome-content">
+				<h1>
+					<i class="fa-solid fa-gauge-high"></i>
+					Tableau de Bord</h1>
+				<p>Bienvenue dans l'espace d'administration</p>
+			</div>
+			<div class="welcome-icon">
+				<i class="fa-solid fa-chart-line"></i>
+			</div>
+		</div>
 
-    {# Content Management Section #}
-    <div class="section-header">
-        <i class="fa-solid fa-newspaper"></i>
-        <h2>Gestion du Contenu</h2>
-    </div>
-    <div class="dashboard-grid">
-        <a href="{{ path('app_admin_actualite_index') }}" class="modern-card gradient-blue">
-            <div class="card-icon"><i class="fa-solid fa-newspaper"></i></div>
-            <div class="card-content">
-                <h3>Actualités</h3>
-                <p>Gérer les news du site</p>
-            </div>
-            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-        </a>
+		{# Content Management Section #}
+		<div class="section-header">
+			<i class="fa-solid fa-newspaper"></i>
+			<h2>Gestion du Contenu</h2>
+		</div>
+		<div class="dashboard-grid">
+			<a href="{{ path('app_admin_actualite_index') }}" class="modern-card gradient-blue">
+				<div class="card-icon">
+					<i class="fa-solid fa-newspaper"></i>
+				</div>
+				<div class="card-content">
+					<h3>Actualités</h3>
+					<p>Gérer les news du site</p>
+				</div>
+				<div class="card-arrow">
+					<i class="fa-solid fa-arrow-right"></i>
+				</div>
+			</a>
+			<a href="{{ path('app_admin_type_evenement_index') }}" class="modern-card gradient-indigo">
+				<div class="card-icon">
+					<i class="fa-solid fa-tag"></i>
+				</div>
+				<div class="card-content">
+					<h3>Types d'Événements</h3>
+					<p>Catégories d'événements</p>
+				</div>
+				<div class="card-arrow">
+					<i class="fa-solid fa-arrow-right"></i>
+				</div>
+			</a>
+			<a href="{{ path('app_admin_evenement_index') }}" class="modern-card gradient-purple">
+				<div class="card-icon">
+					<i class="fa-solid fa-calendar-days"></i>
+				</div>
+				<div class="card-content">
+					<h3>Événements</h3>
+					<p>Calendrier et événements</p>
+				</div>
+				<div class="card-arrow">
+					<i class="fa-solid fa-arrow-right"></i>
+				</div>
+			</a>
+		</div>
 
-        <a href="{{ path('app_admin_evenement_index') }}" class="modern-card gradient-purple">
-            <div class="card-icon"><i class="fa-solid fa-calendar-days"></i></div>
-            <div class="card-content">
-                <h3>Événements</h3>
-                <p>Calendrier et événements</p>
-            </div>
-            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-        </a>
+		{# Media Management Section #}
+		<div class="section-header">
+			<i class="fa-solid fa-images"></i>
+			<h2>Gestion des Médias</h2>
+		</div>
+		<div class="dashboard-grid">
 
-        <a href="{{ path('app_admin_produit_index') }}" class="modern-card gradient-green">
-            <div class="card-icon"><i class="fa-solid fa-box"></i></div>
-            <div class="card-content">
-                <h3>Produits</h3>
-                <p>Boutique et produits</p>
-            </div>
-            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-        </a>
-    </div>
+			<a href="{{ path('app_admin_categorie_album_index') }}" class="modern-card gradient-teal">
+				<div class="card-icon">
+					<i class="fa-solid fa-folder-open"></i>
+				</div>
+				<div class="card-content">
+					<h3>Catégories</h3>
+					<p>Catégories d'albums</p>
+				</div>
+				<div class="card-arrow">
+					<i class="fa-solid fa-arrow-right"></i>
+				</div>
+			</a>
+			<a href="{{ path('app_admin_album_index') }}" class="modern-card gradient-orange">
+				<div class="card-icon">
+					<i class="fa-solid fa-images"></i>
+				</div>
+				<div class="card-content">
+					<h3>Albums</h3>
+					<p>Collections de photos</p>
+				</div>
+				<div class="card-arrow">
+					<i class="fa-solid fa-arrow-right"></i>
+				</div>
+			</a>
 
-    {# Media Management Section #}
-    <div class="section-header">
-        <i class="fa-solid fa-images"></i>
-        <h2>Gestion des Médias</h2>
-    </div>
-    <div class="dashboard-grid">
-        <a href="{{ path('app_admin_album_index') }}" class="modern-card gradient-orange">
-            <div class="card-icon"><i class="fa-solid fa-images"></i></div>
-            <div class="card-content">
-                <h3>Albums</h3>
-                <p>Collections de photos</p>
-            </div>
-            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-<<<<<<< HEAD
-        </a>
+			<a href="{{ path('app_admin_photo_index') }}" class="modern-card gradient-pink">
+				<div class="card-icon">
+					<i class="fa-solid fa-camera"></i>
+				</div>
+				<div class="card-content">
+					<h3>Photos</h3>
+					<p>Bibliothèque de photos</p>
+				</div>
+				<div class="card-arrow">
+					<i class="fa-solid fa-arrow-right"></i>
+				</div>
+			</a>
 
-        <a href="{{ path('app_admin_photo_index') }}" class="modern-card gradient-pink">
-            <div class="card-icon"><i class="fa-solid fa-camera"></i></div>
-            <div class="card-content">
-                <h3>Photos</h3>
-                <p>Bibliothèque de photos</p>
-            </div>
-            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-        </a>
 
-        <a href="{{ path('app_admin_categorie_album_index') }}" class="modern-card gradient-teal">
-            <div class="card-icon"><i class="fa-solid fa-folder-open"></i></div>
-            <div class="card-content">
-                <h3>Catégories</h3>
-                <p>Catégories d'albums</p>
-            </div>
-            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-        </a>
-    </div>
+		</div>
 
-    {# Configuration Section #}
-    <div class="section-header">
-        <i class="fa-solid fa-sliders"></i>
-        <h2>Configuration</h2>
-    </div>
-    <div class="dashboard-grid dashboard-grid-2">
-        <a href="{{ path('app_admin_type_evenement_index') }}" class="modern-card gradient-indigo">
-            <div class="card-icon"><i class="fa-solid fa-tag"></i></div>
-            <div class="card-content">
-                <h3>Types d'Événements</h3>
-                <p>Catégories d'événements</p>
-            </div>
-            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-        </a>
+		{# Configuration Section #}
+		<div class="section-header">
+			<i class="fa-solid fa-sliders"></i>
+			<h2>Configuration</h2>
+		</div>
+		<div class="dashboard-grid dashboard-grid-2">
+			<a href="{{ path('app_admin_produit_index') }}" class="modern-card gradient-green">
+				<div class="card-icon">
+					<i class="fa-solid fa-box"></i>
+				</div>
+				<div class="card-content">
+					<h3>Produits</h3>
+					<p>Boutique et produits</p>
+				</div>
+				<div class="card-arrow">
+					<i class="fa-solid fa-arrow-right"></i>
+				</div>
+			</a>
 
-        <a href="{{ path('app_admin_utilisateur_index') }}" class="modern-card gradient-red">
-            <div class="card-icon"><i class="fa-solid fa-users"></i></div>
-            <div class="card-content">
-                <h3>Utilisateurs</h3>
-                <p>Gestion des comptes</p>
-            </div>
-            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-=======
->>>>>>> enzo
-        </a>
+			<a href="{{ path('app_admin_utilisateur_index') }}" class="modern-card gradient-red">
+				<div class="card-icon">
+					<i class="fa-solid fa-users"></i>
+				</div>
+				<div class="card-content">
+					<h3>Utilisateurs</h3>
+					<p>Gestion des comptes</p>
+				</div>
+				<div class="card-arrow">
+					<i class="fa-solid fa-arrow-right"></i>
+				</div>
 
-        <a href="{{ path('app_admin_photo_index') }}" class="modern-card gradient-pink">
-            <div class="card-icon"><i class="fa-solid fa-camera"></i></div>
-            <div class="card-content">
-                <h3>Photos</h3>
-                <p>Bibliothèque de photos</p>
-            </div>
-            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-        </a>
+			</a>
 
-        <a href="{{ path('app_admin_categorie_album_index') }}" class="modern-card gradient-teal">
-            <div class="card-icon"><i class="fa-solid fa-folder-open"></i></div>
-            <div class="card-content">
-                <h3>Catégories</h3>
-                <p>Catégories d'albums</p>
-            </div>
-            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-        </a>
-    </div>
+			<a href="{{ path('app_admin_faq_index') }}" class="modern-card gradient-cyan">
+				<div class="card-icon">
+					<i class="fa-solid fa-circle-question"></i>
+				</div>
+				<div class="card-content">
+					<h3>FAQ</h3>
+					<p>Gérer les questions/réponses</p>
+				</div>
+				<div class="card-arrow">
+					<i class="fa-solid fa-arrow-right"></i>
+				</div>
+			</a>
 
-    {# Configuration Section #}
-    <div class="section-header">
-        <i class="fa-solid fa-sliders"></i>
-        <h2>Configuration</h2>
-    </div>
-    <div class="dashboard-grid dashboard-grid-2">
-        <a href="{{ path('app_admin_type_evenement_index') }}" class="modern-card gradient-indigo">
-            <div class="card-icon"><i class="fa-solid fa-tag"></i></div>
-            <div class="card-content">
-                <h3>Types d'Événements</h3>
-                <p>Catégories d'événements</p>
-            </div>
-            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-        </a>
+			<a href="{{ path('app_admin_partenaires_index') }}" class="modern-card gradient-yellow">
+				<div class="card-icon">
+					<i class="fa-solid fa-handshake"></i>
+				</div>
+				<div class="card-content">
+					<h3>Partenaires</h3>
+					<p>Gérer les partenaires</p>
+				</div>
+				<div class="card-arrow">
+					<i class="fa-solid fa-arrow-right"></i>
+				</div>
+			</a>
+		</div>
 
-        <a href="{{ path('app_admin_utilisateur_index') }}" class="modern-card gradient-red">
-            <div class="card-icon"><i class="fa-solid fa-users"></i></div>
-            <div class="card-content">
-                <h3>Utilisateurs</h3>
-                <p>Gestion des comptes</p>
-            </div>
-            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-        </a>
-
-        <a href="{{ path('app_admin_faq_index') }}" class="modern-card gradient-cyan">
-            <div class="card-icon"><i class="fa-solid fa-circle-question"></i></div>
-            <div class="card-content">
-                <h3>FAQ</h3>
-                <p>Gérer les questions/réponses</p>
-            </div>
-            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-        </a>
-
-        <a href="{{ path('app_admin_partenaires_index') }}" class="modern-card gradient-yellow">
-            <div class="card-icon"><i class="fa-solid fa-handshake"></i></div>
-            <div class="card-content">
-                <h3>Partenaires</h3>
-                <p>Gérer les partenaires</p>
-            </div>
-            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-        </a>
-        
-    </div>
+	</div>
 </div>
 
 <style>
-.admin-dashboard-modern {
-    padding: 2rem;
-    max-width: 1400px;
-    margin: 0 auto;
-}
+	.admin-dashboard-modern {
+		padding: 2rem;
+		max-width: 1400px;
+		margin: 0 auto;
+	}
 
-/* Welcome Banner */
-.welcome-banner {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 20px;
-    padding: 2.5rem;
-    margin-bottom: 3rem;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-}
+	/* Welcome Banner */
+	.welcome-banner {
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		border-radius: 20px;
+		padding: 2.5rem;
+		margin-bottom: 3rem;
+		color: white;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+	}
 
-.welcome-content h1 {
-    margin: 0 0 0.5rem 0;
-    font-size: 2rem;
-    font-weight: 600;
-}
+	.welcome-content h1 {
+		margin: 0 0 0.5rem;
+		font-size: 2rem;
+		font-weight: 600;
+	}
 
-.welcome-content p {
-    margin: 0;
-    opacity: 0.9;
-    font-size: 1.1rem;
-}
+	.welcome-content p {
+		margin: 0;
+		opacity: 0.9;
+		font-size: 1.1rem;
+	}
 
-.welcome-icon {
-    font-size: 5rem;
-    opacity: 0.2;
-}
+	.welcome-icon {
+		font-size: 5rem;
+		opacity: 0.2;
+	}
 
-/* Section Headers */
-.section-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin: 2.5rem 0 1.5rem 0;
-    padding-bottom: 0.75rem;
-    border-bottom: 2px solid #e2e8f0;
-}
+	/* Section Headers */
+	.section-header {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		margin: 2.5rem 0 1.5rem;
+		padding-bottom: 0.75rem;
+		border-bottom: 2px solid #e2e8f0;
+	}
 
-.section-header i {
-    font-size: 1.5rem;
-    color: #667eea;
-}
+	.section-header i {
+		font-size: 1.5rem;
+		color: #667eea;
+	}
 
-.section-header h2 {
-    margin: 0;
-    font-size: 1.5rem;
-    color: #1e293b;
-    font-weight: 600;
-}
+	.section-header h2 {
+		margin: 0;
+		font-size: 1.5rem;
+		color: #1e293b;
+		font-weight: 600;
+	}
 
-/* Dashboard Grid */
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-}
+	/* Dashboard Grid */
+	.dashboard-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5rem;
+		margin-bottom: 2rem;
+	}
 
-.dashboard-grid-2 {
-    grid-template-columns: repeat(2, 1fr);
-}
+	.dashboard-grid-2 {
+		grid-template-columns: repeat(2, 1fr);
+	}
 
-@media (max-width: 1200px) {
-    .dashboard-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
+	@media(max-width: 1200px) {
+		.dashboard-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
 
-@media (max-width: 768px) {
-    .dashboard-grid,
-    .dashboard-grid-2 {
-        grid-template-columns: 1fr;
-    }
-}
+	@media(max-width: 768px) {
+		.dashboard-grid,
+		.dashboard-grid-2 {
+			grid-template-columns: 1fr;
+		}
+	}
 
-/* Modern Cards */
-.modern-card {
-    position: relative;
-    background: white;
-    border-radius: 16px;
-    padding: 1.75rem;
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-    text-decoration: none;
-    color: inherit;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow: hidden;
-}
+	/* Modern Cards */
+	.modern-card {
+		position: relative;
+		background: white;
+		border-radius: 16px;
+		padding: 1.75rem;
+		display: flex;
+		align-items: center;
+		gap: 1.25rem;
+		text-decoration: none;
+		color: inherit;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		overflow: hidden;
+	}
 
-.modern-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
-}
+	.modern-card::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 4px;
+		background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+		transform: scaleX(0);
+		transform-origin: left;
+		transition: transform 0.3s ease;
+	}
 
-.modern-card:hover::before {
-    transform: scaleX(1);
-}
+	.modern-card:hover::before {
+		transform: scaleX(1);
+	}
 
-.modern-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-}
+	.modern-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+	}
 
-.card-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.75rem;
-    flex-shrink: 0;
-    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-    color: white;
-}
+	.card-icon {
+		width: 60px;
+		height: 60px;
+		border-radius: 12px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 1.75rem;
+		flex-shrink: 0;
+		background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+		color: white;
+	}
 
-.card-content {
-    flex: 1;
-}
+	.card-content {
+		flex: 1;
+	}
 
-.card-content h3 {
-    margin: 0 0 0.25rem 0;
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: #1e293b;
-}
+	.card-content h3 {
+		margin: 0 0 0.25rem;
+		font-size: 1.125rem;
+		font-weight: 600;
+		color: #1e293b;
+	}
 
-.card-content p {
-    margin: 0;
-    font-size: 0.875rem;
-    color: #64748b;
-}
+	.card-content p {
+		margin: 0;
+		font-size: 0.875rem;
+		color: #64748b;
+	}
 
-.card-arrow {
-    font-size: 1.25rem;
-    color: #cbd5e1;
-    transition: all 0.3s ease;
-}
+	.card-arrow {
+		font-size: 1.25rem;
+		color: #cbd5e1;
+		transition: all 0.3s ease;
+	}
 
-.modern-card:hover .card-arrow {
-    color: #667eea;
-    transform: translateX(4px);
-}
+	.modern-card:hover .card-arrow {
+		color: #667eea;
+		transform: translateX(4px);
+	}
 
-/* Gradient Variants */
-.gradient-blue {
-    --gradient-start: #3b82f6;
-    --gradient-end: #2563eb;
-}
+	/* Gradient Variants */
+	.gradient-blue {
+		--gradient-start: #3b82f6;
+		--gradient-end: #2563eb;
+	}
 
-.gradient-purple {
-    --gradient-start: #8b5cf6;
-    --gradient-end: #7c3aed;
-}
+	.gradient-purple {
+		--gradient-start: #8b5cf6;
+		--gradient-end: #7c3aed;
+	}
 
-.gradient-green {
-    --gradient-start: #10b981;
-    --gradient-end: #059669;
-}
+	.gradient-green {
+		--gradient-start: #10b981;
+		--gradient-end: #059669;
+	}
 
-.gradient-orange {
-    --gradient-start: #f59e0b;
-    --gradient-end: #d97706;
-}
+	.gradient-orange {
+		--gradient-start: #f59e0b;
+		--gradient-end: #d97706;
+	}
 
-.gradient-pink {
-    --gradient-start: #ec4899;
-    --gradient-end: #db2777;
-}
+	.gradient-pink {
+		--gradient-start: #ec4899;
+		--gradient-end: #db2777;
+	}
 
-.gradient-teal {
-    --gradient-start: #14b8a6;
-    --gradient-end: #0d9488;
-}
+	.gradient-teal {
+		--gradient-start: #14b8a6;
+		--gradient-end: #0d9488;
+	}
 
-.gradient-indigo {
-    --gradient-start: #6366f1;
-    --gradient-end: #4f46e5;
-}
+	.gradient-indigo {
+		--gradient-start: #6366f1;
+		--gradient-end: #4f46e5;
+	}
 
-.gradient-red {
-    --gradient-start: #ef4444;
-    --gradient-end: #dc2626;
+	.gradient-red {
+		--gradient-start: #ef4444;
+		--gradient-end: #dc2626;
 
-}
+	}
 
-.gradient-cyan {
-    --gradient-start: #06b6d4;
-    --gradient-end: #0891b2;
-}
+	.gradient-cyan {
+		--gradient-start: #06b6d4;
+		--gradient-end: #0891b2;
+	}
 
-.gradient-yellow {
-    --gradient-start: #f59e0b;
-    --gradient-end: #d97706;
+	.gradient-yellow {
+		--gradient-start: #f59e0b;
+		--gradient-end: #d97706;
 
-}
-</style>
-{% endblock %}
+	}
+</style>{% endblock %}
