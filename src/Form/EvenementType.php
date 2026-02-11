@@ -21,7 +21,7 @@ class EvenementType extends AbstractType
             ->add('horaire')
             ->add('typeEvenement', EntityType::class, [
                 'class' => TypeEvenement::class,
-                'choice_label' => 'id',
+                'choice_label' => 'libelleTypeEvenement',
             ])
         ;
     }
