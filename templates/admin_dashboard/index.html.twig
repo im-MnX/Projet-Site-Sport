@@ -1,120 +1,318 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin_base.html.twig' %}
 
 {% block title %}Tableau de Bord Admin{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+{% block breadcrumb %}<span>Administration</span> / <span>Dashboard</span>{% endblock %}
 
 {% block body %}
-<div class="container admin-dashboard">
-    <h1 class="page-title">Administration</h1>
-    
+<div class="admin-dashboard-modern">
+    {# Welcome Banner #}
+    <div class="welcome-banner">
+        <div class="welcome-content">
+            <h1><i class="fa-solid fa-gauge-high"></i> Tableau de Bord</h1>
+            <p>Bienvenue dans l'espace d'administration</p>
+        </div>
+        <div class="welcome-icon">
+            <i class="fa-solid fa-chart-line"></i>
+        </div>
+    </div>
+
+    {# Content Management Section #}
+    <div class="section-header">
+        <i class="fa-solid fa-newspaper"></i>
+        <h2>Gestion du Contenu</h2>
+    </div>
     <div class="dashboard-grid">
-        <a href="{{ path('app_admin_actualite_index') }}" class="dashboard-card">
+        <a href="{{ path('app_admin_actualite_index') }}" class="modern-card gradient-blue">
             <div class="card-icon"><i class="fa-solid fa-newspaper"></i></div>
-            <h2>Actualités</h2>
-            <p>Gérer les news</p>
+            <div class="card-content">
+                <h3>Actualités</h3>
+                <p>Gérer les news du site</p>
+            </div>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
         </a>
 
-        <a href="{{ path('app_admin_album_index') }}" class="dashboard-card">
-            <div class="card-icon"><i class="fa-solid fa-images"></i></div>
-            <h2>Albums</h2>
-            <p>Gérer les albums photos</p>
-        </a>
-
-        <a href="{{ path('app_admin_categorie_album_index') }}" class="dashboard-card">
-            <div class="card-icon"><i class="fa-solid fa-tags"></i></div>
-            <h2>Catégories d'Albums</h2>
-            <p>Gérer les catégories</p>
-        </a>
-
-        <a href="{{ path('app_admin_evenement_index') }}" class="dashboard-card">
+        <a href="{{ path('app_admin_evenement_index') }}" class="modern-card gradient-purple">
             <div class="card-icon"><i class="fa-solid fa-calendar-days"></i></div>
-            <h2>Événements</h2>
-            <p>Gérer les événements</p>
+            <div class="card-content">
+                <h3>Événements</h3>
+                <p>Calendrier et événements</p>
+            </div>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
         </a>
 
-        <a href="{{ path('app_admin_photo_index') }}" class="dashboard-card">
-            <div class="card-icon"><i class="fa-solid fa-camera"></i></div>
-            <h2>Photos</h2>
-            <p>Gérer les photos</p>
-        </a>
-
-        <a href="{{ path('app_admin_type_evenement_index') }}" class="dashboard-card">
-            <div class="card-icon"><i class="fa-solid fa-list-check"></i></div>
-            <h2>Types d'Événements</h2>
-            <p>Gérer les types</p>
-        </a>
-
-        <a href="{{ path('app_admin_utilisateur_index') }}" class="dashboard-card">
-            <div class="card-icon"><i class="fa-solid fa-users"></i></div>
-            <h2>Utilisateurs</h2>
-            <p>Gérer les comptes</p>
-        </a>
-         <a href="{{ path('app_admin_produit_index') }}" class="dashboard-card">
+        <a href="{{ path('app_admin_produit_index') }}" class="modern-card gradient-green">
             <div class="card-icon"><i class="fa-solid fa-box"></i></div>
-            <h2>Produits</h2>
-            <p>Gérer les produits</p>
+            <div class="card-content">
+                <h3>Produits</h3>
+                <p>Boutique et produits</p>
+            </div>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+    </div>
+
+    {# Media Management Section #}
+    <div class="section-header">
+        <i class="fa-solid fa-images"></i>
+        <h2>Gestion des Médias</h2>
+    </div>
+    <div class="dashboard-grid">
+        <a href="{{ path('app_admin_album_index') }}" class="modern-card gradient-orange">
+            <div class="card-icon"><i class="fa-solid fa-images"></i></div>
+            <div class="card-content">
+                <h3>Albums</h3>
+                <p>Collections de photos</p>
+            </div>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+
+        <a href="{{ path('app_admin_photo_index') }}" class="modern-card gradient-pink">
+            <div class="card-icon"><i class="fa-solid fa-camera"></i></div>
+            <div class="card-content">
+                <h3>Photos</h3>
+                <p>Bibliothèque de photos</p>
+            </div>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+
+        <a href="{{ path('app_admin_categorie_album_index') }}" class="modern-card gradient-teal">
+            <div class="card-icon"><i class="fa-solid fa-folder-open"></i></div>
+            <div class="card-content">
+                <h3>Catégories</h3>
+                <p>Catégories d'albums</p>
+            </div>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+    </div>
+
+    {# Configuration Section #}
+    <div class="section-header">
+        <i class="fa-solid fa-sliders"></i>
+        <h2>Configuration</h2>
+    </div>
+    <div class="dashboard-grid dashboard-grid-2">
+        <a href="{{ path('app_admin_type_evenement_index') }}" class="modern-card gradient-indigo">
+            <div class="card-icon"><i class="fa-solid fa-tag"></i></div>
+            <div class="card-content">
+                <h3>Types d'Événements</h3>
+                <p>Catégories d'événements</p>
+            </div>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+
+        <a href="{{ path('app_admin_utilisateur_index') }}" class="modern-card gradient-red">
+            <div class="card-icon"><i class="fa-solid fa-users"></i></div>
+            <div class="card-content">
+                <h3>Utilisateurs</h3>
+                <p>Gestion des comptes</p>
+            </div>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
         </a>
     </div>
 </div>
 
 <style>
-/* Dashboard Styles - Inlined for now, should move to CSS file later */
-.admin-dashboard {
+.admin-dashboard-modern {
     padding: 2rem;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
-.page-title {
-    text-align: center;
+/* Welcome Banner */
+.welcome-banner {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    padding: 2.5rem;
     margin-bottom: 3rem;
-    color: #333;
-    font-size: 2.5rem;
-}
-
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    justify-content: center;
-}
-
-.dashboard-card {
-    background: white;
-    border-radius: 15px;
-    padding: 2rem;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-decoration: none;
-    color: inherit;
+    color: white;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.welcome-content h1 {
+    margin: 0 0 0.5rem 0;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.welcome-content p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 1.1rem;
+}
+
+.welcome-icon {
+    font-size: 5rem;
+    opacity: 0.2;
+}
+
+/* Section Headers */
+.section-header {
+    display: flex;
     align-items: center;
     gap: 1rem;
+    margin: 2.5rem 0 1.5rem 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #e2e8f0;
 }
 
-.dashboard-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-    color: inherit; /* Prevent link color change on hover if desired */
+.section-header i {
+    font-size: 1.5rem;
+    color: #667eea;
+}
+
+.section-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #1e293b;
+    font-weight: 600;
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.dashboard-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 1200px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-grid,
+    .dashboard-grid-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Modern Cards */
+.modern-card {
+    position: relative;
+    background: white;
+    border-radius: 16px;
+    padding: 1.75rem;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.modern-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.modern-card:hover::before {
+    transform: scaleX(1);
+}
+
+.modern-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
 }
 
 .card-icon {
-    font-size: 3rem;
-    color: #007bff; /* Example primary color, adjust to theme */
-    margin-bottom: 0.5rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    color: white;
 }
 
-.dashboard-card h2 {
-    margin: 0;
-    font-size: 1.5rem;
-    color: #333;
+.card-content {
+    flex: 1;
 }
 
-.dashboard-card p {
+.card-content h3 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.card-content p {
     margin: 0;
-    color: #666;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
+    color: #64748b;
+}
+
+.card-arrow {
+    font-size: 1.25rem;
+    color: #cbd5e1;
+    transition: all 0.3s ease;
+}
+
+.modern-card:hover .card-arrow {
+    color: #667eea;
+    transform: translateX(4px);
+}
+
+/* Gradient Variants */
+.gradient-blue {
+    --gradient-start: #3b82f6;
+    --gradient-end: #2563eb;
+}
+
+.gradient-purple {
+    --gradient-start: #8b5cf6;
+    --gradient-end: #7c3aed;
+}
+
+.gradient-green {
+    --gradient-start: #10b981;
+    --gradient-end: #059669;
+}
+
+.gradient-orange {
+    --gradient-start: #f59e0b;
+    --gradient-end: #d97706;
+}
+
+.gradient-pink {
+    --gradient-start: #ec4899;
+    --gradient-end: #db2777;
+}
+
+.gradient-teal {
+    --gradient-start: #14b8a6;
+    --gradient-end: #0d9488;
+}
+
+.gradient-indigo {
+    --gradient-start: #6366f1;
+    --gradient-end: #4f46e5;
+}
+
+.gradient-red {
+    --gradient-start: #ef4444;
+    --gradient-end: #dc2626;
 }
 </style>
 {% endblock %}

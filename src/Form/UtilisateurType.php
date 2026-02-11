@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Utilisateur;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -39,6 +40,17 @@ class UtilisateurType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+            ])
+            ->add('roles', ChoiceType::class, [
+                'label' => 'Rôles',
+                'choices' => [
+                    'Utilisateur' => 'ROLE_USER',
+                    'Administrateur' => 'ROLE_ADMIN',
+                ],
+                'multiple' => true,
+                'expanded' => true,
+                'required' => false,
+                'help' => 'Sélectionnez un ou plusieurs rôles pour cet utilisateur',
             ])
         ;
     }
