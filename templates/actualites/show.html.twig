@@ -9,7 +9,7 @@
 	<div class="actualite-show-container">
         <h2>{{ actualite.titre }}</h2>
         {% if actualite.images %}
-            <img src="{{ asset('images/' ~ actualite.images) }}" alt="{{ actualite.titre }}" class="actualite-image">
+            <img src="{{ asset('uploads/actualites/' ~ actualite.images) }}" alt="{{ actualite.titre }}" class="actualite-image">
         {% endif %}
         <p>{{ actualite.description }}</p>
         <span class="card-date">{{ actualite.date ? actualite.date|date('d/m/Y') : '' }}</span>

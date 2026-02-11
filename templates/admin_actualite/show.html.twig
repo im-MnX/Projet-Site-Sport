@@ -26,7 +26,7 @@
         <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem;">
             <div>
                 {% if actualite.images %}
-                    <img src="{{ asset(actualite.images) }}" alt="{{ actualite.titre }}" style="width: 100%; border-radius: 0.5rem; object-fit: cover;">
+                    <img src="{{ asset('uploads/actualites/' ~ actualite.images) }}" alt="{{ actualite.titre }}" style="width: 100%; border-radius: 0.5rem; object-fit: cover;">
                 {% else %}
                     <div style="background-color: #f1f5f9; width: 100%; height: 200px; display: flex; align-items: center; justify-content: center; border-radius: 0.5rem; color: #64748b;">
                         No Image

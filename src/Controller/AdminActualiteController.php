@@ -7,6 +7,7 @@ use App\Form\ActualiteType;
 use App\Repository\ActualiteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -30,6 +31,24 @@ final class AdminActualiteController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Handle file upload
+            $imageFile = $form->get('imageFile')->getData();
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+
+                try {
+                    $imageFile->move(
+                        $this->getParameter('kernel.project_dir').'/public/uploads/actualites',
+                        $newFilename
+                    );
+                    $actualite->setImages($newFilename);
+                } catch (FileException $e) {
+                    // Handle exception if something happens during file upload
+                }
+            }
+
             $entityManager->persist($actualite);
             $entityManager->flush();
 
@@ -57,6 +76,33 @@ final class AdminActualiteController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Handle file upload
+            $imageFile = $form->get('imageFile')->getData();
+            if ($imageFile) {
+                // Delete old image if exists
+                $oldImage = $idActualite->getImages();
+                if ($oldImage) {
+                    $oldImagePath = $this->getParameter('kernel.project_dir').'/public/uploads/actualites/'.$oldImage;
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
+
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+
+                try {
+                    $imageFile->move(
+                        $this->getParameter('kernel.project_dir').'/public/uploads/actualites',
+                        $newFilename
+                    );
+                    $idActualite->setImages($newFilename);
+                } catch (FileException $e) {
+                    // Handle exception if something happens during file upload
+                }
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_admin_actualite_index', [], Response::HTTP_SEE_OTHER);
