@@ -29,7 +29,7 @@
                     <tr>
                         <td style="width: 80px;">
                             {% if produit.image %}
-                                <img src="{{ asset(produit.image) }}" alt="{{ produit.nomProduit }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
+                                <img src="{{ asset('uploads/produits/' ~ produit.image) }}" alt="{{ produit.nomProduit }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
                             {% else %}
                                 <span class="badge bg-secondary">No Image</span>
                             {% endif %}
