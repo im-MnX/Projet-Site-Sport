@@ -109,16 +109,22 @@
             <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
         </a>
 
-        <a href="{{ path('app_admin_faq_index') }}" class="dashboard-card">
+        <a href="{{ path('app_admin_faq_index') }}" class="modern-card gradient-cyan">
             <div class="card-icon"><i class="fa-solid fa-circle-question"></i></div>
-            <h2>FAQ</h2>
-            <p>Gérer les questions/réponses</p>
+            <div class="card-content">
+                <h3>FAQ</h3>
+                <p>Gérer les questions/réponses</p>
+            </div>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
         </a>
 
-        <a href="{{ path('app_admin_partenaires_index') }}" class="dashboard-card">
+        <a href="{{ path('app_admin_partenaires_index') }}" class="modern-card gradient-yellow">
             <div class="card-icon"><i class="fa-solid fa-handshake"></i></div>
-            <h2>Partenaires</h2>
-            <p>Gérer les partenaires</p>
+            <div class="card-content">
+                <h3>Partenaires</h3>
+                <p>Gérer les partenaires</p>
+            </div>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
         </a>
         
     </div>
@@ -326,6 +332,16 @@
 .gradient-red {
     --gradient-start: #ef4444;
     --gradient-end: #dc2626;
+}
+
+.gradient-cyan {
+    --gradient-start: #06b6d4;
+    --gradient-end: #0891b2;
+}
+
+.gradient-yellow {
+    --gradient-start: #f59e0b;
+    --gradient-end: #d97706;
 }
 </style>
 {% endblock %}
