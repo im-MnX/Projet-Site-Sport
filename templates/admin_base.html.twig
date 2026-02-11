@@ -20,12 +20,15 @@
             <div class="sidebar-header">
                 <i class="fa-solid fa-gauge-high"></i> Admin
             </div>
+
+            
             
             <nav class="nav-menu">
                 <a href="{{ path('app_admin_dashboard') }}" class="nav-link {% if app.request.get('_route') == 'app_admin_dashboard' %}active{% endif %}">
                     <i class="fa-solid fa-chart-line"></i> Dashboard
                 </a>
 
+                <div class="nav-section-title">Liens Rapides</div>
                 <a href="{{ path('app_admin_produit_index') }}" class="nav-link {% if 'admin_produit' in app.request.get('_route') %}active{% endif %}">
                     <i class="fa-solid fa-box"></i> Produits
                 </a>
@@ -56,11 +59,7 @@
                 <a href="{{ path('app_admin_partenaires_index') }}" class="nav-link {% if 'admin_partenaires' in app.request.get('_route') %}active{% endif %}">
                     <i class="fa-solid fa-handshake"></i> Partenaires
                 </a>
-                
-                <div class="nav-section-title">Liens Rapides</div>
-                
-                <div class="nav-section-title">Liens Rapides</div>
-                
+                         
                 <a href="{{ path('home') }}" class="nav-link" target="_blank">
                     <i class="fa-solid fa-home"></i> Voir le site
                 </a>
