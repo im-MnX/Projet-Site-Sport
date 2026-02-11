@@ -52,6 +52,12 @@
                 <a href="{{ path('app_admin_utilisateur_index') }}" class="nav-link {% if 'admin_utilisateur' in app.request.get('_route') %}active{% endif %}">
                     <i class="fa-regular fa-user"></i> Utilisateurs
                 </a>
+                <a href="{{ path('app_admin_faq_index') }}" class="nav-link {% if 'admin_faq' in app.request.get('_route') %}active{% endif %}">
+                    <i class="fa-regular fa-circle-question"></i> FAQ
+                </a>
+                <a href="{{ path('app_admin_partenaires_index') }}" class="nav-link {% if 'admin_partenaires' in app.request.get('_route') %}active{% endif %}">
+                    <i class="fa-solid fa-handshake"></i> Partenaires
+                </a>
                 
                 <a href="{{ path('home') }}" class="nav-link" target="_blank">
                     <i class="fa-solid fa-home"></i> Voir le site
