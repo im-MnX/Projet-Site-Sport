@@ -7,9 +7,11 @@ use App\Form\EvenementType;
 use App\Repository\EvenementRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/admin/evenement')]
 final class AdminEvenementController extends AbstractController
@@ -23,13 +25,32 @@ final class AdminEvenementController extends AbstractController
     }
 
     #[Route('/new', name: 'app_admin_evenement_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $evenement = new Evenement();
         $form = $this->createForm(EvenementType::class, $evenement);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('imageFile')->getData();
+
+            if ($imageFile) {
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+
+                try {
+                    $imageFile->move(
+                        $this->getParameter('kernel.project_dir').'/public/uploads/evenements',
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                $evenement->setImages($newFilename);
+            }
+
             $entityManager->persist($evenement);
             $entityManager->flush();
 
@@ -51,12 +72,40 @@ final class AdminEvenementController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_admin_evenement_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Evenement $evenement, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Evenement $evenement, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(EvenementType::class, $evenement);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('imageFile')->getData();
+
+            if ($imageFile) {
+                // Delete old image
+                $oldImageName = $evenement->getImages();
+                if ($oldImageName) {
+                    $oldImagePath = $this->getParameter('kernel.project_dir').'/public/uploads/evenements/'.$oldImageName;
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
+
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+
+                try {
+                    $imageFile->move(
+                        $this->getParameter('kernel.project_dir').'/public/uploads/evenements',
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                $evenement->setImages($newFilename);
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_admin_evenement_index', [], Response::HTTP_SEE_OTHER);
@@ -72,6 +121,15 @@ final class AdminEvenementController extends AbstractController
     public function delete(Request $request, Evenement $evenement, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$evenement->getIdEvenement(), $request->getPayload()->getString('_token'))) {
+            // Delete image file
+            $imageName = $evenement->getImages();
+            if ($imageName) {
+                $imagePath = $this->getParameter('kernel.project_dir').'/public/uploads/evenements/'.$imageName;
+                if (file_exists($imagePath)) {
+                    unlink($imagePath);
+                }
+            }
+
             $entityManager->remove($evenement);
             $entityManager->flush();
         }

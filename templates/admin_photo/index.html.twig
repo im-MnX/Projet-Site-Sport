@@ -17,7 +17,7 @@
                 <tr>
                     <td style="width: 80px;">
                         {% if photo.cheminImage %}
-                            <img src="{{ asset(photo.cheminImage) }}" alt="{{ photo.titre }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
+                            <img src="{{ asset('photos/album_' ~ photo.idAlbum.idAlbum ~ '/' ~ photo.cheminImage) }}" alt="{{ photo.titre }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
                         {% else %}
                             <span class="badge bg-secondary">No Image</span>
                         {% endif %}
