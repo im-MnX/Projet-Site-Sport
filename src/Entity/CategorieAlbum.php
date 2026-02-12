@@ -19,7 +19,7 @@ class CategorieAlbum
     #[ORM\Column(name: "libelleCategorieAlbum", type: "string", length: 100)]
     private ?string $libelleCategorieAlbum = null;
 
-    #[ORM\OneToMany(mappedBy: "idCategorieAlbum", targetEntity: Album::class)]
+    #[ORM\OneToMany(mappedBy: "idCategorieAlbum", targetEntity: Album::class,cascade: ["remove"], orphanRemoval: true)]
     private Collection $albums;
 
     public function __construct() { $this->albums = new ArrayCollection(); }

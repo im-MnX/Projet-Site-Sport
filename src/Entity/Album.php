@@ -29,7 +29,7 @@ class Album
     #[ORM\Column(name: "archive", type: "boolean", options: ["default" => false])]
     private bool $archive = false;
 
-    #[ORM\OneToMany(mappedBy: "idAlbum", targetEntity: Photo::class)]
+    #[ORM\OneToMany(mappedBy: "idAlbum", targetEntity: Photo::class,cascade: ["remove"],orphanRemoval: true)]
     private Collection $photos;
 
     public function __construct() { $this->photos = new ArrayCollection(); }
