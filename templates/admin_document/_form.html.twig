@@ -1,0 +1,28 @@
+{{ form_start(form) }}
+    <div style="display: grid; gap: 1.5rem;">
+        <div>
+            {{ form_label(form.titre) }}
+            {{ form_widget(form.titre, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.titre) }}
+        </div>
+        <div>
+            {{ form_label(form.identifiant) }}
+            {{ form_widget(form.identifiant, {'attr': {'class': 'form-control'}}) }}
+            <small class="form-text text-muted">Utilisé pour appeler le document dans les templates (ex: <code>PLANNING_COURS</code>)</small>
+            {{ form_errors(form.identifiant) }}
+        </div>
+        <div>
+            {{ form_label(form.documentFile) }}
+            {{ form_widget(form.documentFile, {'attr': {'class': 'form-control'}}) }}
+            {% if document.filename %}
+                <p style="margin-top: 0.5rem;">Fichier actuel : <code>{{ document.filename }}</code></p>
+            {% endif %}
+            {{ form_errors(form.documentFile) }}
+        </div>
+    </div>
+    
+    <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+        <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+        <a href="{{ path('app_admin_document_index') }}" class="btn btn-secondary">Retour à la liste</a>
+    </div>
+{{ form_end(form) }}
