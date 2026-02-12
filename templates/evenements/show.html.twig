@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Événements
+{% endblock %}
+
+{% block body %}
+	<link rel="stylesheet" href="{{ asset('css/actualites.css') }}">
+
+	<div class="actualite-show-container">
+		<h2>{{ evenement.nom }}</h2>
+		{% if evenement.images %}
+			<img src="{{ asset('uploads/evenements/' ~ evenement.images) }}" alt="{{ evenement.nom }}" class="actualite-image">
+		{% endif %}
+		<div class="event-details" style="margin-bottom: 2rem; color: var(--text-gray);">
+			<p>
+				<i class="fas fa-calendar-day"></i>
+				<strong>Date :</strong>
+				{{ evenement.dateEvenement ? evenement.dateEvenement|date('d F Y') : '-' }}
+			</p>
+			{% if evenement.horaire %}
+				<p>
+					<i class="fas fa-clock"></i>
+					<strong>Horaire :</strong>
+					{{ evenement.horaire|date('H:i') }}
+				</p>
+			{% endif %}
+		</div>
+
+		<p>{{ evenement.description }}</p>
+
+		<a href="{{ path('app_evenement') }}" class="btn-back">
+			<i class="bi bi-arrow-left"></i>
+			Retour aux événements
+		</a>
+	</div>
+{% endblock %}
