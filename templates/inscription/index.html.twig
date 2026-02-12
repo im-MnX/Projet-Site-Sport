@@ -41,11 +41,11 @@
                 </div>
 
                 <div class="documents-list">
-                    <a href="{{ asset('FichiersInscription/Feuille-inscription.docx') }}" class="doc-link" target="_blank">Fiche d'inscription</a>
-                    <a href="{{ asset('FichiersInscription/Feuille-urgence.pdf') }}" class="doc-link" target="_blank">Feuille d'urgence</a>
-                    <a href="{{ asset('FichiersInscription/Feuille-inscription-comptabilite.docx') }}" class="doc-link" target="_blank">Moyen de paiement</a>
+                    <a href="{{ asset(get_document_path('FICHE_INSCRIPTION')|default('FichiersInscription/Feuille-inscription.docx')) }}" class="doc-link" target="_blank">Fiche d'inscription</a>
+                    <a href="{{ asset(get_document_path('FEUILLE_URGENCE')|default('FichiersInscription/Feuille-urgence.pdf')) }}" class="doc-link" target="_blank">Feuille d'urgence</a>
+                    <a href="{{ asset(get_document_path('MOYEN_PAIEMENT')|default('FichiersInscription/Feuille-inscription-comptabilite.docx')) }}" class="doc-link" target="_blank">Moyen de paiement</a>
                     <br> <!-- Spacer -->
-                    <a href="{{ asset('FichiersInscription/Formulairelicencemineur20252026remplissable.pdf') }}" class="doc-link" target="_blank">Formulaire licence FFN-Mineur</a>
+                    <a href="{{ asset(get_document_path('FORMULAIRE_LICENCE_FFN')|default('FichiersInscription/Formulairelicencemineur20252026remplissable.pdf')) }}" class="doc-link" target="_blank">Formulaire licence FFN-Mineur</a>
                     <a href="https://www.ffnatation.fr/sites/default/files/2025-09/Re%CC%80glements%20NA%202025-2026-vers%200825.pdf" class="doc-link" target="_blank">Règlement FFN</a>
                 </div>
             </div>

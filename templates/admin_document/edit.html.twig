@@ -1,0 +1,15 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Modifier le Document{% endblock %}
+{% block page_title %}Modifier le Document{% endblock %}
+
+{% block body %}
+    <div class="card" style="max-width: 800px; margin: 0 auto;">
+        <div class="card-header">
+            <h2 class="card-title">Modifier {{ document.titre }}</h2>
+        </div>
+        <div style="padding: 1.5rem;">
+            {{ include('admin_document/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+        </div>
+    </div>
+{% endblock %}
