@@ -21,4 +21,12 @@ class EvenementController extends AbstractController
             'evenements' => $evenements,
         ]);
     }
+
+    #[Route('/evenements/{id}', name: 'app_evenement_show')]
+    public function show(Evenement $evenement): Response
+    {
+        return $this->render('evenements/show.html.twig', [
+            'evenement' => $evenement,
+        ]);
+    }
 }

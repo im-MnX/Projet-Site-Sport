@@ -4,30 +4,36 @@
 {% endblock %}
 
 {% block body %}
+	<link rel="stylesheet" href="{{ asset('css/actualites.css') }}">
 
 	<div class="page-container">
-		<h1>
-			Événements du club
-		</h1>
-
-        <div class="evenements-list">
-    		{% for item in evenements %}
-	    		{% set type = item.typeEvenement.libelleTypeEvenement|lower %}
-		    	<div class="evenement {{ type }}">
-			    	<h2>
-				    	{{ item.nom }}
-					    <span class="date">{{ item.dateEvenement|date('d F Y') }}</span>
-    				</h2>
-                    {% if item.images %}
-                        <div class="evenement-image">
-                            <img src="{{ asset('uploads/evenements/' ~ item.images) }}" alt="{{ item.nom }}" style="max-width: 100%; border-radius: 8px; margin-bottom: 1rem;">
-                        </div>
-                    {% endif %}
-	    			<p>{{ item.description }}</p>
-		    	</div>
-    		{% endfor %}
-        </div>
-
-
+		<h1>Événements du club</h1>
+		<div class="actualites-container">
+			{% for item in evenements %}
+				{% set type = item.typeEvenement.libelleTypeEvenement|lower %}
+				<article class="modern-card">
+					<div class="card-image-wrapper">
+						<div class="card-placeholder-img">
+							{% if item.images %}
+								<img src="{{ asset('uploads/evenements/' ~ item.images) }}" alt="{{ item.nom }}" class="actualite-image">
+							{% endif %}
+						</div>
+					</div>
+					<div class="card-body">
+						<span class="card-date">{{ item.dateEvenement ? item.dateEvenement|date('d/m/Y') : '' }}</span>
+						<h3 class="card-title">{{ item.nom }}</h3>
+						<p class="card-excerpt">{{ item.description|striptags|slice(0, 100) ~ '...' }}</p>
+						<a href="{{ path('app_evenement_show', { id: item.idEvenement }) }}" class="read-more">Lire la suite
+							<i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+				</article>
+			{% else %}
+				<div class="empty-shop" style="grid-column: 1 / -1;">
+					<i class="bi bi-calendar-x" style="font-size: 3rem; margin-bottom: 20px; color: #ccc;"></i>
+					<h3>Aucun événement prévu pour le moment</h3>
+				</div>
+			{% endfor %}
+		</div>
 	</div>
 {% endblock %}
