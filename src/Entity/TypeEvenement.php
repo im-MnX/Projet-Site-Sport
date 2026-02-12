@@ -19,7 +19,7 @@ class TypeEvenement
     #[ORM\Column(name: "libelleTypeEvenement", type: "string", length: 50)]
     private ?string $libelleTypeEvenement = null;
 
-    #[ORM\OneToMany(mappedBy: "typeEvenement", targetEntity: Evenement::class)]
+    #[ORM\OneToMany(mappedBy: "typeEvenement", targetEntity: Evenement::class,cascade: ["remove"], orphanRemoval: true)]
     private Collection $evenements;
 
     public function __construct()
