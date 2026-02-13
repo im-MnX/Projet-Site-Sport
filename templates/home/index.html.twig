@@ -26,7 +26,7 @@
 					Depuis 60 ans,
 					<strong>Angers Nat' Synchro</strong>
 					forme des athlètes passionnés de natation artistique. 
-					                    Que vous soyez débutant ou compétiteur chevronné, rejoignez une famille dynamique où dépassement de soi rime avec esprit d'équipe.
+										                    Que vous soyez débutant ou compétiteur chevronné, rejoignez une famille dynamique où dépassement de soi rime avec esprit d'équipe.
 				</p>
 				<div class="stats-row">
 					<div class="stat-item">
@@ -40,7 +40,10 @@
 				<div class="card-badge">Prochain événement</div>
 				{% if upcomingEvents is not empty %}
 					{% set nextEvent = upcomingEvents[0] %}
-					<h3>{{ nextEvent.nom }}</h3>
+					<a href="{{ path('app_evenement_show', { id: nextEvent.idEvenement }) }}" class="read-more">
+						<h3>{{ nextEvent.nom }}</h3>
+					</a>
+
 					{% if nextEvent.dateEvenement %}
 						<div class="event-time">
 							<i class="fas fa-calendar-day"></i>
@@ -114,10 +117,8 @@
 						{% endfor %}
 					</div>
 				{% else %}
-					{# Infinite Carousel for many partners #}
 					<div class="partners-carousel">
 						<div class="partners-track">
-							{# First set of partners #}
 							{% for partenaire in partenaires %}
 								<div class="partner-slide">
 									<a href="{{ partenaire.lienPartenaire }}" target="_blank" title="{{ partenaire.nomPartenaire }}">
@@ -126,7 +127,6 @@
 								</div>
 							{% endfor %}
 
-							{# Duplicate set for infinite scroll #}
 							{% for partenaire in partenaires %}
 								<div class="partner-slide">
 									<a href="{{ partenaire.lienPartenaire }}" target="_blank" title="{{ partenaire.nomPartenaire }}">

@@ -338,7 +338,7 @@ body {
 .avatar {
     width: 32px;
     height: 32px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #2eb6e6 0%, #0099cc 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -382,7 +382,7 @@ body {
 
 .dropdown-header {
     padding: 1rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #2eb6e6 0%, #0099cc 100%);
     border-radius: 0.5rem 0.5rem 0 0;
     color: white;
 }
