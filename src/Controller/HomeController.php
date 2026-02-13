@@ -24,9 +24,13 @@ class HomeController extends AbstractController
         // Récupérer les actualités, limitées à 4
         $actualites = $doctrine->getRepository(Actualite::class)->findBy([], ['date' => 'DESC'], 4);
 
+        // Récupérer les partenaires
+        $partenaires = $doctrine->getRepository(\App\Entity\Partenaires::class)->findAll();
+
         return $this->render('home/index.html.twig', [
             'upcomingEvents' => $evenements,
             'latestNews' => $actualites,
+            'partenaires' => $partenaires,
         ]);
     }
 }

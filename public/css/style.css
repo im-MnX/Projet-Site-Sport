@@ -798,6 +798,85 @@ h1 {
 }
 
 /* ============================= */
+/* Partner Carousel */
+/* ============================= */
+.partners-section {
+  padding: 80px 0;
+  margin-top: 60px;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #ffffff 0%, #f4f7f9 100%);
+  /* Removed borders */
+}
+
+.partners-carousel {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  /* Mask for fade effect on edges */
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.partners-static {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 60px;
+  padding: 40px 0;
+  width: 100%;
+}
+
+.partners-track {
+  display: flex;
+  gap: 80px;
+  /* Larger gap */
+  width: max-content;
+  animation: scroll 40s linear infinite;
+  /* Slower animation */
+  padding: 40px 0;
+  flex-wrap: nowrap !important;
+}
+
+.partners-track:hover {
+  animation-play-state: paused;
+}
+
+.partner-slide {
+  flex: 0 0 auto;
+  width: 200px;
+  /* Larger logos */
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.partner-slide img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.partner-slide:hover img {
+  transform: scale(1.15);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Duplicated content logic: handled in template by rendering twice */
+
 /* Section Partenaires */
 /* ============================= */
 

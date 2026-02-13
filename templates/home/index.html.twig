@@ -92,19 +92,54 @@
 			</div>
 		</div>
 
-		<!-- Section Partenaires -->
-		<div class="partners-section">
+	</div>
+
+	<div class="partners-section">
+		<div class="home-container" style="padding-bottom: 0;">
 			<div class="section-header">
 				<h2>Nos partenaires</h2>
 				<div class="header-line"></div>
 			</div>
 
-			<div class="partners-grid">
-				<a href="https://www.barthelaix49.com/pain-gateau-petit-four-chocolat-angers/" target="_blank"><img src="{{ asset('images/partenaire/blanc-barthelaix.png') }}" alt="Partenaire 1"></a>
-				<a href="https://www.flunch.fr/" target="_blank"><img src="{{ asset('images/partenaire/flunch.jpg') }}" alt="Partenaire 2"></a>
-				<a href="https://www.synchroloc.fr/" target="_blank"><img src="{{ asset('images/partenaire/synchroloc-flocage.jpg') }}" alt="Partenaire 3"></a>
-			</div>
-		</div>
+			{% if partenaires is defined and partenaires|length > 0 %}
+				{% if partenaires|length < 6 %}
+					{# Static Display for few partners #}
+					<div class="partners-static">
+						{% for partenaire in partenaires %}
+							<div class="partner-slide">
+								<a href="{{ partenaire.lienPartenaire }}" target="_blank" title="{{ partenaire.nomPartenaire }}">
+									<img src="{{ asset('logos/' ~ partenaire.logoPartenaire) }}" alt="{{ partenaire.nomPartenaire }}">
+								</a>
+							</div>
+						{% endfor %}
+					</div>
+				{% else %}
+					{# Infinite Carousel for many partners #}
+					<div class="partners-carousel">
+						<div class="partners-track">
+							{# First set of partners #}
+							{% for partenaire in partenaires %}
+								<div class="partner-slide">
+									<a href="{{ partenaire.lienPartenaire }}" target="_blank" title="{{ partenaire.nomPartenaire }}">
+										<img src="{{ asset('logos/' ~ partenaire.logoPartenaire) }}" alt="{{ partenaire.nomPartenaire }}">
+									</a>
+								</div>
+							{% endfor %}
 
+							{# Duplicate set for infinite scroll #}
+							{% for partenaire in partenaires %}
+								<div class="partner-slide">
+									<a href="{{ partenaire.lienPartenaire }}" target="_blank" title="{{ partenaire.nomPartenaire }}">
+										<img src="{{ asset('logos/' ~ partenaire.logoPartenaire) }}" alt="{{ partenaire.nomPartenaire }}">
+									</a>
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+				{% endif %}
+			{% else %}
+				<p style="text-align: center; color: #999; font-style: italic;">Nos partenaires apparaîtront ici prochainement.</p>
+			{% endif %}
+		</div>
 	</div>
 {% endblock %}
