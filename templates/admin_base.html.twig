@@ -27,6 +27,10 @@
                 <a href="{{ path('app_admin_dashboard') }}" class="nav-link {% if app.request.get('_route') == 'app_admin_dashboard' %}active{% endif %}">
                     <i class="fa-solid fa-chart-line"></i> Dashboard
                 </a>
+                
+                <a href="{{ path('home') }}" class="nav-link nav-link-site" target="_blank">
+                    <i class="fa-solid fa-globe"></i> Voir le site
+                </a>
 
                 <div class="nav-section-title">Liens Rapides</div>
                 <a href="{{ path('app_admin_produit_index') }}" class="nav-link {% if 'admin_produit' in app.request.get('_route') %}active{% endif %}">
@@ -61,10 +65,6 @@
                 </a>
                 <a href="{{ path('app_admin_document_index') }}" class="nav-link {% if 'admin_document' in app.request.get('_route') %}active{% endif %}">
                     <i class="fa-solid fa-file-invoice"></i> Documents
-                </a>
-                         
-                <a href="{{ path('home') }}" class="nav-link" target="_blank">
-                    <i class="fa-solid fa-home"></i> Voir le site
                 </a>
             </nav>
         </div>
