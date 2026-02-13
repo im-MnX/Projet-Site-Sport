@@ -19,10 +19,6 @@ class DocumentType extends AbstractType
                 'label' => 'Titre du document',
                 'attr' => ['placeholder' => 'Ex: Planning des cours']
             ])
-            ->add('identifiant', TextType::class, [
-                'label' => 'Identifiant unique (interne)',
-                'attr' => ['placeholder' => 'Ex: PLANNING_COURS']
-            ])
             ->add('documentFile', FileType::class, [
                 'label' => 'Fichier (PDF, DOCX, ...)',
                 'mapped' => false,

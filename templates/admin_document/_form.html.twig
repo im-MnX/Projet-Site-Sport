@@ -6,12 +6,6 @@
             {{ form_errors(form.titre) }}
         </div>
         <div>
-            {{ form_label(form.identifiant) }}
-            {{ form_widget(form.identifiant, {'attr': {'class': 'form-control'}}) }}
-            <small class="form-text text-muted">Utilisé pour appeler le document dans les templates (ex: <code>PLANNING_COURS</code>)</small>
-            {{ form_errors(form.identifiant) }}
-        </div>
-        <div>
             {{ form_label(form.documentFile) }}
             {{ form_widget(form.documentFile, {'attr': {'class': 'form-control'}}) }}
             {% if document.filename %}

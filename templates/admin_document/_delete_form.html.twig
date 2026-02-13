@@ -1,6 +1,0 @@
-<form method="post" action="{{ path('app_admin_document_delete', {'id': document.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce document ?');" style="display: inline-block;">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ document.id) }}">
-    <button class="btn btn-sm btn-danger" title="Supprimer">
-        <i class="fa-solid fa-trash"></i>
-    </button>
-</form>
