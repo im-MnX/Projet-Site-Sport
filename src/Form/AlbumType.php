@@ -8,6 +8,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length; 
 
 class AlbumType extends AbstractType
 {
@@ -16,7 +17,14 @@ class AlbumType extends AbstractType
         $builder
             ->add('description', null, [
                 'label' => 'Description',
+                'constraints' => [
+                    new Length([
+                        'max' => 255,
+                        'maxMessage' => 'La description ne peut pas dépasser {{ limit }} caractères.',
+                    ]),
+                ],
             ])
+
             ->add('priorite', null, [
                 'label' => 'Priorité',
             ])
