@@ -34,6 +34,9 @@ class Evenement
     #[ORM\Column(name: "horaire", type: Types::TIME_MUTABLE)]
     private ?\DateTime $horaire = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $brochureFilename = null;
+
 
     public function getIdEvenement(): ?int
     {
@@ -109,6 +112,18 @@ class Evenement
     public function setHoraire(?\DateTime $horaire): static
     {
         $this->horaire = $horaire;
+        return $this;
+    }
+
+    public function getBrochureFilename(): ?string
+    {
+        return $this->brochureFilename;
+    }
+
+    public function setBrochureFilename(?string $brochureFilename): static
+    {
+        $this->brochureFilename = $brochureFilename;
+
         return $this;
     }
 }

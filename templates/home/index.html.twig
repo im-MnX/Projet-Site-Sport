@@ -36,26 +36,43 @@
 				</div>
 			</div>
 
-			<div class="next-event-card">
-				<div class="card-badge">Prochain événement</div>
-				{% if upcomingEvents is not empty %}
-					{% set nextEvent = upcomingEvents[0] %}
-					<h3>{{ nextEvent.nom }}</h3>
-					{% if nextEvent.dateEvenement %}
-						<div class="event-time">
-							<i class="fas fa-calendar-day"></i>
-							<span>{{ nextEvent.dateEvenement|date('d F Y') }}</span>
-						</div>
-						<div class="event-time">
-							<i class="fas fa-clock"></i>
-							<span>{{ nextEvent.horaire|date('H:i') }}</span>
-						</div>
+			<div class="featured-sidebar">
+				<div class="next-event-card">
+					<div class="card-badge">Prochain événement</div>
+					{% if upcomingEvents is not empty %}
+						{% set nextEvent = upcomingEvents[0] %}
+						<h3>{{ nextEvent.nom }}</h3>
+						{% if nextEvent.dateEvenement %}
+							<div class="event-time">
+								<i class="fas fa-calendar-day"></i>
+								<span>{{ nextEvent.dateEvenement|date('d F Y') }}</span>
+							</div>
+							<div class="event-time">
+								<i class="fas fa-clock"></i>
+								<span>{{ nextEvent.horaire|date('H:i') }}</span>
+							</div>
+						{% endif %}
+						<p class="event-desc">{{ nextEvent.description ?: 'Venez nombreux !' }}</p>
+						<a href="{{ path('app_evenement_show', { id: nextEvent.id }) }}" class="btn-event-details">
+							Voir les détails
+							<i class="fas fa-arrow-right"></i>
+						</a>
+					{% else %}
+						<h3>Saison à venir</h3>
+						<p class="event-desc">Le calendrier des événements sera bientôt disponible. Restez connectés !</p>
 					{% endif %}
-					<p class="event-desc">{{ nextEvent.description ?: 'Venez nombreux !' }}</p>
-				{% else %}
-					<h3>Saison à venir</h3>
-					<p class="event-desc">Le calendrier des événements sera bientôt disponible. Restez connectés !</p>
-				{% endif %}
+				</div>
+
+				<div class="social-widget">
+					<h3>Suivez-nous</h3>
+					<div class="fb-page-wrapper">
+						<iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fangers.nat.synchro&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&appId" width="100%" height="400" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+					</div>
+					<a href="https://www.instagram.com/angers_nat_synchro/" target="_blank" class="instagram-btn">
+						<i class="fab fa-instagram"></i>
+						Sur Instagram
+					</a>
+				</div>
 			</div>
 
 		</div>

@@ -51,6 +51,23 @@ final class AdminEvenementController extends AbstractController
                 $evenement->setImages($newFilename);
             }
 
+            $brochureFile = $form->get('brochure')->getData();
+            if ($brochureFile) {
+                $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$brochureFile->guessExtension();
+
+                try {
+                    $brochureFile->move(
+                        $this->getParameter('kernel.project_dir').'/public/uploads/brochures',
+                        $newFilename
+                    );
+                    $evenement->setBrochureFilename($newFilename);
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+            }
+
             $entityManager->persist($evenement);
             $entityManager->flush();
 
@@ -106,6 +123,32 @@ final class AdminEvenementController extends AbstractController
                 $evenement->setImages($newFilename);
             }
 
+            $brochureFile = $form->get('brochure')->getData();
+            if ($brochureFile) {
+                // Delete old brochure
+                $oldBrochureName = $evenement->getBrochureFilename();
+                if ($oldBrochureName) {
+                    $oldBrochurePath = $this->getParameter('kernel.project_dir').'/public/uploads/brochures/'.$oldBrochureName;
+                    if (file_exists($oldBrochurePath)) {
+                        unlink($oldBrochurePath);
+                    }
+                }
+
+                $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$brochureFile->guessExtension();
+
+                try {
+                    $brochureFile->move(
+                        $this->getParameter('kernel.project_dir').'/public/uploads/brochures',
+                        $newFilename
+                    );
+                    $evenement->setBrochureFilename($newFilename);
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_admin_evenement_index', [], Response::HTTP_SEE_OTHER);
@@ -127,6 +170,14 @@ final class AdminEvenementController extends AbstractController
                 $imagePath = $this->getParameter('kernel.project_dir').'/public/uploads/evenements/'.$imageName;
                 if (file_exists($imagePath)) {
                     unlink($imagePath);
+                }
+            }
+
+            $brochureName = $evenement->getBrochureFilename();
+            if ($brochureName) {
+                $brochurePath = $this->getParameter('kernel.project_dir').'/public/uploads/brochures/'.$brochureName;
+                if (file_exists($brochurePath)) {
+                    unlink($brochurePath);
                 }
             }
 

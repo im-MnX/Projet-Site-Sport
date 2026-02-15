@@ -40,7 +40,27 @@ class EvenementType extends AbstractType
                     ])
                 ],
             ])
-            ->add('description')
+            ->add('description', null, [
+                'attr' => [
+                    'class' => 'description-wysiwyg',
+                    'rows' => 10
+                ]
+            ])
+            ->add('brochure', FileType::class, [
+                'label' => 'Dossier d\'inscription / Brochure (PDF)',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '10240k',
+                        'mimeTypes' => [
+                            'application/pdf',
+                            'application/x-pdf',
+                        ],
+                        'mimeTypesMessage' => 'Veuillez uploader un document PDF valide',
+                    ])
+                ],
+            ])
             ->add('horaire')
             ->add('typeEvenement', EntityType::class, [
                 'class' => TypeEvenement::class,
