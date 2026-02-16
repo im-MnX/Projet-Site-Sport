@@ -431,6 +431,16 @@ footer .footer-content {
   margin: 0;
 }
 
+/* (Moved to the end of the file for better override safety) */
+
+/* Clearing floats for headers to prevent layout issues */
+.evenement h3,
+.evenement h4,
+.evenement h5 {
+  clear: both;
+  padding-top: 1rem;
+}
+
 /* Responsive : empilement sur petits écrans */
 @media (max-width: 576px) {
   .evenement h2 {
@@ -1245,8 +1255,78 @@ h1 {
 /* Description Section */
 .event-content-section {
   max-width: 1400px;
+  width: 100%;
   margin: 4rem auto;
   padding: 0 2rem 8rem;
+}
+
+/* Styles for images and videos within the event content */
+.event-content-section img:not([class*="image-style-"]),
+.event-content-section video,
+.event-content-section .media-wrapper {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem auto;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Ensure aligned images (which might be wrapped in figure) behave correctly */
+.event-content-section figure.image {
+  display: table;
+  /* Fixes width issues for resized images in figures */
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  /* Horizontal margins are handled by alignment classes below */
+}
+
+.event-content-section figure.image img {
+  width: 100% !important;
+  /* Force image to fill the resized figure container */
+}
+
+/* --- CKEditor 5 Alignment Style Parity --- */
+/* Using high specificity to ensure these win over general layout rules */
+
+/* Image Side (Right) */
+.event-content-section .image-style-side {
+  float: right;
+  margin-left: 2.5rem !important;
+  margin-bottom: 1.5rem;
+  clear: right;
+}
+
+/* Align Left */
+.event-content-section .image-style-align-left,
+.event-content-section .image-style-block-align-left {
+  float: left;
+  margin-right: 2.5rem !important;
+  margin-bottom: 1.5rem;
+  clear: left;
+}
+
+/* Align Right */
+.event-content-section .image-style-align-right,
+.event-content-section .image-style-block-align-right {
+  float: right;
+  margin-left: 2.5rem !important;
+  margin-bottom: 1.5rem;
+  clear: right;
+}
+
+/* Align Center */
+.event-content-section .image-style-align-center,
+.event-content-section .image-style-block-align-center {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block;
+  clear: both;
+}
+
+/* Reset for aligned images to ensure they float */
+.event-content-section figure[class*="image-style-"] {
+  display: table;
 }
 
 .action-cards {

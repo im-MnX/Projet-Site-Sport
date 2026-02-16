@@ -53,6 +53,7 @@
                 }
 
                 /* Scale down ALL media previews in the editor */
+                /* Remove !important block to allow CKEditor alignment classes to work */
                 .ck-content .image, 
                 .ck-content .video, 
                 .ck-content picture, 
@@ -60,11 +61,39 @@
                 .ck-content .media,
                 .ck-content oembed,
                 .ck-content iframe {
-                    max-width: 50% !important; /* Scale down for editing comfort */
-                    margin: 25px auto !important;
-                    display: block !important;
-                    height: auto !important;
-                    aspect-ratio: auto;
+                    max-width: 100%;
+                    height: auto;
+                }
+
+                /* Sync alignment styles for visual parity in the editor */
+                .ck-content .image-style-side {
+                    float: right;
+                    margin-left: 2.5rem;
+                    margin-bottom: 1.5rem;
+                    /* Remove max-width constraint to allow 75%/100% sizes */
+                }
+                .ck-content .image-style-align-left,
+                .ck-content .image-style-block-align-left {
+                    float: left;
+                    margin-right: 2.5rem;
+                    margin-bottom: 1.5rem;
+                }
+                .ck-content .image-style-align-right,
+                .ck-content .image-style-block-align-right {
+                    float: right;
+                    margin-left: 2.5rem;
+                    margin-bottom: 1.5rem;
+                }
+                .ck-content .image-style-align-center,
+                .ck-content .image-style-block-align-center {
+                    margin-left: auto;
+                    margin-right: auto;
+                    display: block;
+                }
+
+                /* Ensure resized images fill their figure container in editor */
+                .ck-content figure.image img {
+                    width: 100% !important;
                 }
 
                 /* Ensure video aspect ratio is maintained if possible */
@@ -85,22 +114,79 @@
 
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
-            <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
+            <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/super-build/ckeditor.js"></script>
             <script>
                 document.addEventListener('DOMContentLoaded', () => {
                     document.querySelectorAll('textarea.description-wysiwyg').forEach( (textarea) => {
-                        ClassicEditor
+                        CKEDITOR.ClassicEditor
                             .create(textarea, {
                                 ckfinder: {
                                     uploadUrl: '{{ url('app_admin_upload_editor_image') }}'
                                 },
-                                toolbar: [
-                                    'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'insertTable', 'uploadImage', 'undo', 'redo'
-                                ]
+                                // Use a strict whitelist of plugins to avoid loading ANY premium/cloud features
+                                plugins: [
+                                    CKEDITOR.ClassicEditor.builtinPlugins.find(p => p.pluginName === 'Essentials'),
+                                    CKEDITOR.ClassicEditor.builtinPlugins.find(p => p.pluginName === 'Autoformat'),
+                                    CKEDITOR.ClassicEditor.builtinPlugins.find(p => p.pluginName === 'Bold'),
+                                    CKEDITOR.ClassicEditor.builtinPlugins.find(p => p.pluginName === 'Italic'),
+                                    CKEDITOR.ClassicEditor.builtinPlugins.find(p => p.pluginName === 'BlockQuote'),
+                                    CKEDITOR.ClassicEditor.builtinPlugins.find(p => p.pluginName === 'FontBackgroundColor'),
+                                    CKEDITOR.ClassicEditor.builtinPlugins.find(p => p.pluginName === 'FontColor'),
+                                    CKEDITOR.ClassicEditor.builtinPlugins.find(p => p.pluginName === 'GeneralHtmlSupport'), // Enable HTML Support
+                                    CKEDITOR.ClassicEditor.builtinPlugins.find(p => p.pluginName === 'Heading'),
+                                    CKEDITOR.ClassicEditor.builtinPlugins.find(p => p.pluginName === 'Image'),
+                                    CKEDITOR.ClassicEditor.builtinPlugins.find(p => p.pluginName === 'ImageCaption'),
+                                    CKEDITOR.ClassicEditor.builtinPlugins.find(p => p.pluginName === 'ImageStyle'),
+                                    CKEDITOR.ClassicEditor.builtinPlugins.find(p => p.pluginName === 'ImageToolbar'),
+                                    CKEDITOR.ClassicEditor.builtinPlugins.find(p => p.pluginName === 'ImageUpload'),
+                                    CKEDITOR.ClassicEditor.builtinPlugins.find(p => p.pluginName === 'ImageResize'), // The key feature we want
+                                    CKEDITOR.ClassicEditor.builtinPlugins.find(p => p.pluginName === 'Link'),
+                                    CKEDITOR.ClassicEditor.builtinPlugins.find(p => p.pluginName === 'List'),
+                                    CKEDITOR.ClassicEditor.builtinPlugins.find(p => p.pluginName === 'MediaEmbed'),
+                                    CKEDITOR.ClassicEditor.builtinPlugins.find(p => p.pluginName === 'Paragraph'),
+                                    CKEDITOR.ClassicEditor.builtinPlugins.find(p => p.pluginName === 'PasteFromOffice'),
+                                    CKEDITOR.ClassicEditor.builtinPlugins.find(p => p.pluginName === 'CKFinderUploadAdapter'), // This is the correct adapter for SuperBuild
+                                    CKEDITOR.ClassicEditor.builtinPlugins.find(p => p.pluginName === 'Table'),
+                                    CKEDITOR.ClassicEditor.builtinPlugins.find(p => p.pluginName === 'TableToolbar'),
+                                    CKEDITOR.ClassicEditor.builtinPlugins.find(p => p.pluginName === 'TextTransformation')
+                                ],
+                                htmlSupport: {
+                                    allow: [
+                                        {
+                                            name: /.*/,
+                                            attributes: true,
+                                            classes: true,
+                                            styles: true
+                                        }
+                                    ]
+                                },
+                                image: {
+                                    resizeUnit: "%",
+                                    resizeOptions: [ 
+                                        { name: 'resizeImage:original', value: null, label: 'Original' },
+                                        { name: 'resizeImage:25', value: '25', label: '25%' }, 
+                                        { name: 'resizeImage:50', value: '50', label: '50%' }, 
+                                        { name: 'resizeImage:75', value: '75', label: '75%' } 
+                                    ],
+                                    toolbar: [
+                                        'imageTextAlternative', 'toggleImageCaption', '|',
+                                        'imageStyle:inline', 'imageStyle:wrapText', 'imageStyle:breakText', '|',
+                                        'resizeImage'
+                                    ]
+                                },
+                                // Ensure standard toolbar items are available
+                                toolbar: {
+                                    items: [
+                                        'heading', '|', 'bold', 'italic', 'fontColor', 'fontBackgroundColor', '|', 'link', 'bulletedList', 'numberedList', 'blockQuote', '|',
+                                        'insertTable', 'uploadImage', 'mediaEmbed', '|',
+                                        'undo', 'redo'
+                                    ],
+                                    shouldNotGroupWhenFull: true
+                                }
                             })
-                            .catch(error => {
-                                console.error(error);
-                            });
+                            .then(editor => {
+                                console.log('Editor initialized correctly', editor);
+                            })
                     });
                 });
             </script>
