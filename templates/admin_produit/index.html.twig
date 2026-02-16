@@ -61,12 +61,9 @@
 								{% if produit.stock > 10 %}
 									<span style="color: var(--success-color); font-weight: 500;">{{ produit.stock }}
 										en stock</span>
-								{% elseif produit.stock > 1 %}
+								{% elseif produit.stock > 0 %}
 									<span style="color: var(--warning-color); font-weight: 500;">{{ produit.stock }}
-										restants</span>
-                                {% elseif produit.stock == 1 %}
-									<span style="color: var(--warning-color); font-weight: 500;">{{ produit.stock }}
-										restant</span>
+										restant{{ produit.stock > 1 ? 's' : '' }}</span>
 								{% else %}
 									<span style="color: var(--danger-color); font-weight: 500;">Rupture</span>
 								{% endif %}
