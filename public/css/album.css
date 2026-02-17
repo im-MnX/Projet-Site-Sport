@@ -1,4 +1,4 @@
-/* --- Modern Gallery Design (Full Overhaul with Split Header) --- */
+
 
 :root {
     --bg-dark: #0a0a0a;
@@ -17,7 +17,7 @@ body {
     overflow-x: hidden;
 }
 
-/* --- Sticky Container --- */
+
 .gallery-nav-sticky {
     position: sticky;
     top: 0;
@@ -28,23 +28,18 @@ body {
     box-shadow: var(--shadow-nav);
     width: 100%;
     margin-top: -10px;
-    /* Blend with header */
 
     display: flex;
     flex-direction: column;
 }
 
-/* --- Row 1: Title & Logo Clearance --- */
 .nav-title-row {
     width: 100%;
     display: flex;
     justify-content: flex-start;
-    /* Title on left */
     align-items: center;
     padding: 0 2.5%;
-    /* Match max-width 95% margin */
 
-    /* CRITICAL: This row handles the vertical space for the logo */
     height: 80px;
     padding-top: 10px;
 }
@@ -56,30 +51,23 @@ body {
     text-transform: uppercase;
     letter-spacing: -1px;
     margin-left: 20px;
-    /* Small offset */
 }
 
-/* --- Row 2: Categories (Scrollable) --- */
 .nav-categories-row {
     width: 100%;
     border-top: 1px solid rgba(0, 0, 0, 0.03);
-    /* Subtle separator */
     padding: 10px 0;
     position: relative;
-    /* Context for mask */
     overflow: hidden;
 }
 
-/* Container for mask alignment */
 .nav-scroll-wrapper {
     display: flex;
     align-items: center;
     overflow-x: auto;
     gap: 20px;
     padding: 5px 2.5%;
-    /* Horizontal padding matches page layout */
     padding-right: 80px;
-    /* Space for mask */
     scrollbar-width: none;
     -ms-overflow-style: none;
     -webkit-overflow-scrolling: touch;
@@ -90,7 +78,6 @@ body {
     display: none;
 }
 
-/* Gradient Mask on Row 2 */
 .nav-categories-row::after {
     content: '';
     position: absolute;
@@ -103,7 +90,6 @@ body {
     z-index: 2;
 }
 
-/* Chips and Groups */
 .nav-group-inline {
     display: flex;
     align-items: center;
@@ -149,7 +135,6 @@ body {
     box-shadow: 0 3px 8px rgba(46, 182, 230, 0.3);
 }
 
-/* --- Main Content --- */
 .gallery-main-full {
     max-width: 95%;
     margin: 30px auto;
@@ -196,12 +181,10 @@ body {
     font-weight: 700;
 }
 
-/* --- Masonry Grid (Centered Flex) --- */
 .masonry-full-width {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    /* Center items horizontally */
     gap: 20px;
     animation: slideUp 0.8s ease-out;
 }
@@ -213,12 +196,9 @@ body {
     overflow: hidden;
     background: #000;
 
-    /* Flex sizing: grow, shrink, basis */
     flex: 1 1 300px;
     max-width: 400px;
-    /* Prevent single items from being huge */
     aspect-ratio: 1;
-    /* Square thumbnails */
 }
 
 .image-container {
@@ -249,7 +229,6 @@ body {
     opacity: 0;
     opacity: 0;
     transition: opacity 0.15s ease-out;
-    /* Faster fade in */
 }
 
 .overlay i {
@@ -261,9 +240,7 @@ body {
     border-radius: 50%;
     transform: scale(0.8);
     transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    /* Pop effect, faster */
 }
-
 .photo-card:hover .overlay {
     opacity: 1;
 }
@@ -272,7 +249,6 @@ body {
     transform: scale(1);
 }
 
-/* --- Lightbox --- */
 .lightbox-modal {
     position: fixed;
     inset: 0;
@@ -342,16 +318,12 @@ body {
 .nav-btn:hover {
     color: var(--primary);
     transform: translateY(-50%) scale(1.1);
-    /* Preserve centering */
 }
 
-/* --- Responsive --- */
 @media (max-width: 768px) {
     .nav-title-row {
         height: 60px;
-        /* Smaller row 1 on mobile */
         justify-content: center;
-        /* Center title */
     }
 
     .nav-brand {
@@ -373,7 +345,6 @@ body {
     }
 }
 
-/* --- Animations --- */
 @keyframes fadeIn {
     from {
         opacity: 0;

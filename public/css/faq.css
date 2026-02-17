@@ -1,13 +1,10 @@
-/* FAQ Page Styles - Matching Site Design */
 
-/* Wrapper principal */
 .example-wrapper {
     max-width: 1200px;
     margin: 0 auto;
     padding: 40px 20px;
 }
 
-/* Titre principal */
 .example-wrapper h1 {
     text-align: center;
     margin-bottom: 3rem;
@@ -30,7 +27,6 @@
     border-radius: 2px;
 }
 
-/* Grille des questions */
 .faq {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -38,7 +34,6 @@
     margin-top: 40px;
 }
 
-/* Carte de question */
 .question {
     background: white;
     border-radius: 16px;
@@ -65,7 +60,6 @@
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
 }
 
-/* Titre de la question */
 .question h2 {
     font-size: 1.3rem;
     font-weight: 700;
@@ -92,7 +86,6 @@
     margin-top: 2px;
 }
 
-/* Réponse */
 .question p {
     font-size: 1rem;
     color: #666;
@@ -100,7 +93,6 @@
     margin: 0;
 }
 
-/* Message vide */
 .faq > p {
     text-align: center;
     color: #999;
@@ -109,7 +101,6 @@
     padding: 60px 20px;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .example-wrapper h1 {
         font-size: 2.2rem;

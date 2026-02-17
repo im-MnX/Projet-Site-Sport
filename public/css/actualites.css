@@ -1,4 +1,4 @@
-/* Actualites Styles */
+
 
 .actualites-container {
     max-width: 1800px;
@@ -9,13 +9,11 @@
     gap: 2rem;
 }
 
-/* Single Actualite Card (Index) */
 .actualite-item {
     background: var(--white);
     border-radius: var(--radius-md);
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    /* Softer shadow than main style for variety, or match it? Let's match existing modern-card vibe roughly but simplified */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid #eee;
     display: flex;
@@ -48,10 +46,9 @@
     height: 200px;
     object-fit: cover;
     order: -1;
-    /* Image at top */
 }
 
-/* Show Page Specifics */
+
 .actualite-show-container {
     max-width: 1400px;
     margin: 0 auto;
