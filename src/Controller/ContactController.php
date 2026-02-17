@@ -25,6 +25,9 @@ class ContactController extends AbstractController
             $emailMessage = (new Email())
                 ->from('site@activite-sport.fr') // Sender address (configured in env usually, but this is fine for now)
                 ->to('LuCtiNy29@outlook.fr')
+                //->from('secretariat.ans49@gmail.com')
+                //->to('secretariat.ans49@gmail.com')
+                //->replyTo($email)
                 ->subject('Nouveau message de contact : ' . $sujet)
                 ->text("Nom: $nom\nEmail: $email\nTéléphone: $telephone\n\nMessage:\n$message")
                 ->html("
