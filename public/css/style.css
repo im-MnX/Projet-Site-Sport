@@ -41,7 +41,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 40px;
   min-height: 90px;
   position: relative;
   padding-right: 120px;
@@ -97,8 +96,6 @@ a.nav-item:hover,
 }
 
 .logout-btn {
-  position: absolute;
-  right: 40px;
   width: 45px;
   height: 45px;
   padding: 0;
@@ -111,6 +108,18 @@ a.nav-item:hover,
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   z-index: 100;
 }
+
+.user-controls {
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  z-index: 1000;
+}
+
 
 .logout-btn:hover {
   background-color: #ff4444 !important;

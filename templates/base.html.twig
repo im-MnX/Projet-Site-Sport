@@ -59,36 +59,38 @@
 					</div>
 				</div>
 
-				{% if app.user %}
-					{% if is_granted('ROLE_ADMIN') %}
-						<a class="nav-item" href="{{ path('app_admin_dashboard') }}" title="Administration">
-							<i class="fa-solid fa-screwdriver-wrench"></i>
+				<div class="user-controls">
+					{# Afficher le panier uniquement si on est sur la page boutique #}
+					{% if app.request.get('_route') == 'app_boutique' or app.request.get('_route') == 'app_panier' %}
+						<div class="header-top">
+							<a href="{{ path('app_panier') }}" class="panier-header">
+								Panier
+								{% set totalCount = 0 %}
+								{% for quantite in app.session.get('panier')|default([]) %}
+									{% set totalCount = totalCount + quantite %}
+								{% endfor %}
+								{% if totalCount > 0 %}
+									<span class="panier-count">{{ totalCount }}</span>
+								{% endif %}
+							</a>
+						</div>
+					{% endif %}
+
+					{% if app.user %}
+						{% if is_granted('ROLE_ADMIN') %}
+							<a class="nav-item" href="{{ path('app_admin_dashboard') }}" title="Administration">
+								<i class="fa-solid fa-screwdriver-wrench"></i>
+							</a>
+						{% endif %}
+						<a class="nav-item logout-btn" href="{{ path('app_logout') }}" title="Déconnexion">
+							<i class="fa-solid fa-power-off"></i>
+						</a>
+					{% else %}
+						<a class="nav-item" href="{{ path('app_login') }}" title="Connexion">
+							<i class="fa-solid fa-user"></i>
 						</a>
 					{% endif %}
-					<a class="nav-item logout-btn" href="{{ path('app_logout') }}" title="Déconnexion">
-						<i class="fa-solid fa-power-off"></i>
-					</a>
-				{% else %}
-					<a class="nav-item" href="{{ path('app_login') }}" title="Connexion">
-						<i class="fa-solid fa-user"></i>
-					</a>
-				{% endif %}
-			</nav>
-			{# Afficher le panier uniquement si on est sur la page boutique #}
-			{% if app.request.get('_route') == 'app_boutique' %}
-				<div class="header-top">
-					<a href="{{ path('app_panier') }}" class="panier-header">
-						Panier
-						{% set totalCount = 0 %}
-						{% for quantite in app.session.get('panier')|default([]) %}
-							{% set totalCount = totalCount + quantite %}
-						{% endfor %}
-						{% if totalCount > 0 %}
-							<span class="panier-count">{{ totalCount }}</span>
-						{% endif %}
-					</a>
 				</div>
-			{% endif %}
 		</header>
 		{% block body %}{% endblock %}
 
