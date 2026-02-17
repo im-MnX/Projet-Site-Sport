@@ -47,7 +47,6 @@ class PanierController extends AbstractController
         $panier[$idProduit] = ($panier[$idProduit] ?? 0) + 1;
         $session->set('panier', $panier);
 
-        $this->addFlash('success', $produit->getNomProduit() . ' a été ajouté au panier.');
 
         return $this->redirectToRoute('app_boutique');
     }
