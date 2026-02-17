@@ -1,0 +1,123 @@
+:root {
+    --primary-blue: #0066cc;
+    --dark-blue: #003366;
+    --accent-yellow: #ffcc00;
+}
+
+/* Widen the EasyAdmin content area for better editing */
+.content-wrapper,
+.content,
+.container-fluid,
+.content-header-wrapper,
+.main,
+.content-body,
+.content-panel,
+.content-panel-body,
+.card {
+    max-width: none !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+form[name="Evenement"],
+form[name="evenement"],
+.edit-form,
+.new-form,
+.content-body>form,
+.content-panel,
+.card {
+    max-width: 1400px !important;
+    /* Total parity with public .event-content-section */
+    width: 100% !important;
+    margin: 20px auto !important;
+    background: white;
+    padding: 40px !important;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box !important;
+}
+
+/* Force internal grid columns to take full width of the 1400px container */
+.col-md-8,
+.col-lg-7,
+.col-md-9,
+.col-lg-10,
+.col-xl-7,
+.col-xxl-6,
+.col-sm-12 {
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+    width: 100% !important;
+}
+
+.ck-editor__editable {
+    min-height: 600px;
+}
+
+.ck.ck-editor {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+}
+
+/* Scale down ALL media previews in the editor */
+/* Remove !important block to allow CKEditor alignment classes to work */
+.ck-content .image,
+.ck-content .video,
+.ck-content picture,
+.ck-content img,
+.ck-content .media,
+.ck-content oembed,
+.ck-content iframe {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Sync alignment styles for visual parity in the editor */
+.ck-content .image-style-side {
+    float: right;
+    margin-left: 2.5rem;
+    margin-bottom: 1.5rem;
+    /* Remove max-width constraint to allow 75%/100% sizes */
+}
+
+.ck-content .image-style-align-left,
+.ck-content .image-style-block-align-left {
+    float: left;
+    margin-right: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.ck-content .image-style-align-right,
+.ck-content .image-style-block-align-right {
+    float: right;
+    margin-left: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.ck-content .image-style-align-center,
+.ck-content .image-style-block-align-center {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+/* Ensure resized images fill their figure container in editor */
+.ck-content figure.image img {
+    width: 100% !important;
+}
+
+/* Ensure video aspect ratio is maintained if possible */
+.ck-content .media iframe {
+    width: 100% !important;
+    aspect-ratio: 16/9;
+}
+
+/* Ensure captions are still readable */
+.ck-content figcaption {
+    font-size: 0.85rem;
+    color: #666;
+    text-align: center;
+    margin-top: 8px;
+}

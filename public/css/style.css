@@ -13,7 +13,12 @@
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
   --radius-md: 8px;
+  --radius-md: 8px;
   --transition-fast: 0.2s ease;
+
+  /* Variables imported from boutique.css for cart button */
+  --text-main: #2c3e50;
+  --accent-color: #e74c3c;
 }
 
 body {
@@ -1415,4 +1420,74 @@ h1 {
   .action-cards {
     grid-template-columns: 1fr;
   }
+}
+/* ===================== */
+/* Header Cart Button    */
+/* (Moved from boutique.css) */
+/* ===================== */
+
+.header-top {
+    z-index: 1001 !important;
+}
+
+.panier-header {
+    background-color: var(--white);
+    color: var(--primary-blue);
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+}
+
+.panier-header::before {
+    content: '\f07a';
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 1rem;
+}
+
+.panier-header:hover {
+    background-color: var(--accent-yellow);
+    color: var(--text-main);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.panier-count {
+    background-color: var(--accent-color);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    height: 20px;
+    min-width: 20px;
+    padding: 0 6px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 4px;
+}
+
+@media (max-width: 900px) {
+    .header-top {
+        position: fixed; /* Keep it fixed on mobile so it doesn't disappear */
+        bottom: 20px;
+        right: 20px;
+        top: auto;
+        transform: none;
+        z-index: 2000;
+    }
+
+    .panier-header {
+        padding: 12px 20px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        background-color: var(--accent-yellow);
+        color: var(--text-main);
+    }
 }

@@ -3,9 +3,15 @@
 {% block title %}Événements
 {% endblock %}
 
-{% block body %}
-	<link rel="stylesheet" href="{{ asset('css/actualites.css') }}">
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/actualites.css') }}">
+{% endblock %}
 
+
+
+
+{% block body %}
 	<div class="page-container">
 		<h1>Événements du club</h1>
 		<div class="actualites-container">

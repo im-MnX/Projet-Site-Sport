@@ -30,8 +30,13 @@
 	Événements
 {% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/actualites.css') }}">
+{% endblock %}
+
+
 {% block body %}
-	<link rel="stylesheet" href="{{ asset('css/actualites.css') }}">
 
 	<div class="event-poster-header">
 		<div class="poster-header-container">
