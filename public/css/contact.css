@@ -290,3 +290,132 @@
     height: 100%;
     border: none;
 }
+
+/* ============================================= */
+/* Enhanced contact responsive — max-width: 768px */
+/* ============================================= */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 30px 15px 80px 15px;
+    }
+
+    .header-title {
+        margin-bottom: 30px;
+    }
+
+    .header-title h1 {
+        font-size: 2.2rem;
+    }
+
+    .header-title p {
+        font-size: 1.1rem;
+    }
+
+    .container-grid2 {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .form-left {
+        padding: 25px;
+        border-radius: 16px;
+    }
+
+    .form-left h2 {
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+    }
+
+    .form-right {
+        padding: 25px;
+        border-radius: 16px;
+    }
+
+    .form-right h2 {
+        font-size: 1.5rem;
+        margin-bottom: 25px;
+    }
+
+    .info-item {
+        padding: 15px;
+        margin-bottom: 20px;
+        gap: 15px;
+    }
+
+    .info-item:hover {
+        transform: translateX(5px);
+    }
+
+    .icon-circle {
+        width: 42px;
+        height: 42px;
+    }
+
+    .social-links {
+        padding-left: 0;
+        justify-content: center;
+    }
+
+    .social-link {
+        width: 44px;
+        height: 44px;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+        padding: 14px 16px;
+        font-size: 1rem;
+    }
+
+    .btn-primary {
+        padding: 14px 24px;
+        font-size: 1rem;
+    }
+
+    .contact-map-section {
+        padding: 30px;
+        margin-top: 40px;
+        border-radius: 16px;
+    }
+
+    .contact-map-section h2 {
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+    }
+
+    .contact-map-placeholder {
+        padding-bottom: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-title h1 {
+        font-size: 1.8rem;
+    }
+
+    .header-title p {
+        font-size: 1rem;
+    }
+
+    .form-left,
+    .form-right {
+        padding: 20px;
+    }
+
+    .form-left h2 {
+        font-size: 1.4rem;
+    }
+
+    .form-right h2 {
+        font-size: 1.3rem;
+    }
+
+    .contact-map-section {
+        padding: 20px;
+    }
+
+    .contact-map-placeholder {
+        padding-bottom: 250px;
+    }
+}

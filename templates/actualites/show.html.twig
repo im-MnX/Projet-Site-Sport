@@ -3,9 +3,15 @@
 {% block title %}Actualités
 {% endblock %}
 
-{% block body %}
-	<link rel="stylesheet" href="{{ asset('css/actualites.css') }}">
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/actualites.css') }}">
+{% endblock %}
 
+
+
+
+{% block body %}
 	<div class="actualite-show-container">
         <h2>{{ actualite.titre }}</h2>
         {% if actualite.images %}

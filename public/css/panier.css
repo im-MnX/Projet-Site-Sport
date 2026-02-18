@@ -58,24 +58,54 @@ p.total {
 /* Responsive */
 /* ===================== */
 
-@media (max-width: 992px) {
-    .produits-list {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
 @media (max-width: 768px) {
     .produits-list {
         grid-template-columns: 1fr;
     }
 
-    table,
+    table {
+        width: 95%;
+        font-size: 14px;
+    }
+
     th,
     td {
+        padding: 10px 8px;
         font-size: 14px;
     }
 
     h1 {
         font-size: 1.8rem;
+    }
+
+    p.total {
+        text-align: center;
+        width: 95%;
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    table {
+        width: 100%;
+        border-radius: 8px;
+    }
+
+    th,
+    td {
+        padding: 8px 6px;
+        font-size: 12px;
+    }
+
+    thead {
+        font-size: 12px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    p.total {
+        font-size: 1rem;
     }
 }
