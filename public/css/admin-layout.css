@@ -121,3 +121,54 @@ form[name="evenement"],
     text-align: center;
     margin-top: 8px;
 }
+
+/* ============================================= */
+/* RESPONSIVE ADMIN LAYOUT — max-width: 768px    */
+/* ============================================= */
+@media (max-width: 768px) {
+
+    form[name="Evenement"],
+    form[name="evenement"],
+    .edit-form,
+    .new-form,
+    .content-body>form,
+    .content-panel,
+    .card {
+        padding: 20px !important;
+        margin: 10px auto !important;
+    }
+
+    .ck-editor__editable {
+        min-height: 300px;
+    }
+
+    /* Stack float images on mobile */
+    .ck-content .image-style-side,
+    .ck-content .image-style-align-left,
+    .ck-content .image-style-block-align-left,
+    .ck-content .image-style-align-right,
+    .ck-content .image-style-block-align-right {
+        float: none;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+
+    form[name="Evenement"],
+    form[name="evenement"],
+    .edit-form,
+    .new-form,
+    .content-body>form,
+    .content-panel,
+    .card {
+        padding: 12px !important;
+    }
+
+    .ck-editor__editable {
+        min-height: 200px;
+    }
+}

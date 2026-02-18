@@ -1,5 +1,5 @@
 :root {
-    
+
     --primary-color: #2563eb;
     --primary-hover: #1d4ed8;
     --secondary-color: #64748b;
@@ -15,14 +15,14 @@
     --warning-color: #f59e0b;
     --danger-color: #ef4444;
 
-    
+
     --spacing-xs: 0.25rem;
     --spacing-sm: 0.5rem;
     --spacing-md: 1rem;
     --spacing-lg: 1.5rem;
     --spacing-xl: 2rem;
 
-    
+
     --font-family: 'Inter', system-ui, -apple-system, sans-serif;
     --font-size-base: 1rem;
     --font-size-sm: 0.875rem;
@@ -31,7 +31,7 @@
     --font-weight-medium: 500;
     --font-weight-bold: 600;
 
-    
+
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
@@ -496,5 +496,224 @@ body {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* ============================================= */
+/* ADMIN SIDEBAR TOGGLE (Mobile)                 */
+/* ============================================= */
+.admin-sidebar-toggle {
+    display: none;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 1100;
+    background-color: var(--sidebar-bg);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-sidebar-toggle:hover {
+    background-color: var(--sidebar-hover);
+}
+
+.admin-sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1049;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.admin-sidebar-overlay.active {
+    opacity: 1;
+}
+
+/* ============================================= */
+/* RESPONSIVE ADMIN — max-width: 768px           */
+/* ============================================= */
+@media (max-width: 768px) {
+
+    .admin-sidebar-toggle {
+        display: flex;
+    }
+
+    .admin-sidebar-overlay {
+        display: block;
+        pointer-events: none;
+    }
+
+    .admin-sidebar-overlay.active {
+        pointer-events: auto;
+    }
+
+    /* Sidebar becomes off-canvas drawer */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 260px;
+        height: 100vh;
+        z-index: 1050;
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        flex-direction: column;
+        overflow-y: auto;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    /* Main content goes full width */
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        padding: var(--spacing-md);
+        padding-top: 70px;
+    }
+
+    /* Top bar */
+    .top-bar {
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        gap: var(--spacing-sm);
+    }
+
+    /* User menu */
+    .user-menu {
+        padding: 0.4rem 0.8rem;
+    }
+
+    .user-email {
+        font-size: 0.75rem;
+        max-width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .avatar {
+        width: 28px;
+        height: 28px;
+        font-size: 0.75rem;
+    }
+
+    .user-dropdown {
+        min-width: 240px;
+        right: 0;
+    }
+
+    .dropdown-header {
+        padding: 0.75rem;
+    }
+
+    .dropdown-user-info i {
+        font-size: 1.5rem;
+    }
+
+    .dropdown-item {
+        padding: 0.6rem 0.8rem;
+    }
+
+    /* Cards */
+    .card {
+        padding: var(--spacing-md);
+        margin-bottom: var(--spacing-md);
+    }
+
+    .card-header {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        align-items: flex-start;
+    }
+
+    /* Tables — horizontal scroll */
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table th,
+    .table td {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: var(--font-size-sm);
+        white-space: nowrap;
+    }
+
+    /* Buttons */
+    .btn {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: 0.8rem;
+    }
+
+    .btn-sm {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.7rem;
+    }
+
+    /* Forms */
+    .form-control {
+        padding: 0.4rem 0.6rem;
+        font-size: var(--font-size-sm);
+    }
+
+    /* Alerts */
+    .alert {
+        padding: var(--spacing-sm);
+        font-size: var(--font-size-sm);
+    }
+
+    /* Stock alerts */
+    .stock-alert {
+        padding: 0.65rem 0.8rem;
+        font-size: var(--font-size-sm);
+    }
+
+    .stock-alert i {
+        font-size: 1rem;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+        font-size: 0.75rem;
+    }
+}
+
+/* ============================================= */
+/* RESPONSIVE ADMIN — max-width: 480px           */
+/* ============================================= */
+@media (max-width: 480px) {
+    .main-content {
+        padding: var(--spacing-sm);
+        padding-top: 60px;
+    }
+
+    .card {
+        padding: var(--spacing-sm);
+    }
+
+    .card-title {
+        font-size: var(--font-size-base);
+    }
+
+    .user-email {
+        display: none;
+    }
+
+    .user-dropdown {
+        min-width: 200px;
+        right: -10px;
     }
 }
