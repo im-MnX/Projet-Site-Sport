@@ -14,146 +14,215 @@
 		</div>
 	</div>
 
-	<div
-		class="home-container">
+    <!-- Section: Introduction & News -->
+    <main class="home-main">
+        <!-- Hero Section remains above -->
+        
+        <section class="intro-section container-center">
+            <div class="intro-grid">
+                <!-- Quick Access Grid (3x2) -->
+                <div class="quick-access-grid">
+                    <a href="{{ path('app_about') }}" class="quick-access-item">
+                        <i class="fas fa-child"></i>
+                        <span>Bébé synchro</span>
+                    </a>
+                    <a href="{{ path('app_inscription') }}" class="quick-access-item">
+                        <i class="fas fa-file-signature"></i>
+                        <span>Inscriptions annuelles</span>
+                    </a>
+                    <a href="{{ path('app_evenement') }}" class="quick-access-item">
+                        <i class="fas fa-trophy"></i>
+                        <span>Championnat</span>
+                    </a>
+                    <a href="{{ path('app_evenement') }}" class="quick-access-item">
+                        <i class="fas fa-star"></i>
+                        <span>Gala</span>
+                    </a>
+                    <a href="{{ asset(get_document_path('PLANNING_COURS')|default('PlanningCours/PlanningCours.pdf')) }}" target="_blank" class="quick-access-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Planning des cours</span>
+                    </a>
+                    <a href="{{ asset(get_document_path('PLANNING_COMPETITIONS')|default('PlanningCompetitions/PlanningCompetitions.pdf')) }}" target="_blank" class="quick-access-item">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Planning des compétitions</span>
+                    </a>
+                </div>
 
-		<!-- Section: A la une (Event + Presentation) -->
-		<div class="featured-section">
+                <!-- Event Carousel & Indicators Wrapper -->
+                <div class="carousel-column-wrapper">
+                    <div class="next-event-placeholder carousel-container">
+                    <div class="glass-card next-event-card-modern carousel-wrapper">
+                        {% if upcomingEvents is not empty %}
+                            {% for event in upcomingEvents %}
+                                <div class="event-slide {{ loop.first ? 'active' : '' }}">
+                                    <!-- Left: Info -->
+                                    <div class="event-info-side">
+                                        <div class="card-header-top">
+                                            <span class="badge-accent">Prochain événement</span>
+                                        </div>
+                                        <h3>{{ event.nom }}</h3>
+                                        <div class="event-meta-modern">
+                                            <div class="meta-item">
+                                                <i class="fas fa-calendar-day"></i>
+                                                <span>{{ event.dateEvenement|date('d F Y') }}</span>
+                                            </div>
+                                            <div class="meta-item">
+                                                <i class="fas fa-clock"></i>
+                                                <span>{{ event.horaire|date('H:i') }}</span>
+                                            </div>
+                                        </div>
+                                        <p>{{ event.description ? (event.description|striptags|slice(0, 100) ~ '...')|raw : 'Venez nombreux !' }}</p>
+                                        <a href="{{ path('app_evenement_show', { id: event.id }) }}" class="btn-primary-modern">
+                                            Voir les détails <i class="fas fa-arrow-right"></i>
+                                        </a>
+                                    </div>
 
-			<div class="welcome-text">
-				<h2>Bienvenue au club</h2>
-				<p>
-					Depuis 60 ans,
-					<strong>Angers Nat' Synchro</strong>
-					forme des athlètes passionnés de natation artistique. 
-					Que vous soyez débutant ou compétiteur chevronné, rejoignez une famille dynamique où dépassement de soi rime avec esprit d'équipe.
-				</p>
-				<div class="stats-row">
-					<div class="stat-item">
-						<span class="stat-number">60+</span>
-						<span class="stat-label">Années</span>
-					</div>
-				</div>
-			</div>
+                                    <!-- Right: Poster -->
+                                    <div class="event-poster-side">
+                                        {% if event.images %}
+                                            <img src="{{ asset('uploads/evenements/' ~ event.images) }}" alt="{{ event.nom }}">
+                                        {% else %}
+                                            <div class="placeholder-poster">
+                                                <span>{{ event.nom|slice(0, 1) }}</span>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endfor %}
 
-			<div class="featured-sidebar">
-				<div class="next-event-card">
-					<div class="card-badge">Prochain événement</div>
-					{% if upcomingEvents is not empty %}
-						{% set nextEvent = upcomingEvents[0] %}
-						<h3>{{ nextEvent.nom }}</h3>
-						{% if nextEvent.dateEvenement %}
-							<div class="event-time">
-								<i class="fas fa-calendar-day"></i>
-								<span>{{ nextEvent.dateEvenement|date('d F Y') }}</span>
-							</div>
-							<div class="event-time">
-								<i class="fas fa-clock"></i>
-								<span>{{ nextEvent.horaire|date('H:i') }}</span>
-							</div>
-						{% endif %}
-						<p class="event-desc">{{ nextEvent.description ? nextEvent.description|striptags|slice(0, 150) ~ '...' : 'Venez nombreux !' }}</p>
-						<a href="{{ path('app_evenement_show', { id: nextEvent.id }) }}" class="btn-event-details">
-							Voir les détails
-							<i class="fas fa-arrow-right"></i>
-						</a>
-					{% else %}
-						<h3>Saison à venir</h3>
-						<p class="event-desc">Le calendrier des événements sera bientôt disponible. Restez connectés !</p>
-					{% endif %}
-				</div>
+                            <!-- Indicators (Moved outside wrapper for z-index safety) -->
+                            <!-- Removed from here to place outside -->
 
-				<div class="social-widget">
-					<h3>Suivez-nous</h3>
-					<div class="fb-page-wrapper">
-						<iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fangers.nat.synchro&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&appId" width="100%" height="400" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
-					</div>
-					<a href="https://www.instagram.com/angers_nat_synchro/" target="_blank" class="instagram-btn">
-						<i class="fab fa-instagram"></i>
-						Sur Instagram
-					</a>
-				</div>
-			</div>
+                        {% else %}
+                            <div class="no-event">
+                                <h3>Saison à venir</h3>
+                                <p>Le calendrier des événements sera bientôt disponible.</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
 
-		</div>
+                <!-- Indicators (Moved completely below container) -->
+                {% if upcomingEvents is not empty %}
+                    <div class="carousel-indicators-outside">
+                        {% for event in upcomingEvents %}
+                            <button type="button" class="indicator-dot-outside {{ loop.first ? 'active' : '' }}" data-slide-to="{{ loop.index0 }}"></button>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                </div>
 
-		<!-- Section: Dernières Actualités -->
-		<div class="modern-news-section">
-			<div class="section-header">
-				<h2>Actualités</h2>
-				<div class="header-line"></div>
-			</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const slides = document.querySelectorAll('.event-slide');
+        const dots = document.querySelectorAll('.indicator-dot-outside');
+        
+        if (slides.length > 1) {
+            let currentIndex = 0;
+            
+            function showSlide(index) {
+                // Remove active class from current
+                slides[currentIndex].classList.remove('active');
+                if(dots.length > 0) dots[currentIndex].classList.remove('active');
+                
+                // Update index
+                currentIndex = index;
+                
+                // Add active class to new
+                slides[currentIndex].classList.add('active');
+                if(dots.length > 0) dots[currentIndex].classList.add('active');
+            }
 
-			<div class="modern-grid">
-				{% for news in latestNews %}
-					<article class="modern-card">
-						<div
-							class="card-image-wrapper">
-							<!-- Placeholder ou image réelle si dispo -->
-							<div class="card-placeholder-img">
-								<img src="{{ asset('uploads/actualites/' ~ news.images) }}" alt="{{ news.titre }}" class="actualite-image">
-							</div>
-						</div>
-						<div class="card-body">
-							<span class="card-date">{{ news.date ? news.date|date('d/m/Y') : '' }}</span>
-							<h3 class="card-title">{{ news.titre ?: 'Actualité' }}</h3>
-							<p class="card-excerpt">{{ news.description|striptags|slice(0, 100) ~ '...' }}</p>
-							<a href="{{ path('app_actualites_show', { id: news.idActualite }) }}" class="read-more">Lire la suite
-								<i class="fas fa-arrow-right"></i>
-							</a>
-						</div>
-					</article>
-				{% else %}
-					<p>Aucune actualité disponible</p>
-				{% endfor %}
-			</div>
-		</div>
+            // Auto-advance
+            setInterval(() => {
+                showSlide((currentIndex + 1) % slides.length);
+            }, 8000);
 
-	</div>
+            // Dot interaction
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    showSlide(index);
+                });
+            });
+        }
+    });
+</script>
+            </div>
+        </section>
 
-	<div class="partners-section">
-		<div class="home-container" style="padding-bottom: 0;">
-			<div class="section-header">
-				<h2>Nos partenaires</h2>
-				<div class="header-line"></div>
-			</div>
+        <!-- Social Banner -->
+        <section class="social-banner-modern">
+            <div class="container-center banner-flex">
+                <div class="social-content-text">
+                    <h3>Restez connectés</h3>
+                    <p>Suivez nos dernières actualités et moments forts sur les réseaux sociaux.</p>
+                </div>
+                <div class="social-links-modern">
+                    <a href="https://www.facebook.com/angers.nat.synchro" target="_blank" class="social-btn-modern fb">
+                        <i class="fab fa-facebook-f"></i>
+                        Facebook
+                    </a>
+                    <a href="https://www.instagram.com/angers_nat_synchro/" target="_blank" class="social-btn-modern ig">
+                        <i class="fab fa-instagram"></i>
+                        Instagram
+                    </a>
+                </div>
+            </div>
+        </section>
 
-			{% if partenaires is defined and partenaires|length > 0 %}
-				{% if partenaires|length < 6 %}
-					{# Static Display for few partners #}
-					<div class="partners-static">
-						{% for partenaire in partenaires %}
-							<div class="partner-slide">
-								<a href="{{ partenaire.lienPartenaire }}" target="_blank" title="{{ partenaire.nomPartenaire }}">
-									<img src="{{ asset('logos/' ~ partenaire.logoPartenaire) }}" alt="{{ partenaire.nomPartenaire }}">
-								</a>
-							</div>
-						{% endfor %}
-					</div>
-				{% else %}
-					<div class="partners-carousel">
-						<div class="partners-track">
-							{% for partenaire in partenaires %}
-								<div class="partner-slide">
-									<a href="{{ partenaire.lienPartenaire }}" target="_blank" title="{{ partenaire.nomPartenaire }}">
-										<img src="{{ asset('logos/' ~ partenaire.logoPartenaire) }}" alt="{{ partenaire.nomPartenaire }}">
-									</a>
-								</div>
-							{% endfor %}
+        <!-- News Section -->
+        <section class="news-section-modern container-center">
+            <div class="section-title">
+                <h2>Actualités</h2>
+                <a href="{{ path('app_actualites') }}" class="view-all">Voir tout <i class="fas fa-chevron-right"></i></a>
+            </div>
+            
+            <div class="news-grid-modern">
+                {% for news in latestNews %}
+                    <article class="news-card-modern">
+                        <div class="news-img-container">
+                            <img src="{{ asset('uploads/actualites/' ~ news.images) }}" alt="{{ news.titre }}">
+                            <div class="news-date-badge">
+                                {{ news.date ? news.date|date('d M') : '' }}
+                            </div>
+                        </div>
+                        <div class="news-body-modern">
+                            <h3>{{ news.titre ?: 'Actualité' }}</h3>
+                            <p>{{ (news.description|striptags|slice(0, 80) ~ '...')|raw }}</p>
+                            <a href="{{ path('app_actualites_show', { id: news.idActualite }) }}" class="btn-text">
+                                Lire la suite <i class="fas fa-long-arrow-alt-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                {% else %}
+                    <p class="empty-msg">Aucune actualité disponible pour le moment.</p>
+                {% endfor %}
+            </div>
+        </section>
 
-							{% for partenaire in partenaires %}
-								<div class="partner-slide">
-									<a href="{{ partenaire.lienPartenaire }}" target="_blank" title="{{ partenaire.nomPartenaire }}">
-										<img src="{{ asset('logos/' ~ partenaire.logoPartenaire) }}" alt="{{ partenaire.nomPartenaire }}">
-									</a>
-								</div>
-							{% endfor %}
-						</div>
-					</div>
-				{% endif %}
-			{% else %}
-				<p style="text-align: center; color: #999; font-style: italic;">Nos partenaires apparaîtront ici prochainement.</p>
-			{% endif %}
-		</div>
-	</div>
+        <!-- Partners Section -->
+        <section class="partners-section-modern">
+            <div class="container-center">
+                <div class="section-title text-center">
+                    <h2>Ils nous font confiance</h2>
+                </div>
+                
+                {% if partenaires is defined and partenaires|length > 0 %}
+                    <div class="partners-slider-wrapper">
+                        <div class="partners-track-modern">
+                            {% for i in 1..2 %} {# Duplicate for infinite scroll effect #}
+                                {% for partenaire in partenaires %}
+                                    <div class="partner-item">
+                                        <a href="{{ partenaire.lienPartenaire }}" target="_blank">
+                                            <img src="{{ asset('logos/' ~ partenaire.logoPartenaire) }}" alt="{{ partenaire.nomPartenaire }}">
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </section>
+    </main>
 {% endblock %}

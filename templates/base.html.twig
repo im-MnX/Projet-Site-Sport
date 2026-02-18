@@ -20,71 +20,71 @@
 		{% endblock %}
 	</head>
 	<body>
-		<header class="navbar">
-			<nav class="nav-menu" role="navigation" aria-label="Main navigation">
-				<div class="nav-left">
-					<div class="nav-item dropdown" data-dropdown>
-						<button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+		<header class="site-header">
+			<nav class="site-nav" role="navigation" aria-label="Main navigation">
+				<div class="nav-group-left">
+					<div class="site-dropdown" data-dropdown>
+						<button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
 							Le Club
-							<i class="fas fa-chevron-down chevron"></i>
+							<i class="fas fa-chevron-down site-chevron"></i>
 						</button>
-						<div class="dropdown-menu" role="menu">
-							<a class="dropdown-item" href="{{ path('app_about') }}">Présentations du club</a>
-							<a class="dropdown-item" href="{{ path('app_evenement') }}">Événements</a>
-							<a class="dropdown-item" href="{{ path('app_actualites') }}">Actualités</a>
-							<a class="dropdown-item" href="{{ asset(get_document_path('PLANNING_COURS')|default('PlanningCours/PlanningCours.pdf')) }}" target="_blank">Planning des cours</a>
-							<a class="dropdown-item" href="{{ asset(get_document_path('PLANNING_COMPETITIONS')|default('PlanningCompetitions/PlanningCompetitions.pdf')) }}" target="_blank">Planning des compétitions</a>
-							<a class="dropdown-item" href="{{ path('app_resultats') }}">Résultats</a>
+						<div class="nav-dropdown-card" role="menu">
+							<a class="nav-dropdown-link" href="{{ path('app_about') }}">Présentations du club</a>
+							<a class="nav-dropdown-link" href="{{ path('app_evenement') }}">Événements</a>
+							<a class="nav-dropdown-link" href="{{ path('app_actualites') }}">Actualités</a>
+							<a class="nav-dropdown-link" href="{{ asset(get_document_path('PLANNING_COURS')|default('PlanningCours/PlanningCours.pdf')) }}" target="_blank">Planning des cours</a>
+							<a class="nav-dropdown-link" href="{{ asset(get_document_path('PLANNING_COMPETITIONS')|default('PlanningCompetitions/PlanningCompetitions.pdf')) }}" target="_blank">Planning des compétitions</a>
+							<a class="nav-dropdown-link" href="{{ path('app_resultats') }}">Résultats</a>
 						</div>
 					</div>
 
-					<div class="nav-item dropdown" data-dropdown>
-						<button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+					<div class="site-dropdown" data-dropdown>
+						<button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
 							Inscriptions
-							<i class="fas fa-chevron-down chevron"></i>
+							<i class="fas fa-chevron-down site-chevron"></i>
 						</button>
-						<div class="dropdown-menu" role="menu">
-							<a class="dropdown-item" href="{{ path('app_inscription') }}">Inscriptions annuelles</a>
-							<a class="dropdown-item" href="#">Inscriptions aux événements</a>
+						<div class="nav-dropdown-card" role="menu">
+							<a class="nav-dropdown-link" href="{{ path('app_inscription') }}">Inscriptions annuelles</a>
+							<a class="nav-dropdown-link" href="#">Inscriptions aux événements</a>
 						</div>
 					</div>
 				</div>
 
-				<a href="{{ path('home') }}"><img src="{{ asset('images/Logo_60ans.png') }}" alt="logo" class="logo"></a>
+				<a href="{{ path('home') }}"><img src="{{ asset('images/Logo_60ans.png') }}" alt="logo" class="site-logo"></a>
 
-				<div class="nav-right">
-					<div class="nav-links">
-						<a class="nav-item" href="{{ path('album_show') }}">Galerie</a>
-						<a class="nav-item" href="{{ path('app_boutique') }}">Boutique</a>
+				<div class="nav-group-right">
+					<div class="nav-link-group">
+						<a class="nav-link-item" href="{{ path('album_show') }}">Galerie</a>
+						<a class="nav-link-item" href="{{ path('app_boutique') }}">Boutique</a>
 					</div>
 				</div>
 
 				{% if app.user %}
 					{% if is_granted('ROLE_ADMIN') %}
-						<a class="nav-item" href="{{ path('app_admin_dashboard') }}" title="Administration">
+						<a class="nav-link-item" href="{{ path('app_admin_dashboard') }}" title="Administration">
 							<i class="fa-solid fa-screwdriver-wrench"></i>
 						</a>
 					{% endif %}
-					<a class="nav-item logout-btn" href="{{ path('app_logout') }}" title="Déconnexion">
+					<a class="nav-link-item site-logout-btn" href="{{ path('app_logout') }}" title="Déconnexion">
 						<i class="fa-solid fa-power-off"></i>
 					</a>
 				{% else %}
-					<a class="nav-item" href="{{ path('app_login') }}" title="Connexion">
+					<a class="nav-link-item" href="{{ path('app_login') }}" title="Connexion">
 						<i class="fa-solid fa-user"></i>
 					</a>
 				{% endif %}
 			</nav>
 			{# Afficher le panier uniquement si on est sur la page boutique #}
 			{% if app.request.get('_route') == 'app_boutique' %}
-				<div class="header-top">
-					<a href="{{ path('app_panier') }}" class="panier-header">
+				<div class="header-utility-top">
+					<a href="{{ path('app_panier') }}" class="panier-indicator">
 						Panier
 						{% set totalCount = 0 %}
 						{% for quantite in app.session.get('panier')|default([]) %}
 							{% set totalCount = totalCount + quantite %}
 						{% endfor %}
 						{% if totalCount > 0 %}
-							<span class="panier-count">{{ totalCount }}</span>
+							<span class="panier-badge">{{ totalCount }}</span>
 						{% endif %}
 					</a>
 				</div>

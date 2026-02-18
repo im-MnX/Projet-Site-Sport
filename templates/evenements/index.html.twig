@@ -22,7 +22,7 @@
 					<div class="card-body">
 						<span class="card-date">{{ item.dateEvenement ? item.dateEvenement|date('d/m/Y') : '' }}</span>
 						<h3 class="card-title">{{ item.nom }}</h3>
-						<p class="card-excerpt">{{ item.description|striptags|slice(0, 100) ~ '...' }}</p>
+						<p class="card-excerpt">{{ (item.description|striptags|slice(0, 100) ~ '...')|raw }}</p>
 						<a href="{{ path('app_evenement_show', { id: item.idEvenement }) }}" class="read-more">Lire la suite
 							<i class="fas fa-arrow-right"></i>
 						</a>
