@@ -1,0 +1,87 @@
+{% extends 'admin_base.html.twig' %}
+{% block title %}Accueil — Administration{% endblock %}
+{% block page_title %}Accueil{% endblock %}
+
+{% block body %}
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">Cases de la page d'accueil ({{ quick_accesses|length }}/6)</h2>
+        {% if quick_accesses|length < 6 %}
+            <a href="{{ path('app_admin_quick_access_new') }}" class="btn btn-primary">
+                <i class="fa-solid fa-plus"></i> Nouvelle case
+            </a>
+        {% endif %}
+    </div>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success" style="margin: 1rem; padding: 0.75rem 1rem; background: #d1fae5; color: #065f46; border-radius: 8px;">
+            <i class="fa-solid fa-circle-check"></i> {{ message }}
+        </div>
+    {% endfor %}
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Titre</th>
+                    <th>Icône</th>
+                    <th>Lien / Document</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for qa in quick_accesses %}
+                <tr>
+                    <td style="color: var(--text-muted);">{{ qa.position ?? loop.index }}</td>
+                    <td style="font-weight: 500;">{{ qa.titre }}</td>
+                    <td>
+                        <i class="{{ qa.icone }}" style="font-size: 1.2rem; margin-right: 0.4rem;"></i>
+                        <code style="font-size: 0.75rem; color: var(--text-muted);">{{ qa.icone }}</code>
+                    </td>
+                    <td style="color: var(--text-muted); font-size: 0.875rem;">
+                        {% if qa.document %}
+                            <i class="fa-solid fa-file-pdf"></i> {{ qa.document.titre }}
+                        {% elseif qa.lien %}
+                            <i class="fa-solid fa-link"></i> {{ qa.lien }}
+                        {% else %}
+                            <span style="color: #f59e0b;"><i class="fa-solid fa-triangle-exclamation"></i> Aucun lien</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <a href="{{ path('app_admin_quick_access_edit', {'id': qa.id}) }}" class="btn btn-sm btn-warning">
+                                <i class="fa-solid fa-pen"></i>
+                            </a>
+                            <form method="post" action="{{ path('app_admin_quick_access_delete', {'id': qa.id}) }}"
+                                  onsubmit="return confirm('Supprimer cette case ?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ qa.id) }}">
+                                <button class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5" style="text-align: center; padding: 2rem;">
+                        <div style="color: var(--text-muted); margin-bottom: 1rem;">
+                            <i class="fa-solid fa-grid-2" style="font-size: 2rem;"></i>
+                            <p style="margin-top: 0.5rem;">Aucune case configurée</p>
+                        </div>
+                        <a href="{{ path('app_admin_quick_access_new') }}" class="btn btn-primary">
+                            <i class="fa-solid fa-plus"></i> Créer les cases
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div style="padding: 1rem; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid var(--border-color);">
+        <i class="fa-solid fa-circle-info"></i>
+        Les cases sont affichées dans l'ordre de leur position sur la page d'accueil.
+        Une icône doit être une classe Font Awesome valide (ex : <code>fas fa-calendar-alt</code>).
+    </div>
+</div>
+{% endblock %}

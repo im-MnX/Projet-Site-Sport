@@ -149,6 +149,9 @@
                 <a href="{{ path('app_admin_document_index') }}" class="nav-link {% if 'admin_document' in app.request.get('_route') %}active{% endif %}">
                     <i class="fa-solid fa-file-invoice"></i> Documents
                 </a>
+                <a href="{{ path('app_admin_quick_access_index') }}" class="nav-link {% if 'admin_quick_access' in app.request.get('_route') %}active{% endif %}">
+                    <i class="fa-solid fa-house"></i> Accueil
+                </a>
             </nav>
         </div>
 

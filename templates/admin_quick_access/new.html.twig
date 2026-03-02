@@ -1,0 +1,17 @@
+{% extends 'admin_base.html.twig' %}
+{% block title %}Ajouter une case — Accueil{% endblock %}
+{% block page_title %}Accueil{% endblock %}
+
+{% block body %}
+<div class="card" style="max-width: 700px;">
+    <div class="card-header">
+        <h2 class="card-title">Créer une case</h2>
+        <a href="{{ path('app_admin_quick_access_index') }}" class="btn btn-secondary">
+            <i class="fa-solid fa-arrow-left"></i> Retour
+        </a>
+    </div>
+    <div style="padding: 1.5rem;">
+        {% include 'admin_quick_access/_form.html.twig' %}
+    </div>
+</div>
+{% endblock %}

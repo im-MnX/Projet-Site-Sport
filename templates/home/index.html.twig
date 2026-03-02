@@ -20,32 +20,36 @@
         
         <section class="intro-section container-center">
             <div class="intro-grid">
-                <!-- Quick Access Grid (3x2) -->
+                <!-- Quick Access Grid (3x2) — données dynamiques -->
                 <div class="quick-access-grid">
-                    <a href="{{ path('app_about') }}" class="quick-access-item">
-                        <i class="fas fa-child"></i>
-                        <span>Bébé synchro</span>
-                    </a>
-                    <a href="{{ path('app_inscription') }}" class="quick-access-item">
-                        <i class="fas fa-file-signature"></i>
-                        <span>Inscriptions annuelles</span>
-                    </a>
-                    <a href="{{ path('app_evenement') }}" class="quick-access-item">
-                        <i class="fas fa-trophy"></i>
-                        <span>Championnat</span>
-                    </a>
-                    <a href="{{ path('app_evenement') }}" class="quick-access-item">
-                        <i class="fas fa-star"></i>
-                        <span>Gala</span>
-                    </a>
-                    <a href="{{ asset(get_document_path('PLANNING_COURS')|default('PlanningCours/PlanningCours.pdf')) }}" target="_blank" class="quick-access-item">
-                        <i class="fas fa-calendar-alt"></i>
-                        <span>Planning des cours</span>
-                    </a>
-                    <a href="{{ asset(get_document_path('PLANNING_COMPETITIONS')|default('PlanningCompetitions/PlanningCompetitions.pdf')) }}" target="_blank" class="quick-access-item">
-                        <i class="fas fa-calendar-check"></i>
-                        <span>Planning des compétitions</span>
-                    </a>
+                        {% for qa in quickAccesses %}
+                            {% if qa.document %}
+                                {# Lien vers un document géré en BDD #}
+                                <a href="{{ asset(qa.document.filename) }}"
+                                   target="_blank" class="quick-access-item">
+                                    <i class="{{ qa.icone }}"></i>
+                                    <span>{{ qa.titre }}</span>
+                                </a>
+                            {% elseif qa.lien starts with 'http' %}
+                                {# Lien externe #}
+                                <a href="{{ qa.lien }}" target="_blank" class="quick-access-item">
+                                    <i class="{{ qa.icone }}"></i>
+                                    <span>{{ qa.titre }}</span>
+                                </a>
+                            {% elseif qa.lien %}
+                                {# Lien interne (chemin ou route) #}
+                                <a href="{{ qa.lien }}" class="quick-access-item">
+                                    <i class="{{ qa.icone }}"></i>
+                                    <span>{{ qa.titre }}</span>
+                                </a>
+                            {% else %}
+                                {# Aucun lien configuré #}
+                                <a href="#" class="quick-access-item">
+                                    <i class="{{ qa.icone }}"></i>
+                                    <span>{{ qa.titre }}</span>
+                                </a>
+                            {% endif %}
+                        {% endfor %}
                 </div>
 
                 <!-- Event Carousel & Indicators Wrapper -->
