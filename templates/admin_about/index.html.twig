@@ -1,0 +1,44 @@
+{% extends 'admin_base.html.twig' %}
+{% block title %}Gestion de la Présentation{% endblock %}
+{% block page_title %}Présentation du club{% endblock %}
+{% block body %}
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">Sections de la page Présentation</h2>
+        <a href="{{ path('app_admin_about_new') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Nouvelle section</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr><th>Titre</th><th>Contenu</th><th>Actions</th></tr>
+            </thead>
+            <tbody>
+            {% for about in abouts %}
+                <tr>
+                    <td>
+                        <div style="font-weight: 500;">{{ about.titre }}</div>
+                    </td>
+                    <td style="color: var(--text-muted);">{{ about.contenu|striptags|slice(0, 80) }}...</td>
+                    <td>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <a href="{{ path('app_admin_about_show', {'id': about.idAbout}) }}" class="btn btn-sm btn-info"><i class="fa-solid fa-eye"></i></a>
+                            <a href="{{ path('app_admin_about_edit', {'id': about.idAbout}) }}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3" style="text-align: center; padding: 2rem;">
+                        <div style="color: var(--text-muted); margin-bottom: 1rem;">
+                            <i class="fa-regular fa-file-lines" style="font-size: 2rem;"></i>
+                            <p style="margin-top: 0.5rem;">Aucune section trouvée</p>
+                        </div>
+                        <a href="{{ path('app_admin_about_new') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Créer une section</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
