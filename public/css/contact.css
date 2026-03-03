@@ -291,9 +291,6 @@
     border: none;
 }
 
-/* ============================================= */
-/* Enhanced contact responsive — max-width: 768px */
-/* ============================================= */
 @media (max-width: 768px) {
     .main-content {
         padding: 30px 15px 80px 15px;

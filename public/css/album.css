@@ -15,7 +15,6 @@ body {
     overflow-x: hidden;
 }
 
-
 .gallery-nav-sticky {
     position: sticky;
     top: 0;
@@ -372,7 +371,6 @@ body {
         max-width: calc(50% - 5px);
     }
 
-    /* Lightbox mobile adjustments */
     .lightbox-image-wrapper img {
         max-width: 95vw;
         max-height: 80vh;

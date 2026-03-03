@@ -1,178 +1,216 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Galerie Photos - NatSynchro{% endblock %}
+{% block title %}Galerie Photos - NatSynchro
+{% endblock %}
 
 {% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/album.css') }}?v={{ 'now'|date('U') }}">
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/album.css') }}?v={{ 'now'|date('U') }}">
 {% endblock %}
 
 {% block body %}
-    {% if album is null %}
-        <div class="empty-state-wrapper">
-            <div class="empty-card">
-                <i class="far fa-images icon-large"></i>
-                <h2>La galerie est vide</h2>
-                <p>Nos souvenirs seront bientôt disponibles ici.</p>
-                <a href="{{ path('home') }}" class="btn-back">Retour à l'accueil</a>
-            </div>
-        </div>
-    {% else %}
-        <!-- Top Navigation Bar (Sticky) -->
-        <nav class="gallery-nav-sticky">
-            <!-- Row 1: Title / Brand (Handles Logo Clearance) -->
-            <div class="nav-title-row">
-                <div class="nav-brand">GALERIE</div>
-            </div>
+	{% if album is null %}
+		<div class="empty-state-wrapper">
+			<div class="empty-card">
+				<i class="far fa-images icon-large"></i>
+				<h2>La galerie est vide</h2>
+				<p>Nos souvenirs seront bientôt disponibles ici.</p>
+				<a href="{{ path('home') }}" class="btn-back">Retour à l'accueil</a>
+			</div>
+		</div>
+	{% else %}
+		<!-- Top Navigation Bar (Sticky) -->
+		<nav
+			class="gallery-nav-sticky">
+			<!-- Row 1: Title / Brand (Handles Logo Clearance) -->
+			<div class="nav-title-row">
+				<div class="nav-brand">GALERIE</div>
+			</div>
 
-            <!-- Row 2: Scrollable Categories -->
-            <div class="nav-categories-row">
-                <div class="nav-scroll-wrapper">
-                    {% for categorie in categories %}
-                        {% if albumsByCategorie[categorie.idCategorieAlbum] is not empty %}
-                            <div class="nav-group-inline">
-                                <span class="nav-group-label">{{ categorie.libelleCategorieAlbum }}</span>
-                                {% for a in albumsByCategorie[categorie.idCategorieAlbum] %}
-                                    <a href="{{ path('album_show', {'idAlbum': a.idAlbum}) }}" 
-                                       class="nav-chip {% if a.idAlbum == album.idAlbum %}active{% endif %}"
-                                       title="{{ a.description }}">
-                                        {{ a.description }}
-                                    </a>
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            </div>
-        </nav>
+			<!-- Row 2: Scrollable Categories -->
+			<div class="nav-categories-row">
+				<div class="nav-scroll-wrapper">
+					{% for categorie in categories %}
+						{% if albumsByCategorie[categorie.idCategorieAlbum] is not empty %}
+							<div class="nav-group-inline">
+								<span class="nav-group-label">{{ categorie.libelleCategorieAlbum }}</span>
+								{% for a in albumsByCategorie[categorie.idCategorieAlbum] %}
+									{% if a.archive != 1 %}
+										<a href="{{ path('album_show', {'idAlbum': a.idAlbum}) }}" class="nav-chip {% if a.idAlbum == album.idAlbum %}active{% endif %}" title="{{ a.description }}">
+											{{ a.description }}
+										</a>
+									{% endif %}
+								{% endfor %}
+							</div>
+						{% endif %}
+					{% endfor %}
+				</div>
+			</div>
+		</nav>
 
-        <!-- Main Content Area -->
-        <main class="gallery-main-full">
-            <header class="album-hero">
-                <div class="hero-content">
-                    <h1>{{ album.description }}</h1>
-                    <div class="album-details">
-                        <span class="photo-count"><i class="far fa-image"></i> {{ photos|length }} photos</span>
-                        {% for categorie in categories %}
-                            {% if albumsByCategorie[categorie.idCategorieAlbum]|filter(a => a.idAlbum == album.idAlbum)|length > 0 %}
-                                <span class="category-tag">{{ categorie.libelleCategorieAlbum }}</span>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                </div>
-            </header>
+		<!-- Main Content Area -->
+		<main class="gallery-main-full">
+			<header class="album-hero">
+				<div class="hero-content">
+					<h1>{{ album.description }}</h1>
+					<div class="album-details">
+						<span class="photo-count">
+							<i class="far fa-image"></i>
+							{{ photos|length }}
+							photos</span>
+						{% for categorie in categories %}
+							{% if albumsByCategorie[categorie.idCategorieAlbum]|filter(a => a.idAlbum == album.idAlbum)|length > 0 %}
+								<span class="category-tag">{{ categorie.libelleCategorieAlbum }}</span>
+							{% endif %}
+						{% endfor %}
+					</div>
+				</div>
+			</header>
 
-            {% if photos is not empty %}
-                <div class="masonry-full-width">
-                    {% for photo in photos %}
-                        <div class="photo-card" data-src="{{ asset('photos/album_' ~ album.idAlbum ~ '/' ~ photo.cheminImage) }}">
-                            <div class="image-container">
-                                <img src="{{ asset('photos/album_' ~ album.idAlbum ~ '/' ~ photo.cheminImage) }}" 
-                                     alt="Photo" 
-                                     loading="lazy">
-                                <div class="overlay">
-                                    <i class="fas fa-expand-alt"></i>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            {% else %}
-                <div class="empty-album-state">
-                    <i class="far fa-folder-open"></i>
-                    <p>Cet album ne contient pas encore de photos.</p>
-                </div>
-            {% endif %}
-        </main>
+			{% if photos is not empty %}
+				<div class="masonry-full-width">
+					{% for photo in photos %}
+						<div class="photo-card" data-src="{{ asset('photos/album_' ~ album.idAlbum ~ '/' ~ photo.cheminImage) }}">
+							<div class="image-container">
+								<img src="{{ asset('photos/album_' ~ album.idAlbum ~ '/' ~ photo.cheminImage) }}" alt="Photo" loading="lazy">
+								<div class="overlay">
+									<i class="fas fa-expand-alt"></i>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			{% else %}
+				<div class="empty-album-state">
+					<i class="far fa-folder-open"></i>
+					<p>Cet album ne contient pas encore de photos.</p>
+				</div>
+			{% endif %}
+		</main>
 
-        <!-- Fullscreen Lightbox -->
-        <div id="lightbox" class="lightbox-modal" aria-hidden="true">
-            <button class="close-btn" aria-label="Fermer"><i class="fas fa-times"></i></button>
-            <button class="nav-btn prev" aria-label="Précédent"><i class="fas fa-chevron-left"></i></button>
-            <button class="nav-btn next" aria-label="Suivant"><i class="fas fa-chevron-right"></i></button>
-            
-            <div class="lightbox-image-wrapper">
-                <img src="" alt="Zoom" id="lightbox-img">
-            </div>
-        </div>
-    {% endif %}
+		<!-- Fullscreen Lightbox -->
+		<div id="lightbox" class="lightbox-modal" aria-hidden="true">
+			<button class="close-btn" aria-label="Fermer">
+				<i class="fas fa-times"></i>
+			</button>
+			<button class="nav-btn prev" aria-label="Précédent">
+				<i class="fas fa-chevron-left"></i>
+			</button>
+			<button class="nav-btn next" aria-label="Suivant">
+				<i class="fas fa-chevron-right"></i>
+			</button>
 
-    <script>
-        const initLightbox = () => {
-            const lightbox = document.getElementById('lightbox');
-            if (!lightbox) return;
+			<div class="lightbox-image-wrapper">
+				<img src="" alt="Zoom" id="lightbox-img">
+			</div>
+		</div>
+	{% endif %}
 
-            // Remove existing listeners to avoid duplicates if re-initialized
-            // Actually, declaring the function inside the event listener or checking for a flag is better.
-            // But since Turbo replaces the body, the script tag is re-executed and old elements are gone.
-            // So fresh initialization is fine.
+	<script>
+		const initLightbox = () => {
+const lightbox = document.getElementById('lightbox');
+if (! lightbox) 
+return;
 
-            const img = document.getElementById('lightbox-img');
-            const items = Array.from(document.querySelectorAll('.photo-card'));
-            let currentIndex = 0;
 
-            const openLightbox = (index) => {
-                if (!items[index]) return;
-                const src = items[index].dataset.src;
-                img.src = src;
-                currentIndex = index;
-                lightbox.classList.add('visible');
-                lightbox.setAttribute('aria-hidden', 'false');
-                document.body.style.overflow = 'hidden';
-            };
 
-            const closeLightbox = () => {
-                lightbox.classList.remove('visible');
-                lightbox.setAttribute('aria-hidden', 'true');
-                document.body.style.overflow = '';
-            };
+// Remove existing listeners to avoid duplicates if re-initialized
+// Actually, declaring the function inside the event listener or checking for a flag is better.
+// But since Turbo replaces the body, the script tag is re-executed and old elements are gone.
+// So fresh initialization is fine.
 
-            const grid = document.querySelector('.masonry-full-width');
-            if (grid) {
-                // Use a named function for the event listener causing issues? No, fresh elements.
-                grid.addEventListener('click', (e) => {
-                    const card = e.target.closest('.photo-card');
-                    if (card) {
-                        const index = items.indexOf(card);
-                        if (index !== -1) {
-                            openLightbox(index);
-                        }
-                    }
-                });
-            }
+const img = document.getElementById('lightbox-img');
+const items = Array.from(document.querySelectorAll('.photo-card'));
+let currentIndex = 0;
 
-            // Navigation buttons - use checks to avoid errors if elements missing
-            const closeBtn = lightbox.querySelector('.close-btn');
-            if(closeBtn) closeBtn.addEventListener('click', closeLightbox);
-            
-            const prevBtn = lightbox.querySelector('.prev');
-            if(prevBtn) prevBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const newIndex = (currentIndex - 1 + items.length) % items.length;
-                openLightbox(newIndex); 
-            });
+const openLightbox = (index) => {
+if (! items[index]) 
+return;
 
-            const nextBtn = lightbox.querySelector('.next');
-            if(nextBtn) nextBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const newIndex = (currentIndex + 1) % items.length;
-                openLightbox(newIndex);
-            });
 
-            lightbox.addEventListener('click', (e) => {
-                if (e.target === lightbox) closeLightbox();
-            });
+const src = items[index].dataset.src;
+img.src = src;
+currentIndex = index;
+lightbox.classList.add('visible');
+lightbox.setAttribute('aria-hidden', 'false');
+document.body.style.overflow = 'hidden';
+};
 
-            document.addEventListener('keydown', (e) => {
-                if (!lightbox.classList.contains('visible')) return;
-                if (e.key === 'Escape') closeLightbox();
-                if (e.key === 'ArrowLeft') prevBtn && prevBtn.click();
-                if (e.key === 'ArrowRight') nextBtn && nextBtn.click();
-            });
-        };
+const closeLightbox = () => {
+lightbox.classList.remove('visible');
+lightbox.setAttribute('aria-hidden', 'true');
+document.body.style.overflow = '';
+};
 
-        // Run on initial load and Turbo navigation
-        document.addEventListener('turbo:load', initLightbox);
-        document.addEventListener('DOMContentLoaded', initLightbox);
-    </script>
+const grid = document.querySelector('.masonry-full-width');
+if (grid) { // Use a named function for the event listener causing issues? No, fresh elements.
+grid.addEventListener('click', (e) => {
+const card = e.target.closest('.photo-card');
+if (card) {
+const index = items.indexOf(card);
+if (index !== -1) {
+openLightbox(index);
+}
+}
+});
+}
+
+// Navigation buttons - use checks to avoid errors if elements missing
+const closeBtn = lightbox.querySelector('.close-btn');
+if (closeBtn) 
+closeBtn.addEventListener('click', closeLightbox);
+
+
+
+const prevBtn = lightbox.querySelector('.prev');
+if (prevBtn) 
+prevBtn.addEventListener('click', (e) => {
+e.stopPropagation();
+const newIndex = (currentIndex - 1 + items.length) % items.length;
+openLightbox(newIndex);
+});
+
+
+
+const nextBtn = lightbox.querySelector('.next');
+if (nextBtn) 
+nextBtn.addEventListener('click', (e) => {
+e.stopPropagation();
+const newIndex = (currentIndex + 1) % items.length;
+openLightbox(newIndex);
+});
+
+
+
+lightbox.addEventListener('click', (e) => {
+if (e.target === lightbox) 
+closeLightbox();
+
+
+});
+
+document.addEventListener('keydown', (e) => {
+if (! lightbox.classList.contains('visible')) 
+return;
+
+
+if (e.key === 'Escape') 
+closeLightbox();
+
+
+if (e.key === 'ArrowLeft') 
+prevBtn && prevBtn.click();
+
+
+if (e.key === 'ArrowRight') 
+nextBtn && nextBtn.click();
+
+
+});
+};
+
+// Run on initial load and Turbo navigation
+document.addEventListener('turbo:load', initLightbox);
+document.addEventListener('DOMContentLoaded', initLightbox);
+	</script>
 {% endblock %}

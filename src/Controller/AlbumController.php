@@ -17,19 +17,19 @@ class AlbumController extends AbstractController
         $albumRepo = $doctrine->getRepository(Album::class);
         $categorieRepo = $doctrine->getRepository(CategorieAlbum::class);
 
-        // If no ID provided or album not found, get the first available album
         if ($idAlbum === null) {
-            $album = $albumRepo->findOneBy([], ['idAlbum' => 'ASC']);
+            $album = $albumRepo->findOneBy(['archive' => 0], ['idAlbum' => 'ASC']);
         } else {
             $album = $albumRepo->find($idAlbum);
+            if ($album && $album->isArchive()) {
+                $album = $albumRepo->findOneBy(['archive' => 0], ['idAlbum' => 'ASC']);
+            }
         }
 
-        // If still no album found, get the first one
         if (!$album) {
-            $album = $albumRepo->findOneBy([], ['idAlbum' => 'ASC']);
+            $album = $albumRepo->findOneBy(['archive' => 0], ['idAlbum' => 'ASC']);
         }
 
-        // If there are no albums at all, show empty state
         if (!$album) {
             return $this->render('album/album.html.twig', [
                 'album' => null,
