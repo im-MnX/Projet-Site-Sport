@@ -1,0 +1,46 @@
+{% extends 'admin_base.html.twig' %}
+{% block title %}Détails - Page Inscription{% endblock %}
+{% block page_title %}Détails de la Page Inscription{% endblock %}
+{% block breadcrumb %}<span>Administration</span> / <a href="{{ path('app_admin_inscription_index') }}">Inscription</a> / <span>Détails</span>{% endblock %}
+{% block body %}
+<div class="card" style="max-width: 900px; margin: 0 auto;">
+    <div class="card-header">
+        <h2 class="card-title">Contenu de la page Inscription</h2>
+        <div style="display: flex; gap: 0.5rem;">
+            <a href="{{ path('app_admin_inscription_index') }}" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Retour</a>
+            <a href="{{ path('app_admin_inscription_edit', {'id': inscription.id}) }}" class="btn btn-warning"><i class="fa-solid fa-pen"></i> Modifier</a>
+            {{ include('admin_inscription/_delete_form.html.twig') }}
+        </div>
+    </div>
+    <div style="padding: 1.5rem;">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th style="width: 30%;">Permanences</th>
+                    <td>{{ inscription.permanencesTexte|raw }}</td>
+                </tr>
+                <tr>
+                    <th>Lien HelloAsso</th>
+                    <td><a href="{{ inscription.lienHelloasso }}" target="_blank">{{ inscription.lienHelloasso }}</a></td>
+                </tr>
+                <tr>
+                    <th>Nom du contact</th>
+                    <td>{{ inscription.contactNom }}</td>
+                </tr>
+                <tr>
+                    <th>Email du secrétariat</th>
+                    <td><a href="mailto:{{ inscription.contactEmail }}">{{ inscription.contactEmail }}</a></td>
+                </tr>
+                <tr>
+                    <th>Texte d'intro contact</th>
+                    <td>{{ inscription.contactTexte }}</td>
+                </tr>
+                <tr>
+                    <th>Photo du contact</th>
+                    <td>{{ inscription.contactPhoto }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
