@@ -1,0 +1,13 @@
+{% extends 'admin_base.html.twig' %}
+{% block title %}Nouveau Contenu Inscription{% endblock %}
+{% block page_title %}Nouveau Contenu Inscription{% endblock %}
+{% block breadcrumb %}<span>Administration</span> / <a href="{{ path('app_admin_inscription_index') }}">Inscription</a> / <span>Nouveau</span>{% endblock %}
+{% block body %}
+<div class="card" style="max-width: 900px; margin: 0 auto;">
+    <div class="card-header">
+        <h2 class="card-title">Créer le contenu de la page inscription</h2>
+        <a href="{{ path('app_admin_inscription_index') }}" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Retour</a>
+    </div>
+    {{ include('admin_inscription/_form.html.twig') }}
+</div>
+{% endblock %}
