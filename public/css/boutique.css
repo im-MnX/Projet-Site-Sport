@@ -251,7 +251,9 @@ body {
         font-size: 1.6rem;
     }
 
-    .product-image-wrapper {
-        padding-top: 80%;
-    }
+
+.product-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
 }

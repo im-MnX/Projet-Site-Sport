@@ -49,16 +49,8 @@
                         <td style="font-size: 1.25rem; font-weight: 600; color: var(--primary-color);">{{ produit.prix }} €</td>
                     </tr>
                     <tr>
-                        <th>Stock</th>
-                        <td>
-                            {% if produit.stock > 10 %}
-                                <span class="badge" style="background-color: var(--success-color); color: white; padding: 0.25rem 0.5rem; border-radius: 0.25rem;">{{ produit.stock }} en stock</span>
-                            {% elseif produit.stock > 0 %}
-                                <span class="badge" style="background-color: var(--warning-color); color: white; padding: 0.25rem 0.5rem; border-radius: 0.25rem;">{{ produit.stock }} restants</span>
-                            {% else %}
-                                <span class="badge" style="background-color: var(--danger-color); color: white; padding: 0.25rem 0.5rem; border-radius: 0.25rem;">Rupture</span>
-                            {% endif %}
-                        </td>
+                        <th>Lien Boutique</th>
+                        <td><a href="{{ produit.lien }}" target="_blank">{{ produit.lien }}</a></td>
                     </tr>
                     <tr>
                         <th>Description</th>

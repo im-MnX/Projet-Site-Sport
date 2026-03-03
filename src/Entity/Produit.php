@@ -23,8 +23,8 @@ class Produit
     #[ORM\Column(name: "prix", type: "decimal", precision: 10, scale: 2)]
     private ?string $prix = null; // string pour decimal
 
-    #[ORM\Column(name: "stock", type: "integer")]
-    private ?int $stock = null;
+    #[ORM\Column(name: "lien", type: "string", length: 255)]
+    private ?string $lien = "https://www.helloasso.com/associations/angers-nat-synchro";
 
     #[ORM\Column(name: "image", type: "string", length: 255, nullable: true)]
     private ?string $image = null;
@@ -36,8 +36,8 @@ class Produit
     public function setDescription(?string $description): static { $this->description = $description; return $this; }
     public function getPrix(): ?string { return $this->prix; }
     public function setPrix(string $prix): static { $this->prix = $prix; return $this; }
-    public function getStock(): ?int { return $this->stock; }
-    public function setStock(int $stock): static { $this->stock = $stock; return $this; }
+    public function getLien(): ?string { return $this->lien; }
+    public function setLien(string $lien): static { $this->lien = $lien; return $this; }
     public function getImage(): ?string { return $this->image; }
     public function setImage(?string $image): static { $this->image = $image; return $this; }
 }

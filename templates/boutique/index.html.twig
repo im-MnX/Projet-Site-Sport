@@ -13,29 +13,28 @@
 
     <div class="boutique-grid">
         {% for produit in produits %}
-            <article class="product-card">
-                <div class="product-image-wrapper">
-                    {% if produit.image %}
-                        <img src="{{ asset('uploads/produits/' ~ produit.image) }}" alt="{{ produit.nomProduit }}">
-                    {% else %}
-                        <div class="product-placeholder">
-                            <i class="fas fa-shopping-bag"></i>
-                        </div>
-                    {% endif %}
-                </div>
-                
-                <div class="product-info">
-                    <h2 class="product-title">{{ produit.nomProduit }}</h2>
-                    <p class="product-desc">{{ produit.description }}</p>
-                    
-                    <div class="product-footer">
-                        <span class="product-price">{{ produit.prix|number_format(2, ',', ' ') }} €</span>
-                        <a href="{{ path('app_panier_ajouter', {'id': produit.idProduit}) }}" class="btn-cart" title="Ajouter au panier">
-                            <i class="fas fa-plus"></i>
-                        </a>
+            <a href="{{ produit.lien }}" class="product-card-link" target="_blank">
+                <article class="product-card">
+                    <div class="product-image-wrapper">
+                        {% if produit.image %}
+                            <img src="{{ asset('uploads/produits/' ~ produit.image) }}" alt="{{ produit.nomProduit }}">
+                        {% else %}
+                            <div class="product-placeholder">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                        {% endif %}
                     </div>
-                </div>
-            </article>
+                    
+                    <div class="product-info">
+                        <h2 class="product-title">{{ produit.nomProduit }}</h2>
+                        <p class="product-desc">{{ produit.description }}</p>
+                        
+                        <div class="product-footer">
+                            <span class="product-price">{{ produit.prix|number_format(2, ',', ' ') }} €</span>
+                        </div>
+                    </div>
+                </article>
+            </a>
         {% else %}
             <div class="empty-shop" style="grid-column: 1 / -1;">
                 <i class="fas fa-store-slash" style="font-size: 3rem; margin-bottom: 20px; color: #ccc;"></i>

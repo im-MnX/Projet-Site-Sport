@@ -23,24 +23,10 @@
 						<th>Image</th>
 						<th>Nom</th>
 						<th>Prix</th>
-						<th>Stock</th>
 						<th>Actions</th>
 					</tr>
 				</thead>
-				<div class="low-stock-alerts">
-					{% for produit in produits %}
-						{% if produit.stock <= 5 %}
-							<div class="stock-alert">
-								<i class="fa-solid fa-triangle-exclamation"></i>
-								<span class="alert-text">
-									<strong>{{ produit.nomProduit }}</strong>
-									- Stock faible ({{ produit.stock }}
-									restant{{ produit.stock > 1 ? 's' : '' }})
-								</span>
-							</div>
-						{% endif %}
-					{% endfor %}
-				</div>
+
 				<tbody>
 					{% for produit in produits %}
 						<tr>
@@ -57,19 +43,12 @@
 							</td>
 							<td style="font-weight: 600;">{{ produit.prix }}
 								€</td>
-							<td>
-								{% if produit.stock > 10 %}
-									<span style="color: var(--success-color); font-weight: 500;">{{ produit.stock }}
-										en stock</span>
-								{% elseif produit.stock > 0 %}
-									<span style="color: var(--warning-color); font-weight: 500;">{{ produit.stock }}
-										restant{{ produit.stock > 1 ? 's' : '' }}</span>
-								{% else %}
-									<span style="color: var(--danger-color); font-weight: 500;">Rupture</span>
-								{% endif %}
-							</td>
+
 							<td>
 								<div style="display: flex; gap: 0.5rem;">
+									<a href="{{ produit.lien }}" class="btn btn-sm btn-outline-primary" title="Lien Boutique" target="_blank">
+										<i class="fa-solid fa-link"></i>
+									</a>
 									<a href="{{ path('app_admin_produit_show', {'idProduit': produit.idProduit}) }}" class="btn btn-sm btn-info" title="Voir details">
 										<i class="fa-solid fa-eye"></i>
 									</a>

@@ -75,21 +75,6 @@
 					</a>
 				{% endif %}
 			</nav>
-			{# Afficher le panier uniquement si on est sur la page boutique ou panier #}
-			{% if app.request.get('_route') == 'app_boutique' or app.request.get('_route') == 'app_panier' %}
-				<div class="header-utility-top">
-					<a href="{{ path('app_panier') }}" class="panier-indicator">
-						Panier
-						{% set totalCount = 0 %}
-						{% for quantite in app.session.get('panier')|default([]) %}
-							{% set totalCount = totalCount + quantite %}
-						{% endfor %}
-						{% if totalCount > 0 %}
-							<span class="panier-badge">{{ totalCount }}</span>
-						{% endif %}
-					</a>
-				</div>
-			{% endif %}
 
 		</header>
 		{% block body %}{% endblock %}
