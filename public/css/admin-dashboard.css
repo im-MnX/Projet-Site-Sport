@@ -4,7 +4,6 @@
     margin: 0 auto;
 }
 
-/* Welcome Banner */
 .welcome-banner {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-radius: 20px;
@@ -56,7 +55,6 @@
     font-weight: 600;
 }
 
-/* Dashboard Grid */
 .dashboard-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -82,7 +80,6 @@
     }
 }
 
-/* Modern Cards */
 .modern-card {
     position: relative;
     background: white;
@@ -161,7 +158,6 @@
     transform: translateX(4px);
 }
 
-/* Gradient Variants */
 .gradient-blue {
     --gradient-start: #3b82f6;
     --gradient-end: #2563eb;
@@ -214,9 +210,6 @@
 
 }
 
-/* ============================================= */
-/* Enhanced mobile responsive for admin dashboard */
-/* ============================================= */
 @media (max-width: 768px) {
     .admin-dashboard-modern {
         padding: 1rem;

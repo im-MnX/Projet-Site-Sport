@@ -24,6 +24,17 @@
 		<header class="site-header">
 			<nav class="site-nav" role="navigation" aria-label="Main navigation">
 				<div class="nav-group-left">
+									<div class="nav-social-group">
+						<a class="nav-social-btn nav-social-fb" href="https://www.facebook.com/angers.nat.synchro" target="_blank" title="Facebook" aria-label="Facebook">
+							<i class="fab fa-facebook-f"></i>
+						</a>
+						<a class="nav-social-btn nav-social-ig" href="https://www.instagram.com/angers_nat_synchro/" target="_blank" title="Instagram" aria-label="Instagram">
+							<i class="fab fa-instagram"></i>
+						</a>
+						<a class="nav-social-btn nav-social-tt" href="https://www.tiktok.com/@angersnatsynchro" target="_blank" title="TikTok" aria-label="TikTok">
+							<i class="bi bi-tiktok"></i>
+						</a>
+					</div>
 					<div class="site-dropdown" data-dropdown>
 						<button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
 							Le Club
@@ -49,6 +60,7 @@
 							<a class="nav-dropdown-link" href="#">Inscriptions aux événements</a>
 						</div>
 					</div>
+
 				</div>
 
 				<a href="{{ path('home') }}"><img src="{{ asset('images/Logo_60ans.png') }}" alt="logo" class="site-logo"></a>
@@ -75,6 +87,21 @@
 					</a>
 				{% endif %}
 			</nav>
+			{# Afficher le panier uniquement si on est sur la page boutique ou panier #}
+			{% if app.request.get('_route') == 'app_boutique' or app.request.get('_route') == 'app_panier' %}
+				<div class="header-utility-top">
+					<a href="{{ path('app_panier') }}" class="panier-header">
+						Panier
+						{% set totalCount = 0 %}
+						{% for quantite in app.session.get('panier')|default([]) %}
+							{% set totalCount = totalCount + quantite %}
+						{% endfor %}
+						{% if totalCount > 0 %}
+							<span class="panier-badge">{{ totalCount }}</span>
+						{% endif %}
+					</a>
+				</div>
+			{% endif %}
 
 		</header>
 		{% block body %}{% endblock %}

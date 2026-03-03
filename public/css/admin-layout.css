@@ -4,7 +4,6 @@
     --accent-yellow: #ffcc00;
 }
 
-/* Widen the EasyAdmin content area for better editing */
 .content-wrapper,
 .content,
 .container-fluid,
@@ -28,7 +27,6 @@ form[name="evenement"],
 .content-panel,
 .card {
     max-width: 1400px !important;
-    /* Total parity with public .event-content-section */
     width: 100% !important;
     margin: 20px auto !important;
     background: white;
@@ -38,7 +36,6 @@ form[name="evenement"],
     box-sizing: border-box !important;
 }
 
-/* Force internal grid columns to take full width of the 1400px container */
 .col-md-8,
 .col-lg-7,
 .col-md-9,
@@ -61,8 +58,6 @@ form[name="evenement"],
     margin: 0 auto !important;
 }
 
-/* Scale down ALL media previews in the editor */
-/* Remove !important block to allow CKEditor alignment classes to work */
 .ck-content .image,
 .ck-content .video,
 .ck-content picture,
@@ -74,12 +69,11 @@ form[name="evenement"],
     height: auto;
 }
 
-/* Sync alignment styles for visual parity in the editor */
 .ck-content .image-style-side {
     float: right;
     margin-left: 2.5rem;
     margin-bottom: 1.5rem;
-    /* Remove max-width constraint to allow 75%/100% sizes */
+    
 }
 
 .ck-content .image-style-align-left,
@@ -103,18 +97,15 @@ form[name="evenement"],
     display: block;
 }
 
-/* Ensure resized images fill their figure container in editor */
 .ck-content figure.image img {
     width: 100% !important;
 }
 
-/* Ensure video aspect ratio is maintained if possible */
 .ck-content .media iframe {
     width: 100% !important;
     aspect-ratio: 16/9;
 }
 
-/* Ensure captions are still readable */
 .ck-content figcaption {
     font-size: 0.85rem;
     color: #666;
@@ -122,9 +113,6 @@ form[name="evenement"],
     margin-top: 8px;
 }
 
-/* ============================================= */
-/* RESPONSIVE ADMIN LAYOUT — max-width: 768px    */
-/* ============================================= */
 @media (max-width: 768px) {
 
     form[name="Evenement"],

@@ -14,219 +14,209 @@
 		</div>
 	</div>
 
-    <!-- Section: Introduction & News -->
-    <main class="home-main">
-        <!-- Hero Section remains above -->
-        
-        <section class="intro-section container-center">
-            <div class="intro-grid">
-                <!-- Quick Access Grid (3x2) — données dynamiques -->
-                <div class="quick-access-grid">
-                        {% for qa in quickAccesses %}
-                            {% if qa.document %}
-                                {# Lien vers un document géré en BDD #}
-                                <a href="{{ asset(qa.document.filename) }}"
-                                   target="_blank" class="quick-access-item">
-                                    <i class="{{ qa.icone }}"></i>
-                                    <span>{{ qa.titre }}</span>
-                                </a>
-                            {% elseif qa.lien starts with 'http' %}
-                                {# Lien externe #}
-                                <a href="{{ qa.lien }}" target="_blank" class="quick-access-item">
-                                    <i class="{{ qa.icone }}"></i>
-                                    <span>{{ qa.titre }}</span>
-                                </a>
-                            {% elseif qa.lien %}
-                                {# Lien interne (chemin ou route) #}
-                                <a href="{{ qa.lien }}" class="quick-access-item">
-                                    <i class="{{ qa.icone }}"></i>
-                                    <span>{{ qa.titre }}</span>
-                                </a>
-                            {% else %}
-                                {# Aucun lien configuré #}
-                                <a href="#" class="quick-access-item">
-                                    <i class="{{ qa.icone }}"></i>
-                                    <span>{{ qa.titre }}</span>
-                                </a>
-                            {% endif %}
-                        {% endfor %}
-                </div>
+	<!-- Section: Introduction & News -->
+	<main
+		class="home-main">
+		<!-- Hero Section remains above -->
 
-                <!-- Event Carousel & Indicators Wrapper -->
-                <div class="carousel-column-wrapper">
-                    <div class="next-event-placeholder carousel-container">
-                    <div class="glass-card next-event-card-modern carousel-wrapper">
-                        {% if upcomingEvents is not empty %}
-                            {% for event in upcomingEvents %}
-                                <div class="event-slide {{ loop.first ? 'active' : '' }}">
-                                    <!-- Left: Info -->
-                                    <div class="event-info-side">
-                                        <div class="card-header-top">
-                                            <span class="badge-accent">Prochain événement</span>
-                                        </div>
-                                        <h3>{{ event.nom }}</h3>
-                                        <div class="event-meta-modern">
-                                            <div class="meta-item">
-                                                <i class="fas fa-calendar-day"></i>
-                                                <span>{{ event.dateEvenement|date('d F Y') }}</span>
-                                            </div>
-                                            <div class="meta-item">
-                                                <i class="fas fa-clock"></i>
-                                                <span>{{ event.horaire|date('H:i') }}</span>
-                                            </div>
-                                        </div>
-                                        <p>{{ event.description ? (event.description|striptags|slice(0, 100) ~ '...')|raw : 'Venez nombreux !' }}</p>
-                                        <a href="{{ path('app_evenement_show', { id: event.id }) }}" class="btn-primary-modern">
-                                            Voir les détails <i class="fas fa-arrow-right"></i>
-                                        </a>
-                                    </div>
+		<section class="intro-section container-center">
+			<div
+				class="intro-grid">
+				<!-- Quick Access Grid (3x2) — données dynamiques -->
+				<div class="quick-access-grid">
+					{% for qa in quickAccesses %}
+						{% if qa.document %}
+							{# Lien vers un document géré en BDD #}
+							<a href="{{ asset(qa.document.filename) }}" target="_blank" class="quick-access-item">
+								<i class="{{ qa.icone }}"></i>
+								<span>{{ qa.titre }}</span>
+							</a>
+						{% elseif qa.lien starts with 'http' %}
+							{# Lien externe #}
+							<a href="{{ qa.lien }}" target="_blank" class="quick-access-item">
+								<i class="{{ qa.icone }}"></i>
+								<span>{{ qa.titre }}</span>
+							</a>
+						{% elseif qa.lien %}
+							{# Lien interne (chemin ou route) #}
+							<a href="{{ qa.lien }}" class="quick-access-item">
+								<i class="{{ qa.icone }}"></i>
+								<span>{{ qa.titre }}</span>
+							</a>
+						{% else %}
+							{# Aucun lien configuré #}
+							<a href="#" class="quick-access-item">
+								<i class="{{ qa.icone }}"></i>
+								<span>{{ qa.titre }}</span>
+							</a>
+						{% endif %}
+					{% endfor %}
+				</div>
 
-                                    <!-- Right: Poster -->
-                                    <div class="event-poster-side">
-                                        {% if event.images %}
-                                            <img src="{{ asset('uploads/evenements/' ~ event.images) }}" alt="{{ event.nom }}">
-                                        {% else %}
-                                            <div class="placeholder-poster">
-                                                <span>{{ event.nom|slice(0, 1) }}</span>
-                                            </div>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            {% endfor %}
+				<!-- Event Carousel & Indicators Wrapper -->
+				<div class="carousel-column-wrapper">
+					<div class="next-event-placeholder carousel-container">
+						<div class="glass-card next-event-card-modern carousel-wrapper">
+							{% if upcomingEvents is not empty %}
+								{% for event in upcomingEvents %}
+									<div
+										class="event-slide {{ loop.first ? 'active' : '' }}">
+										<!-- Left: Info -->
+										<div class="event-info-side">
+											<div class="card-header-top">
+												<span class="badge-accent">Prochain événement</span>
+											</div>
+											<h3>{{ event.nom }}</h3>
+											<div class="event-meta-modern">
+												<div class="meta-item">
+													<i class="fas fa-calendar-day"></i>
+													<span>{{ event.dateEvenement|date('d F Y') }}</span>
+												</div>
+												<div class="meta-item">
+													<i class="fas fa-clock"></i>
+													<span>{{ event.horaire|date('H:i') }}</span>
+												</div>
+											</div>
+											<p>{{ event.description ? (event.description|striptags|slice(0, 100) ~ '...')|raw : 'Venez nombreux !' }}</p>
+											<a href="{{ path('app_evenement_show', { id: event.id }) }}" class="btn-primary-modern">
+												Voir les détails
+												<i class="fas fa-arrow-right"></i>
+											</a>
+										</div>
 
-                            <!-- Indicators (Moved outside wrapper for z-index safety) -->
-                            <!-- Removed from here to place outside -->
+										<!-- Right: Poster -->
+										<div class="event-poster-side">
+											{% if event.images %}
+												<img src="{{ asset('uploads/evenements/' ~ event.images) }}" alt="{{ event.nom }}">
+											{% else %}
+												<div class="placeholder-poster">
+													<span>{{ event.nom|slice(0, 1) }}</span>
+												</div>
+											{% endif %}
+										</div>
+									</div>
+								{% endfor %}
 
-                        {% else %}
-                            <div class="no-event">
-                                <h3>Saison à venir</h3>
-                                <p>Le calendrier des événements sera bientôt disponible.</p>
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
+								<!-- Indicators (Moved outside wrapper for z-index safety) -->
+								<!-- Removed from here to place outside -->
 
-                <!-- Indicators (Moved completely below container) -->
-                {% if upcomingEvents is not empty %}
-                    <div class="carousel-indicators-outside">
-                        {% for event in upcomingEvents %}
-                            <button type="button" class="indicator-dot-outside {{ loop.first ? 'active' : '' }}" data-slide-to="{{ loop.index0 }}"></button>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-                </div>
+							{% else %}
+								<div class="no-event">
+									<h3>Saison à venir</h3>
+									<p>Le calendrier des événements sera bientôt disponible.</p>
+								</div>
+							{% endif %}
+						</div>
+					</div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const slides = document.querySelectorAll('.event-slide');
-        const dots = document.querySelectorAll('.indicator-dot-outside');
-        
-        if (slides.length > 1) {
-            let currentIndex = 0;
-            
-            function showSlide(index) {
-                // Remove active class from current
-                slides[currentIndex].classList.remove('active');
-                if(dots.length > 0) dots[currentIndex].classList.remove('active');
-                
-                // Update index
-                currentIndex = index;
-                
-                // Add active class to new
-                slides[currentIndex].classList.add('active');
-                if(dots.length > 0) dots[currentIndex].classList.add('active');
-            }
+					<!-- Indicators (Moved completely below container) -->
+					{% if upcomingEvents is not empty %}
+						<div class="carousel-indicators-outside">
+							{% for event in upcomingEvents %}
+								<button type="button" class="indicator-dot-outside {{ loop.first ? 'active' : '' }}" data-slide-to="{{ loop.index0 }}"></button>
+							{% endfor %}
+						</div>
+					{% endif %}
+				</div>
 
-            // Auto-advance
-            setInterval(() => {
-                showSlide((currentIndex + 1) % slides.length);
-            }, 8000);
+				<script>
+					document.addEventListener('DOMContentLoaded', function () {
+const slides = document.querySelectorAll('.event-slide');
+const dots = document.querySelectorAll('.indicator-dot-outside');
 
-            // Dot interaction
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    showSlide(index);
-                });
-            });
-        }
-    });
-</script>
-            </div>
-        </section>
+if (slides.length > 1) {
+let currentIndex = 0;
 
-        <!-- Social Banner -->
-        <section class="social-banner-modern">
-            <div class="container-center banner-flex">
-                <div class="social-content-text">
-                    <h3>Restez connectés</h3>
-                    <p>Suivez nos dernières actualités et moments forts sur les réseaux sociaux.</p>
-                </div>
-                <div class="social-links-modern">
-                    <a href="https://www.facebook.com/angers.nat.synchro" target="_blank" class="social-btn-modern fb">
-                        <i class="fab fa-facebook-f"></i>
-                        Facebook
-                    </a>
-                    <a href="https://www.instagram.com/angers_nat_synchro/" target="_blank" class="social-btn-modern ig">
-                        <i class="fab fa-instagram"></i>
-                        Instagram
-                    </a>
-                </div>
-            </div>
-        </section>
+function showSlide(index) { // Remove active class from current
+slides[currentIndex].classList.remove('active');
+if (dots.length > 0) 
+dots[currentIndex].classList.remove('active');
 
-        <!-- News Section -->
-        <section class="news-section-modern container-center">
-            <div class="section-title">
-                <h2>Actualités</h2>
-                <a href="{{ path('app_actualites') }}" class="view-all">Voir tout <i class="fas fa-chevron-right"></i></a>
-            </div>
-            
-            <div class="news-grid-modern">
-                {% for news in latestNews %}
-                    <article class="news-card-modern">
-                        <div class="news-img-container">
-                            <img src="{{ asset('uploads/actualites/' ~ news.images) }}" alt="{{ news.titre }}">
-                            <div class="news-date-badge">
-                                {{ news.date ? news.date|date('d M') : '' }}
-                            </div>
-                        </div>
-                        <div class="news-body-modern">
-                            <h3>{{ news.titre ?: 'Actualité' }}</h3>
-                            <p>{{ (news.description|striptags|slice(0, 80) ~ '...')|raw }}</p>
-                            <a href="{{ path('app_actualites_show', { id: news.idActualite }) }}" class="btn-text">
-                                Lire la suite <i class="fas fa-long-arrow-alt-right"></i>
-                            </a>
-                        </div>
-                    </article>
-                {% else %}
-                    <p class="empty-msg">Aucune actualité disponible pour le moment.</p>
-                {% endfor %}
-            </div>
-        </section>
 
-        <!-- Partners Section -->
-        <section class="partners-section-modern">
-            <div class="container-center">
-                <div class="section-title text-center">
-                    <h2>Ils nous font confiance</h2>
-                </div>
-                
-                {% if partenaires is defined and partenaires|length > 0 %}
-                    <div class="partners-slider-wrapper">
-                        <div class="partners-track-modern">
-                            {% for i in 1..2 %} {# Duplicate for infinite scroll effect #}
-                                {% for partenaire in partenaires %}
-                                    <div class="partner-item">
-                                        <a href="{{ partenaire.lienPartenaire }}" target="_blank">
-                                            <img src="{{ asset('logos/' ~ partenaire.logoPartenaire) }}" alt="{{ partenaire.nomPartenaire }}">
-                                        </a>
-                                    </div>
-                                {% endfor %}
-                            {% endfor %}
-                        </div>
-                    </div>
-                {% endif %}
-            </div>
-        </section>
-    </main>
+// Update index
+currentIndex = index;
+
+// Add active class to new
+slides[currentIndex].classList.add('active');
+if (dots.length > 0) 
+dots[currentIndex].classList.add('active');
+
+}
+
+// Auto-advance
+setInterval(() => {
+showSlide((currentIndex + 1) % slides.length);
+}, 8000);
+
+// Dot interaction
+dots.forEach((dot, index) => {
+dot.addEventListener('click', () => {
+showSlide(index);
+});
+});
+}
+});
+				</script>
+			</div>
+		</section>
+
+		<!-- News Section -->
+		<section class="news-section-modern container-center">
+			<div class="section-title">
+				<h2>Actualités</h2>
+				<a href="{{ path('app_actualites') }}" class="view-all">Voir tout
+					<i class="fas fa-chevron-right"></i>
+				</a>
+			</div>
+
+			<div class="news-grid-modern">
+				{% for news in latestNews %}
+					<article class="news-card-modern">
+						<div class="news-img-container">
+							<img src="{{ asset('uploads/actualites/' ~ news.images) }}" alt="{{ news.titre }}">
+							<div class="news-date-badge">
+								{{ news.date ? news.date|date('d M') : '' }}
+							</div>
+						</div>
+						<div class="news-body-modern">
+							<h3>{{ news.titre ?: 'Actualité' }}</h3>
+							<p>{{ (news.description|striptags|slice(0, 80) ~ '...')|raw }}</p>
+							<a href="{{ path('app_actualites_show', { id: news.idActualite }) }}" class="btn-text">
+								Lire la suite
+								<i class="fas fa-long-arrow-alt-right"></i>
+							</a>
+						</div>
+					</article>
+				{% else %}
+					<p class="empty-msg">Aucune actualité disponible pour le moment.</p>
+				{% endfor %}
+			</div>
+		</section>
+
+		<!-- Partners Section -->
+		<section class="partners-section-modern">
+			<div class="container-center">
+				<div class="section-title text-center">
+					<h2>Ils nous font confiance</h2>
+				</div>
+
+				{% if partenaires is defined and partenaires|length > 0 %}
+					<div class="partners-slider-wrapper">
+						<div class="partners-track-modern">
+							{% for i in 1..2 %}
+								{# Duplicate for infinite scroll effect #}
+								{% for partenaire in partenaires %}
+									<div class="partner-item">
+										<a href="{{ partenaire.lienPartenaire }}" target="_blank">
+											<img src="{{ asset('logos/' ~ partenaire.logoPartenaire) }}" alt="{{ partenaire.nomPartenaire }}">
+										</a>
+									</div>
+								{% endfor %}
+							{% endfor %}
+						</div>
+					</div>
+				{% endif %}
+			</div>
+		</section>
+	</main>
 {% endblock %}
