@@ -20,28 +20,29 @@
 		</div>
 	{% else %}
 		<!-- Top Navigation Bar (Sticky) -->
-		<nav
-			class="gallery-nav-sticky">
-			<!-- Row 1: Title / Brand (Handles Logo Clearance) -->
-			<div class="nav-title-row">
-				<div class="nav-brand">GALERIE</div>
-			</div>
-
-			<!-- Row 2: Scrollable Categories -->
-			<div class="nav-categories-row">
-				<div class="nav-scroll-wrapper">
+		<nav class="gallery-nav-sticky">
+			<div class="gallery-nav-bar">
+				<div class="gallery-nav-brand">GALERIE</div>
+				<div class="gallery-nav-dropdowns">
 					{% for categorie in categories %}
-						{% if albumsByCategorie[categorie.idCategorieAlbum] is not empty %}
-							<div class="nav-group-inline">
-								<span class="nav-group-label">{{ categorie.libelleCategorieAlbum }}</span>
-								{% for a in albumsByCategorie[categorie.idCategorieAlbum] %}
-									{% if a.archive != 1 %}
-										<a href="{{ path('album_show', {'idAlbum': a.idAlbum}) }}" class="nav-chip {% if a.idAlbum == album.idAlbum %}active{% endif %}" title="{{ a.description }}">
-											{{ a.description }}
-										</a>
-									{% endif %}
-								{% endfor %}
-							</div>
+						{% if albumsByCategorie[categorie.idCategorieAlbum] is defined %}
+							{% set visibleAlbums = albumsByCategorie[categorie.idCategorieAlbum]|filter(a => a.archive != 1) %}
+							{% if visibleAlbums is not empty %}
+								<div class="gallery-cat-dropdown">
+									<button class="gallery-cat-btn {% for a in visibleAlbums %}{% if a.idAlbum == album.idAlbum %}active{% endif %}{% endfor %}">
+										{{ categorie.libelleCategorieAlbum }}
+										<i class="fas fa-chevron-down gallery-cat-chevron"></i>
+									</button>
+									<div class="gallery-cat-panel">
+										{% for a in visibleAlbums %}
+											<a href="{{ path('album_show', {'idAlbum': a.idAlbum}) }}"
+											   class="gallery-cat-link {% if a.idAlbum == album.idAlbum %}active{% endif %}">
+												{{ a.description }}
+											</a>
+										{% endfor %}
+									</div>
+								</div>
+							{% endif %}
 						{% endif %}
 					{% endfor %}
 				</div>
