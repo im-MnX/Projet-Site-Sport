@@ -19,20 +19,30 @@
                     <tr>
                         <th>Description</th>
                         <th>Priorité</th>
-                        <th>Archivé</th>
+                        <th>Statut</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                 {% for album in albums %}
                     <tr>
-                        <td style="font-weight: 500;">{{ album.description }}</td>
-                        <td>{{ album.priorite }}</td>
+                        <td>
+                            <div style="font-weight: 600; color: var(--text-color);">{{ album.description }}</div>
+                        </td>
+                        <td>
+                            <span class="badge" style="background-color: #f1f5f9; color: var(--text-muted); border: 1px solid var(--border-color);">
+                                <i class="fa-solid fa-arrow-up-9-1"></i> {{ album.priorite }}
+                            </span>
+                        </td>
                         <td>
                             {% if album.archive %}
-                                <span style="background-color: var(--secondary-color); color: white; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.75rem;">Archivé</span>
+                                <span class="badge" style="background-color: #fee2e2; color: #991b1b; border: 1px solid #fecaca; padding: 0.4rem 0.8rem;">
+                                    <i class="fa-solid fa-box-archive"></i> Archivé
+                                </span>
                             {% else %}
-                                <span style="background-color: var(--success-color); color: white; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.75rem;">Actif</span>
+                                <span class="badge" style="background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0; padding: 0.4rem 0.8rem;">
+                                    <i class="fa-solid fa-circle-check"></i> Actif
+                                </span>
                             {% endif %}
                         </td>
                         <td>

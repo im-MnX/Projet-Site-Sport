@@ -10,28 +10,52 @@
     <div class="table-responsive">
         <table class="table">
             <thead>
-                <tr><th>Image</th><th>Nom</th><th>Date</th><th>Horaire</th><th>Actions</th></tr>
+                <tr>
+                    <th>Image</th>
+                    <th>Nom</th>
+                    <th>Type</th>
+                    <th>Date</th>
+                    <th>Horaire</th>
+                    <th>Actions</th>
+                </tr>
             </thead>
             <tbody>
             {% for evenement in evenements %}
                 <tr>
                     <td style="width: 80px;">
                         {% if evenement.images %}
-                            <img src="{{ asset('uploads/evenements/' ~ evenement.images) }}" alt="{{ evenement.nom }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
+                            <img src="{{ asset('uploads/evenements/' ~ evenement.images) }}" alt="{{ evenement.nom }}" style="width: 55px; height: 55px; object-fit: cover; border-radius: 10px; border: 1px solid var(--border-color);">
                         {% else %}
-                            <span class="badge bg-secondary">No Image</span>
+                            <span class="badge bg-secondary" style="font-size: 0.7rem; opacity: 0.7;">Aucune</span>
                         {% endif %}
                     </td>
                     <td>
-                        <div style="font-weight: 500;">{{ evenement.nom }}</div>
-                        <small style="color: var(--text-muted);">{{ evenement.description|slice(0, 50) }}...</small>
+                        <div style="font-weight: 600; color: var(--text-color);">{{ evenement.nom }}</div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted); max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                            {{ evenement.description|striptags }}
+                        </div>
                     </td>
-                    <td style="color: var(--text-muted);">{{ evenement.dateEvenement ? evenement.dateEvenement|date('d/m/Y') : '-' }}</td>
-                    <td style="color: var(--text-muted);">{{ evenement.horaire ? evenement.horaire|date('H:i') : '-' }}</td>
+                    <td>
+                        {% if evenement.typeEvenement %}
+                            <span class="badge" style="background-color: var(--bg-pale); color: var(--primary-color); border: 1px solid rgba(0, 153, 204, 0.2);">
+                                {{ evenement.typeEvenement.libelleTypeEvenement }}
+                            </span>
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td style="color: var(--text-muted); font-size: 0.9rem;">
+                        {% if evenement.dateDebut == evenement.dateFin %}
+                            {{ evenement.dateDebut|date('d/m/Y') }}
+                        {% else %}
+                            {{ evenement.dateDebut|date('d/m') }} - {{ evenement.dateFin|date('d/m/Y') }}
+                        {% endif %}
+                    </td>
+                    <td style="color: var(--text-muted); font-size: 0.9rem;">{{ evenement.horaire ? evenement.horaire|date('H:i') : '-' }}</td>
                     <td>
                         <div style="display: flex; gap: 0.5rem;">
-                            <a href="{{ path('app_admin_evenement_show', {'id': evenement.idEvenement}) }}" class="btn btn-sm btn-info"><i class="fa-solid fa-eye"></i></a>
-                            <a href="{{ path('app_admin_evenement_edit', {'id': evenement.idEvenement}) }}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen"></i></a>
+                            <a href="{{ path('app_admin_evenement_show', {'id': evenement.idEvenement}) }}" class="btn btn-sm btn-info" title="Voir"><i class="fa-solid fa-eye"></i></a>
+                            <a href="{{ path('app_admin_evenement_edit', {'id': evenement.idEvenement}) }}" class="btn btn-sm btn-warning" title="Modifier"><i class="fa-solid fa-pen"></i></a>
                         </div>
                     </td>
                 </tr>

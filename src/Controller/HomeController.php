@@ -15,9 +15,9 @@ class HomeController extends AbstractController
     {
         // Récupérer les événements à venir (date >= aujourd'hui), limités à 3
         $evenements = $doctrine->getRepository(Evenement::class)->createQueryBuilder('e')
-            ->where('e.dateEvenement >= :now')
+            ->where('e.dateFin >= :now')
             ->setParameter('now', new \DateTime())
-            ->orderBy('e.dateEvenement', 'ASC')
+            ->orderBy('e.dateDebut', 'ASC')
             ->setMaxResults(3)
             ->getQuery()
             ->getResult();

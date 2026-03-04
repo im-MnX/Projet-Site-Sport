@@ -12,4 +12,18 @@ class DocumentRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Document::class);
     }
+
+    /**
+     * @return Document[] Returns an array of Document objects
+     */
+    public function findByCategoryName(string $categoryName): array
+    {
+        return $this->createQueryBuilder('d')
+            ->join('d.categorie', 'c')
+            ->andWhere('c.nom = :val')
+            ->setParameter('val', $categoryName)
+            ->orderBy('d.titre', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 }

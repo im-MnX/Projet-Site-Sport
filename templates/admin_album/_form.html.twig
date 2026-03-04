@@ -1,14 +1,19 @@
 {% form_theme form 'bootstrap_5_layout.html.twig' %}
 
-{{ form_start(form) }}
-    <div class="row">
-        <div class="col-md-8">
-            {{ form_widget(form) }}
-        </div>
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        {{ form_start(form) }}
+            <div class="admin-form-content">
+                {{ form_widget(form) }}
+            </div>
+            <div class="mt-5 pt-4 border-top d-flex gap-3">
+                <button class="btn btn-primary btn-lg">
+                    <i class="fa-solid fa-save"></i> {{ button_label|default('Enregistrer') }}
+                </button>
+                <a href="{{ path('app_admin_album_index') }}" class="btn btn-secondary btn-lg">
+                    Annuler
+                </a>
+            </div>
+        {{ form_end(form) }}
     </div>
-    <div class="mt-4">
-        <button class="btn btn-primary">
-            <i class="fa-solid fa-save"></i> {{ button_label|default('Enregistrer') }}
-        </button>
-    </div>
-{{ form_end(form) }}
+</div>

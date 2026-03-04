@@ -14,8 +14,8 @@ class EvenementController extends AbstractController
     #[Route('/evenements', name: 'app_evenement')]
     public function index(EvenementRepository $repo): Response
     {
-        // Récupérer tous les événements triés par dateEvenement décroissante
-        $evenements = $repo->findBy([], ['dateEvenement' => 'DESC']);
+        // Récupérer tous les événements triés par dateDebut décroissante
+        $evenements = $repo->findBy([], ['dateDebut' => 'DESC']);
 
         return $this->render('evenements/index.html.twig', [
             'evenements' => $evenements,

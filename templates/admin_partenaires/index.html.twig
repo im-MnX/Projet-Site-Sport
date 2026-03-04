@@ -10,30 +10,40 @@
     <div class="table-responsive">
         <table class="table">
             <thead>
-                <tr><th>Logo</th><th>Nom</th><th>Lien</th><th>Actions</th></tr>
+                <tr>
+                    <th>Logo</th>
+                    <th>Nom</th>
+                    <th>Lien</th>
+                    <th>Actions</th>
+                </tr>
             </thead>
             <tbody>
             {% for partenaire in partenaires %}
                 <tr>
                     <td style="width: 80px;">
                         {% if partenaire.logoPartenaire %}
-                            <img src="{{ asset('logos/' ~ partenaire.logoPartenaire) }}" alt="{{ partenaire.nomPartenaire }}" style="width: 50px; height: 50px; object-fit: contain; border-radius: 4px;">
+                            <img src="{{ asset('logos/' ~ partenaire.logoPartenaire) }}" alt="{{ partenaire.nomPartenaire }}" style="width: 55px; height: 55px; object-fit: contain; border-radius: 10px; border: 1px solid var(--border-color); background-color: #fff; padding: 5px;">
                         {% else %}
-                            <span class="badge bg-secondary">No Logo</span>
+                            <span class="badge bg-secondary" style="font-size: 0.7rem; opacity: 0.7;">Aucun</span>
                         {% endif %}
                     </td>
                     <td>
-                        <div style="font-weight: 500;">{{ partenaire.nomPartenaire }}</div>
+                        <div style="font-weight: 600; color: var(--text-color);">{{ partenaire.nomPartenaire }}</div>
                     </td>
-                    <td style="color: var(--text-muted);">
-                        <a href="{{ partenaire.lienPartenaire }}" target="_blank" rel="noopener noreferrer">
-                            {{ partenaire.lienPartenaire|slice(0, 40) }}...
+                    <td>
+                        <a href="{{ partenaire.lienPartenaire }}" target="_blank" rel="noopener noreferrer" style="font-size: 0.85rem; color: var(--primary-color); text-decoration: none;">
+                            <i class="fa-solid fa-external-link" style="font-size: 0.75rem; margin-right: 0.3rem;"></i>
+                            {{ partenaire.lienPartenaire|slice(12, 30) }}...
                         </a>
                     </td>
                     <td>
                         <div style="display: flex; gap: 0.5rem;">
-                            <a href="{{ path('app_admin_partenaires_show', {'id': partenaire.id}) }}" class="btn btn-sm btn-info"><i class="fa-solid fa-eye"></i></a>
-                            <a href="{{ path('app_admin_partenaires_edit', {'id': partenaire.id}) }}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen"></i></a>
+                            <a href="{{ path('app_admin_partenaires_show', {'id': partenaire.id}) }}" class="btn btn-sm btn-info" title="Voir">
+                                <i class="fa-solid fa-eye"></i>
+                            </a>
+                            <a href="{{ path('app_admin_partenaires_edit', {'id': partenaire.id}) }}" class="btn btn-sm btn-warning" title="Modifier">
+                                <i class="fa-solid fa-pen"></i>
+                            </a>
                         </div>
                     </td>
                 </tr>

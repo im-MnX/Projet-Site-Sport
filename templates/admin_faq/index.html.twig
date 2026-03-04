@@ -10,19 +10,31 @@
     <div class="table-responsive">
         <table class="table">
             <thead>
-                <tr><th>Question</th><th>Réponse</th><th>Actions</th></tr>
+                <tr>
+                    <th>Question</th>
+                    <th>Réponse</th>
+                    <th>Actions</th>
+                </tr>
             </thead>
             <tbody>
             {% for faq in faqs %}
                 <tr>
                     <td>
-                        <div style="font-weight: 500;">{{ faq.question }}</div>
+                        <div style="font-weight: 600; color: var(--text-color);">{{ faq.question }}</div>
                     </td>
-                    <td style="color: var(--text-muted);">{{ faq.reponse|slice(0, 80) }}...</td>
+                    <td>
+                        <div style="font-size: 0.85rem; color: var(--text-muted); max-width: 400px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                            {{ faq.reponse|striptags }}
+                        </div>
+                    </td>
                     <td>
                         <div style="display: flex; gap: 0.5rem;">
-                            <a href="{{ path('app_admin_faq_show', {'id': faq.idFaq}) }}" class="btn btn-sm btn-info"><i class="fa-solid fa-eye"></i></a>
-                            <a href="{{ path('app_admin_faq_edit', {'id': faq.idFaq}) }}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen"></i></a>
+                            <a href="{{ path('app_admin_faq_show', {'id': faq.idFaq}) }}" class="btn btn-sm btn-info" title="Voir">
+                                <i class="fa-solid fa-eye"></i>
+                            </a>
+                            <a href="{{ path('app_admin_faq_edit', {'id': faq.idFaq}) }}" class="btn btn-sm btn-warning" title="Modifier">
+                                <i class="fa-solid fa-pen"></i>
+                            </a>
                         </div>
                     </td>
                 </tr>

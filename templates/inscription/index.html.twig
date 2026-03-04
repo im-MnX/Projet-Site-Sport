@@ -8,74 +8,101 @@
 {% endblock %}
 
 {% block body %}
-    <div class="page-container">
-        <h1>Inscriptions</h1>
+    <div class="registration-outer-wrapper">
+        <div class="registration-page container-center">
+            <header class="section-title">
+                <h2>Inscriptions</h2>
+                <span class="subtitle-text">Retrouvez toutes les informations et documents</span>
+            </header>
 
-        {% if inscription %}
-        <div class="inscription-wrapper">
-            
-            <!-- Section 1 : Permanences & HelloAsso -->
-            <div class="permanences-section">
-                <div class="permanences-info">
-                    <h2>Des permanences auront lieu au club :</h2>
-                    <div class="permanences-list">
+            {% if inscription %}
+            <div class="registration-grid">
+                
+                <!-- Section 1 : Permanences & HelloAsso -->
+                <section class="registration-card glass-card permanences-card">
+                    <div class="card-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Permanences au club</h3>
+                    <div class="permanences-content">
                         {{ inscription.permanencesTexte|raw }}
                     </div>
-                </div>
-                
-                {% if inscription.lienHelloasso %}
-                <a href="{{ inscription.lienHelloasso }}"
-                    class="btn-helloasso"
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    Inscription par HelloAsso
-                </a>
-                {% endif %}
-            </div>
-
-            <!-- Section 2 : Préparation & Documents -->
-            <div class="preparation-section">
-                <div class="prep-card">
-                    <i class="fas fa-lightbulb bulb-icon"></i>
-                    <span>PREPARATION</span>
-                </div>
-
-                <div class="documents-list">
-                    <a href="{{ asset(get_document_path('FICHE_INSCRIPTION')|default('FichiersInscription/Feuille-inscription.docx')) }}" class="doc-link" target="_blank">Fiche d'inscription</a>
-                    <a href="{{ asset(get_document_path('FEUILLE_URGENCE')|default('FichiersInscription/Feuille-urgence.pdf')) }}" class="doc-link" target="_blank">Feuille d'urgence</a>
-                    <a href="{{ asset(get_document_path('MOYEN_PAIEMENT')|default('FichiersInscription/Feuille-inscription-comptabilite.docx')) }}" class="doc-link" target="_blank">Moyen de paiement</a>
-                    <br> <!-- Spacer -->
-                    <a href="{{ asset(get_document_path('FORMULAIRE_LICENCE_FFN')|default('FichiersInscription/Formulairelicencemineur20252026remplissable.pdf')) }}" class="doc-link" target="_blank">Formulaire licence FFN-Mineur</a>
-                    <a href="https://www.ffnatation.fr/sites/default/files/2025-09/Re%CC%80glements%20NA%202025-2026-vers%200825.pdf" class="doc-link" target="_blank">Règlement FFN</a>
-                </div>
-            </div>
-
-            <!-- Section 3 : Contact -->
-            <div class="contact-section-inscription">
-                <div class="contact-person">
-                    <div class="contact-avatar" style="display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #fff; background: #bbb;">
-                        <img src="{{ asset(inscription.contactPhoto ?? 'images/RachelLeBozec.jpg') }}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
+                    
+                    {% if inscription.lienHelloasso %}
+                    <div class="action-footer">
+                        <a href="{{ inscription.lienHelloasso }}"
+                            class="btn-helloasso-modern"
+                            target="_blank"
+                            rel="noopener noreferrer">
+                            <span>S'inscrire via HelloAsso</span>
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
                     </div>
-                    <strong>{{ inscription.contactNom ?? 'Contact' }}</strong>
-                </div>
-                
-                <div class="contact-details">
-                    <p>{{ inscription.contactTexte ?? 'Pour toutes nouvelles inscriptions, contactez le secrétariat par mail' }}</p>
-                    {% if inscription.contactEmail %}
-                    <p>(<a href="mailto:{{ inscription.contactEmail }}">{{ inscription.contactEmail }}</a>).</p>
                     {% endif %}
+                </section>
+
+                <!-- Section 2 : Documents -->
+                <section class="registration-card glass-card documents-card">
+                    <div class="card-icon">
+                        <i class="fas fa-file-download"></i>
+                    </div>
+                    <h3>Dossier d'inscription</h3>
+                    <p class="card-desc">Téléchargez et complétez les documents nécessaires :</p>
+                    
+                    <div class="documents-grid-modern">
+                        {% for doc in documents %}
+                            <a href="{{ asset(doc.filename) }}" class="doc-item" target="_blank">
+                                {% if doc.filename ends with '.pdf' %}
+                                    <i class="far fa-file-pdf pdf-icon"></i>
+                                {% elseif doc.filename ends with '.doc' or doc.filename ends with '.docx' %}
+                                    <i class="far fa-file-word word-icon"></i>
+                                {% else %}
+                                    <i class="far fa-file-alt"></i>
+                                {% endif %}
+                                <div class="doc-info">
+                                    <span class="doc-name">{{ doc.titre }}</span>
+                                    <span class="doc-ext">{{ doc.filename|split('.')|last|upper }}</span>
+                                </div>
+                            </a>
+                        {% else %}
+                            <p class="card-desc">Aucun document disponible pour le moment.</p>
+                        {% endfor %}
+                    </div>
+                </section>
+
+                <!-- Section 3 : Contact -->
+                <section class="registration-card glass-card contact-card-modern">
+                    <div class="contact-header">
+                        <div class="contact-avatar-wrapper">
+                            <img src="{{ asset(inscription.contactPhoto ?? 'images/RachelLeBozec.jpg') }}" alt="{{ inscription.contactNom ?? 'Contact' }}">
+                        </div>
+                        <div class="contact-title">
+                            <h3>{{ inscription.contactNom ?? 'Secrétariat' }}</h3>
+                            <span class="contact-role">Responsable Inscriptions</span>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-body">
+                        <p>{{ inscription.contactTexte ?? 'Pour toutes nouvelles inscriptions, contactez le secrétariat par mail' }}</p>
+                        {% if inscription.contactEmail %}
+                        <a href="mailto:{{ inscription.contactEmail }}" class="contact-email-btn">
+                            <i class="far fa-envelope"></i>
+                            {{ inscription.contactEmail }}
+                        </a>
+                        {% endif %}
+                    </div>
+                </section>
+
+            </div>
+            {% else %}
+            <div class="empty-state">
+                <div class="glass-card">
+                    <i class="fas fa-tools"></i>
+                    <p>Le contenu de cette page est en cours de configuration. Revenez bientôt !</p>
                 </div>
             </div>
-
+            {% endif %}
         </div>
-        {% else %}
-        <div class="inscription-wrapper">
-            <p style="text-align: center; color: var(--text-muted); padding: 3rem 0;">
-                <i class="fas fa-tools" style="font-size: 2rem; margin-bottom: 1rem; display: block;"></i>
-                Le contenu de cette page est en cours de configuration. Revenez bientôt !
-            </p>
-        </div>
-        {% endif %}
     </div>
 {% endblock %}
 

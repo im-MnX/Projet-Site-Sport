@@ -70,7 +70,13 @@
 											<div class="event-meta-modern">
 												<div class="meta-item">
 													<i class="fas fa-calendar-day"></i>
-													<span>{{ event.dateEvenement|date('d F Y') }}</span>
+													<span>
+														{% if event.dateDebut == event.dateFin %}
+															{{ event.dateDebut|date('d F Y') }}
+														{% else %}
+															Du {{ event.dateDebut|date('d/m') }} au {{ event.dateFin|date('d/m/Y') }}
+														{% endif %}
+													</span>
 												</div>
 												<div class="meta-item">
 													<i class="fas fa-clock"></i>
@@ -86,13 +92,15 @@
 
 										<!-- Right: Poster -->
 										<div class="event-poster-side">
-											{% if event.images %}
-												<img src="{{ asset('uploads/evenements/' ~ event.images) }}" alt="{{ event.nom }}">
-											{% else %}
-												<div class="placeholder-poster">
-													<span>{{ event.nom|slice(0, 1) }}</span>
-												</div>
-											{% endif %}
+											<div class="event-poster-inner">
+												{% if event.images %}
+													<img src="{{ asset('uploads/evenements/' ~ event.images) }}" alt="{{ event.nom }}">
+												{% else %}
+													<div class="placeholder-poster">
+														<span>{{ event.nom|slice(0, 1) }}</span>
+													</div>
+												{% endif %}
+											</div>
 										</div>
 									</div>
 								{% endfor %}
@@ -169,28 +177,129 @@ showSlide(index);
 				</a>
 			</div>
 
-			<div class="news-grid-modern">
-				{% for news in latestNews %}
-					<article class="news-card-modern">
-						<div class="news-img-container">
-							<img src="{{ asset('uploads/actualites/' ~ news.images) }}" alt="{{ news.titre }}">
-							<div class="news-date-badge">
-								{{ news.date ? news.date|date('d M') : '' }}
+			<div class="news-carousel-container">
+				<button class="news-nav-btn prev" id="newsPrev">
+					<i class="fas fa-chevron-left"></i>
+				</button>
+
+				<div class="news-carousel-viewport">
+					<div class="news-carousel-track" id="newsTrack">
+						{% for news in latestNews %}
+							<div class="news-item-slide">
+								<article class="news-card-modern">
+									<div class="news-img-container">
+										<img src="{{ asset('uploads/actualites/' ~ news.images) }}" alt="{{ news.titre }}">
+										<div class="news-date-badge">
+											{{ news.date ? news.date|date('d M') : '' }}
+										</div>
+									</div>
+									<div class="news-body-modern">
+										<h3>{{ news.titre ?: 'Actualité' }}</h3>
+										<p>{{ (news.description|striptags|slice(0, 80) ~ '...')|raw }}</p>
+										<a href="{{ path('app_actualites_show', { id: news.idActualite }) }}" class="btn-text">
+											Lire la suite
+											<i class="fas fa-long-arrow-alt-right"></i>
+										</a>
+									</div>
+								</article>
 							</div>
-						</div>
-						<div class="news-body-modern">
-							<h3>{{ news.titre ?: 'Actualité' }}</h3>
-							<p>{{ (news.description|striptags|slice(0, 80) ~ '...')|raw }}</p>
-							<a href="{{ path('app_actualites_show', { id: news.idActualite }) }}" class="btn-text">
-								Lire la suite
-								<i class="fas fa-long-arrow-alt-right"></i>
-							</a>
-						</div>
-					</article>
-				{% else %}
-					<p class="empty-msg">Aucune actualité disponible pour le moment.</p>
-				{% endfor %}
+						{% else %}
+							<p class="empty-msg">Aucune actualité disponible pour le moment.</p>
+						{% endfor %}
+					</div>
+				</div>
+
+				<button class="news-nav-btn next" id="newsNext">
+					<i class="fas fa-chevron-right"></i>
+				</button>
+
+				<div class="news-carousel-dots" id="newsDots"></div>
 			</div>
+
+			<script>
+				document.addEventListener('DOMContentLoaded', function () {
+const track = document.getElementById('newsTrack');
+const prevBtn = document.getElementById('newsPrev');
+const nextBtn = document.getElementById('newsNext');
+const dotsContainer = document.getElementById('newsDots');
+const slides = Array.from(track ? track.children : []);
+
+if (slides.length === 0) 
+return;
+
+
+
+let currentIndex = 0;
+const itemsToShow = () => {
+if (window.innerWidth > 1024) 
+return 3;
+
+if (window.innerWidth > 640) 
+return 2;
+
+return 1;
+};
+
+// Create dots
+slides.forEach((_, i) => {
+if (i <= slides.length - itemsToShow()) {
+const dot = document.createElement('button');
+dot.classList.add('news-dot');
+if (i === 0) 
+dot.classList.add('active');
+
+
+dot.addEventListener('click', () => goToSlide(i));
+dotsContainer.appendChild(dot);
+}
+});
+
+const updateDots = () => {
+const dots = dotsContainer.querySelectorAll('.news-dot');
+dots.forEach((dot, i) => {
+dot.classList.toggle('active', i === currentIndex);
+});
+};
+
+const goToSlide = (index) => {
+currentIndex = index;
+const slideWidth = slides[0].getBoundingClientRect().width;
+const gap = 30;
+track.style.transform = `translateX(-${
+index * (slideWidth + gap)
+}px)`;
+updateDots();
+};
+
+nextBtn.addEventListener('click', () => {
+if (currentIndex < slides.length - itemsToShow()) {
+goToSlide(currentIndex + 1);
+} else {
+goToSlide(0);
+}
+});
+
+prevBtn.addEventListener('click', () => {
+if (currentIndex > 0) {
+goToSlide(currentIndex - 1);
+} else {
+goToSlide(slides.length - itemsToShow());
+}
+});
+
+// Auto-play
+let autoPlay = setInterval(() => nextBtn.click(), 5000);
+const container = document.querySelector('.news-carousel-container');
+container.addEventListener('mouseenter', () => clearInterval(autoPlay));
+container.addEventListener('mouseleave', () => autoPlay = setInterval(() => nextBtn.click(), 5000));
+
+// Resize handling
+window.addEventListener('resize', () => {
+goToSlide(0);
+// Re-enable/re-render dots if needed, but simple re-centering is usually enough
+});
+});
+			</script>
 		</section>
 
 		<!-- Partners Section -->

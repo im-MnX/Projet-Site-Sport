@@ -1,22 +1,18 @@
-{{ form_start(form) }}
-    <div style="display: grid; gap: 1.5rem;">
-        <div>
-            {{ form_label(form.titre) }}
-            {{ form_widget(form.titre, {'attr': {'class': 'form-control'}}) }}
-            {{ form_errors(form.titre) }}
-        </div>
-        <div>
-            {{ form_label(form.documentFile) }}
-            {{ form_widget(form.documentFile, {'attr': {'class': 'form-control'}}) }}
-            {% if document.filename %}
-                <p style="margin-top: 0.5rem;">Fichier actuel : <code>{{ document.filename }}</code></p>
-            {% endif %}
-            {{ form_errors(form.documentFile) }}
-        </div>
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        {{ form_start(form) }}
+            <div class="admin-form-content">
+                {{ form_widget(form) }}
+            </div>
+            <div class="mt-5 pt-4 border-top d-flex gap-3">
+                <button class="btn btn-primary btn-lg">
+                    <i class="fa-solid fa-save"></i> {{ button_label|default('Enregistrer') }}
+                </button>
+                <a href="{{ path('app_admin_document_index') }}" class="btn btn-secondary btn-lg">
+                    Annuler
+                </a>
+            </div>
+        {{ form_end(form) }}
     </div>
-    
-    <div style="margin-top: 2rem; display: flex; gap: 1rem;">
-        <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
-        <a href="{{ path('app_admin_document_index') }}" class="btn btn-secondary">Retour à la liste</a>
-    </div>
-{{ form_end(form) }}
+</div>

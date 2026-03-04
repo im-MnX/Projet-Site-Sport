@@ -6,9 +6,16 @@
 
 {% block body %}
     <div class="card">
-        <div class="card-header">
+        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
             <h2 class="card-title">Liste des Documents</h2>
-
+            <div style="display: flex; gap: 10px;">
+                <a href="{{ path('app_admin_categorie_document_index') }}" class="btn btn-outline-secondary">
+                    <i class="fa-solid fa-folder-open"></i> Gérer les catégories
+                </a>
+                <a href="{{ path('app_admin_document_new') }}" class="btn btn-primary">
+                    <i class="fa-solid fa-plus"></i> Ajouter un document
+                </a>
+            </div>
         </div>
 
         <div class="table-responsive">
@@ -17,37 +24,57 @@
                     <tr>
                         <th>Identifiant</th>
                         <th>Titre</th>
+                        <th>Catégorie</th>
                         <th>Fichier</th>
-                        <th>Dernière mise à jour</th>
+                        <th>MàJ</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                 {% for document in documents %}
                     <tr>
-                        <td><code>{{ document.identifiant }}</code></td>
-                        <td><strong>{{ document.titre }}</strong></td>
+                        <td><code style="background-color: #f1f5f9; color: var(--text-color); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.85rem;">{{ document.identifiant|default('-') }}</code></td>
                         <td>
-                            {% if document.filename %}
-                                <a href="{{ asset(document.filename) }}" target="_blank" class="btn btn-sm btn-outline-secondary">
-                                    <i class="fa-solid fa-file-pdf"></i> Voir le fichier
-                                </a>
+                            <div style="font-weight: 600; color: var(--text-color);">{{ document.titre }}</div>
+                        </td>
+                        <td>
+                            {% if document.categorie %}
+                                <span class="badge" style="background-color: var(--bg-pale); color: var(--primary-color); border: 1px solid rgba(0, 153, 204, 0.2);">
+                                    {{ document.categorie.nom }}
+                                </span>
                             {% else %}
-                                <span class="badge bg-danger">Aucun fichier</span>
+                                <span class="text-muted" style="font-size: 0.85rem;">Aucune</span>
                             {% endif %}
                         </td>
-                        <td style="color: var(--text-muted); font-size: 0.9em;">
-                            {{ document.updatedAt ? document.updatedAt|date('d/m/Y H:i') : '-' }}
+                        <td>
+                            {% if document.filename %}
+                                <a href="{{ asset(document.filename) }}" target="_blank" class="btn btn-sm btn-outline-secondary" style="font-size: 0.75rem; padding: 0.25rem 0.5rem; border-radius: 6px;">
+                                    <i class="fa-solid fa-file-pdf"></i> Voir
+                                </a>
+                            {% else %}
+                                <span class="badge bg-danger" style="font-size: 0.7rem; opacity: 0.7;">Aucun</span>
+                            {% endif %}
+                        </td>
+                        <td style="color: var(--text-muted); font-size: 0.85rem;">
+                            {{ document.updatedAt ? document.updatedAt|date('d/m/Y') : '-' }}
                         </td>
                         <td>
-                            <a href="{{ path('app_admin_document_edit', {'id': document.id}) }}" class="btn btn-sm btn-outline-primary">
-                                <i class="fa-solid fa-pen"></i> Modifier
-                            </a>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <a href="{{ path('app_admin_document_edit', {'id': document.id}) }}" class="btn btn-sm btn-warning" title="Modifier">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+                                <form method="post" action="{{ path('app_admin_document_delete', {'id': document.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce document ?');" style="display: inline-block;">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ document.id) }}">
+                                    <button class="btn btn-sm btn-danger" title="Supprimer">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="5" style="text-align: center; padding: 2rem;">
+                        <td colspan="6" style="text-align: center; padding: 2rem;">
                             <div style="color: var(--text-muted); margin-bottom: 1rem;">
                                 <i class="fa-solid fa-file-invoice" style="font-size: 2rem;"></i>
                                 <p style="margin-top: 0.5rem;">Aucun document trouvé</p>

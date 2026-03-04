@@ -26,6 +26,9 @@ class Document
     #[Mapping\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
+    #[Mapping\ManyToOne(inversedBy: 'documents')]
+    private ?CategorieDocument $categorie = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +78,18 @@ class Document
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?CategorieDocument
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?CategorieDocument $categorie): static
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }

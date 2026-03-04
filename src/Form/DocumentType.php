@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\CategorieDocument;
 use App\Entity\Document;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -18,6 +20,19 @@ class DocumentType extends AbstractType
             ->add('titre', TextType::class, [
                 'label' => 'Titre du document',
                 'attr' => ['placeholder' => 'Ex: Planning des cours']
+            ])
+            ->add('identifiant', TextType::class, [
+                'label' => 'Identifiant unique (technique)',
+                'help' => 'Utilisé par le code pour identifier ce document précisément.',
+                'required' => false,
+                'attr' => ['placeholder' => 'Ex: FICHE_INSCRIPTION']
+            ])
+            ->add('categorie', EntityType::class, [
+                'class' => CategorieDocument::class,
+                'choice_label' => 'nom',
+                'label' => 'Catégorie',
+                'placeholder' => 'Choisir une catégorie',
+                'required' => false,
             ])
             ->add('documentFile', FileType::class, [
                 'label' => 'Fichier (PDF, DOCX, ...)',

@@ -32,17 +32,18 @@
 						<tr>
 							<td style="width: 80px;">
 								{% if produit.image %}
-									<img src="{{ asset('uploads/produits/' ~ produit.image) }}" alt="{{ produit.nomProduit }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
+									<img src="{{ asset('uploads/produits/' ~ produit.image) }}" alt="{{ produit.nomProduit }}" style="width: 55px; height: 55px; object-fit: cover; border-radius: 10px; border: 1px solid var(--border-color);">
 								{% else %}
-									<span class="badge bg-secondary">No Image</span>
+									<span class="badge bg-secondary" style="font-size: 0.7rem; opacity: 0.7;">Aucune</span>
 								{% endif %}
 							</td>
 							<td>
-								<div style="font-weight: 500;">{{ produit.nomProduit }}</div>
-								<small style="color: var(--text-muted);">{{ produit.description|slice(0, 50) }}...</small>
+								<div style="font-weight: 600; color: var(--text-color);">{{ produit.nomProduit }}</div>
+								<div style="font-size: 0.85rem; color: var(--text-muted); max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+									{{ produit.description|striptags }}
+								</div>
 							</td>
-							<td style="font-weight: 600;">{{ produit.prix }}
-								€</td>
+							<td style="font-weight: 700; color: var(--primary-color);">{{ produit.prix }} €</td>
 
 							<td>
 								<div style="display: flex; gap: 0.5rem;">

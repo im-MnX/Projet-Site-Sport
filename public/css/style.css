@@ -11,6 +11,7 @@
   --text-main: #334155;
   --text-muted: #64748b;
   --bg-main: #f8fafc;
+  --bg-pale-blue: #f0f7ff;
   --bg-card: rgba(255, 255, 255, 0.95);
 
   --glass-bg: rgba(255, 255, 255, 0.7);
@@ -45,6 +46,10 @@ body {
   flex-direction: column;
   min-height: 100vh;
   overflow-x: hidden;
+}
+
+.home-main {
+  background-color: var(--bg-pale-blue);
 }
 
 .site-header {
@@ -82,7 +87,7 @@ body {
 .nav-group-right {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 25px;
   flex: 1;
 }
 
@@ -144,8 +149,8 @@ body {
 .nav-social-group {
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-right: 8px;
+  gap: 12px;
+  margin-right: 5px;
 }
 
 .nav-social-btn {
@@ -330,17 +335,24 @@ footer {
 
 footer .footer-content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
-  max-width: 1200px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 40px;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .footer-section h3 {
   color: var(--accent-yellow);
   font-size: 1.1rem;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
   position: relative;
   display: inline-block;
 }
@@ -348,8 +360,9 @@ footer .footer-content {
 .footer-section h3::after {
   content: '';
   position: absolute;
-  left: 0;
-  bottom: -4px;
+  left: 50%;
+  bottom: -6px;
+  transform: translateX(-50%);
   width: 30px;
   height: 2px;
   background-color: var(--accent-yellow);
@@ -377,6 +390,7 @@ footer .footer-content {
 .social-icons {
   display: flex;
   gap: 12px;
+  justify-content: center;
 }
 
 .social-icons a {
@@ -879,20 +893,7 @@ h1 {
   gap: 30px;
 }
 
-.modern-card {
-  background: white;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  border: 1px solid #f0f0f0;
-  display: flex;
-  flex-direction: column;
-}
-
-.modern-card:hover {
-  transform: translateY(-10px);
-}
+/* .modern-card moved to dedicated stylesheets (e.g., events.css, boutique.css) */
 
 .card-image-wrapper {
   height: 200px;
@@ -1178,113 +1179,7 @@ h1 {
   border: 0;
 }
 
-.event-poster-header {
-  background: #f8fbff;
-  border-bottom: 2px solid #e1e9f5;
-  padding: 80px 2rem;
-}
-
-.poster-header-container {
-  max-width: 1300px;
-  margin: 0 auto;
-  display: flex;
-  gap: 6rem;
-  align-items: flex-start;
-
-}
-
-.poster-wrapper {
-  flex: 0 0 380px;
-  background: white;
-  padding: 12px;
-  border-radius: 20px;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
-  transform: rotate(-1.5deg);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.poster-wrapper:hover {
-  transform: rotate(0deg) scale(1.05);
-  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.18);
-}
-
-.poster-image {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 12px;
-}
-
-.poster-info {
-  flex: 1;
-  padding-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-}
-
-.poster-category {
-  color: var(--primary-blue);
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 2.5px;
-  font-size: 0.95rem;
-  margin: 0 0 0.8rem 0;
-
-  display: block;
-}
-
-.poster-info h1 {
-  font-size: 4rem;
-  color: var(--dark-blue);
-  margin: 0 0 2.5rem 0;
-
-  padding: 0;
-  font-weight: 800;
-  line-height: 1;
-  text-align: left;
-}
-
-.poster-meta-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  width: 100%;
-}
-
-.poster-meta-item {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  font-size: 1.3rem;
-  color: var(--dark-blue);
-  background: white;
-  padding: 18px 30px 18px 18px;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-  width: fit-content;
-  min-width: 320px;
-
-}
-
-.poster-meta-item i {
-  flex: 0 0 52px;
-  height: 52px;
-  background: #f0f7ff;
-  color: var(--primary-blue);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 15px;
-  font-size: 1.4rem;
-}
-
-.poster-meta-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+/* .event-poster-header styles moved to events.css */
 
 .poster-label {
   font-size: 0.7rem;
@@ -1399,17 +1294,23 @@ h1 {
 }
 
 .btn-poster:hover {
-  background: var(--dark-blue);
+  background: var(--primary-dark);
+  color: white;
   transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 119, 163, 0.35);
 }
 
 .btn-poster-outline {
-  background: #f0f4f8;
-  color: var(--dark-blue);
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
 }
 
 .btn-poster-outline:hover {
-  background: #e2e8f0;
+  background: var(--primary);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 153, 204, 0.3);
 }
 
 @media (max-width: 992px) {
@@ -1605,14 +1506,14 @@ h1 {
 }
 
 .intro-section {
-  padding: 60px 20px;
+  padding: 80px 20px;
   max-width: 95% !important;
-
+  background-color: var(--bg-pale-blue);
 }
 
 .intro-grid {
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
+  grid-template-columns: 1fr 1fr;
 
   gap: 60px;
   align-items: center;
@@ -1833,23 +1734,74 @@ h1 {
   gap: 5px;
 }
 
-.news-grid-modern {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 40px;
+/* News Carousel Container & Structure */
+.news-section-modern {
+  padding-top: 80px;
+  padding-bottom: 100px;
+  position: relative;
+  background-color: var(--bg-pale-blue);
+}
+
+.news-carousel-container {
+  position: relative;
+  width: 100%;
+  margin-top: 40px;
+  padding: 0 50px;
+  box-sizing: border-box;
+}
+
+.news-carousel-viewport {
+  overflow: hidden;
+  width: 100%;
+  padding: 20px 0;
+  box-sizing: border-box;
+}
+
+.news-carousel-track {
+  display: flex;
+  gap: 30px;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  box-sizing: border-box;
+}
+
+.news-item-slide {
+  flex: 0 0 calc((100% - 60px) / 3);
+  box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+  .news-item-slide {
+    flex: 0 0 calc(50% - 15px);
+  }
+}
+
+@media (max-width: 640px) {
+  .news-carousel-container {
+    padding: 0;
+  }
+
+  .news-item-slide {
+    flex: 0 0 100%;
+  }
 }
 
 .news-card-modern {
   background: var(--white);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: var(--shadow-md);
-  transition: var(--transition);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  cursor: pointer;
 }
 
 .news-card-modern:hover {
-  transform: translateY(-10px);
-  box-shadow: var(--shadow-xl);
+  transform: translateY(-4px);
+  border-color: var(--primary);
 }
 
 .news-img-container {
@@ -1865,20 +1817,24 @@ h1 {
 
 .news-date-badge {
   position: absolute;
-  top: 20px;
-  left: 20px;
-  background: var(--white);
-  color: var(--black);
-  padding: 8px 12px;
-  border-radius: var(--radius-sm);
+  top: 15px;
+  left: 15px;
+  background: var(--primary);
+  color: var(--white);
+  padding: 6px 12px;
+  border-radius: 8px;
   font-weight: 800;
   text-align: center;
-  font-size: 0.85rem;
-  box-shadow: var(--shadow-md);
+  font-size: 0.8rem;
+  box-shadow: 0 5px 15px rgba(0, 153, 204, 0.3);
+  z-index: 2;
 }
 
 .news-body-modern {
   padding: 30px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .news-body-modern h3 {
@@ -1903,16 +1859,85 @@ h1 {
   align-items: center;
   gap: 8px;
   transition: var(--transition);
+  margin-top: auto;
+}
+
+.btn-text::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
 }
 
 .btn-text:hover {
   gap: 12px;
 }
 
+/* Carousel Navigation */
+.news-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 45px;
+  height: 45px;
+  background: var(--white);
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.news-nav-btn:hover {
+  background: var(--primary);
+  color: var(--white);
+  box-shadow: 0 15px 30px rgba(0, 153, 204, 0.3);
+}
+
+.news-nav-btn.prev {
+  left: -10px;
+}
+
+.news-nav-btn.next {
+  right: -10px;
+}
+
+.news-carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 40px;
+}
+
+.news-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #cbd5e1;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.news-dot.active {
+  background: var(--primary);
+  width: 25px;
+  border-radius: 10px;
+}
+
 .partners-section-modern {
   background: var(--bg-main);
   padding: 80px 0;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid rgba(15, 23, 42, 0.05);
 }
 
 .partners-slider-wrapper {
@@ -2060,7 +2085,7 @@ h1 {
   position: absolute;
   bottom: 30px;
   left: 40px;
-  width: calc(100% - 80px);
+  width: fit-content;
   text-align: center;
 }
 
@@ -2068,20 +2093,31 @@ h1 {
   flex: 1;
   height: 100%;
   position: relative;
-  overflow: hidden;
-  background: white;
+  overflow: visible;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 1;
-  padding: 15px;
+  padding: 0;
+}
+
+.event-poster-inner {
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
 .event-poster-side img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-
+  max-height: 100%;
+  object-fit: contain;
   display: block;
   border-radius: 12px;
-
 }
 
 .placeholder-poster {
@@ -2132,15 +2168,20 @@ h1 {
   }
 
   .event-poster-side {
-    height: 200px;
+    height: auto;
+    min-height: 300px;
     order: -1;
     flex: none;
     width: 100%;
     padding: 0;
   }
 
+  .event-poster-inner {
+    padding: 1.5rem;
+  }
+
   .event-poster-side img {
-    border-radius: 0;
+    border-radius: 10px;
   }
 
   .carousel-container {

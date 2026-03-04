@@ -5,20 +5,28 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/actualites.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/events.css') }}">
 {% endblock %}
-
-
-
 
 {% block body %}
 	<div class="page-container">
-		<h1>Événements du club</h1>
+		<header class="events-header">
+			<h1>Événements</h1>
+			<span class="events-subtitle">Retrouvez tous les rendez-vous du club</span>
+		</header>
 		<div class="actualites-container">
 			{% for item in evenements %}
-				{% set type = item.typeEvenement.libelleTypeEvenement|lower %}
+				{% set type = item.typeEvenement.libelleTypeEvenement|default('Événement') %}
 				<article class="modern-card">
 					<div class="card-image-wrapper">
+						<div class="event-type-badge">{{ type }}</div>
+						<div class="card-date-floating">
+							{% if item.dateDebut == item.dateFin %}
+								{{ item.dateDebut|date('d/m/Y') }}
+							{% else %}
+								Du {{ item.dateDebut|date('d/m') }} au {{ item.dateFin|date('d/m/Y') }}
+							{% endif %}
+						</div>
 						<div class="card-placeholder-img">
 							{% if item.images %}
 								<img src="{{ asset('uploads/evenements/' ~ item.images) }}" alt="{{ item.nom }}" class="actualite-image">
@@ -26,7 +34,6 @@
 						</div>
 					</div>
 					<div class="card-body">
-						<span class="card-date">{{ item.dateEvenement ? item.dateEvenement|date('d/m/Y') : '' }}</span>
 						<h3 class="card-title">{{ item.nom }}</h3>
 						<p class="card-excerpt">{{ (item.description|striptags|slice(0, 100) ~ '...')|raw }}</p>
 						<a href="{{ path('app_evenement_show', { id: item.idEvenement }) }}" class="read-more">Lire la suite

@@ -32,7 +32,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/actualites.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/events.css') }}">
 {% endblock %}
 
 
@@ -47,17 +47,26 @@
 			{% endif %}
 
 			<div class="poster-info">
-				{% if evenement.typeEvenement %}
-					<span class="poster-category">{{ evenement.typeEvenement.libelleTypeEvenement }}</span>
-				{% endif %}
 				<h1>{{ evenement.nom }}</h1>
 				
 				<div class="poster-meta-list">
 					<div class="poster-meta-item">
 						<i class="fas fa-calendar-alt"></i>
 						<div class="poster-meta-content">
-							<div class="poster-label">Date de l'événement</div>
-							<strong>{{ evenement.dateEvenement ? evenement.dateEvenement|date('d F Y', 'Europe/Paris') : '-' }}</strong>
+							<div class="poster-label">
+								{% if evenement.dateDebut == evenement.dateFin %}
+									Date de l'événement
+								{% else %}
+									Dates de l'événement
+								{% endif %}
+							</div>
+							<strong>
+								{% if evenement.dateDebut == evenement.dateFin %}
+									{{ evenement.dateDebut|date('d F Y', 'Europe/Paris') }}
+								{% else %}
+									Du {{ evenement.dateDebut|date('d/m') }} au {{ evenement.dateFin|date('d/m/Y') }}
+								{% endif %}
+							</strong>
 						</div>
 					</div>
 					{% if evenement.horaire %}

@@ -10,24 +10,37 @@
     <div class="table-responsive">
         <table class="table">
             <thead>
-                <tr><th>Image</th><th>Titre</th><th>Date</th><th>Actions</th></tr>
+                <tr>
+                    <th>Image</th>
+                    <th>Titre</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
             </thead>
             <tbody>
             {% for photo in photos %}
                 <tr>
                     <td style="width: 80px;">
                         {% if photo.cheminImage %}
-                            <img src="{{ asset('photos/album_' ~ photo.idAlbum.idAlbum ~ '/' ~ photo.cheminImage) }}" alt="{{ photo.titre }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
+                            <img src="{{ asset('photos/album_' ~ photo.idAlbum.idAlbum ~ '/' ~ photo.cheminImage) }}" alt="{{ photo.titre }}" style="width: 55px; height: 55px; object-fit: cover; border-radius: 10px; border: 1px solid var(--border-color);">
                         {% else %}
-                            <span class="badge bg-secondary">No Image</span>
+                            <span class="badge bg-secondary" style="font-size: 0.7rem; opacity: 0.7;">Aucune</span>
                         {% endif %}
                     </td>
-                    <td style="font-weight: 500;">{{ photo.titre }}</td>
-                    <td style="color: var(--text-muted);">{{ photo.datePhoto ? photo.datePhoto|date('d/m/Y') : '-' }}</td>
+                    <td>
+                        <div style="font-weight: 600; color: var(--text-color);">{{ photo.titre }}</div>
+                    </td>
+                    <td style="color: var(--text-muted); font-size: 0.9rem;">
+                        {{ photo.datePhoto ? photo.datePhoto|date('d/m/Y') : '-' }}
+                    </td>
                     <td>
                         <div style="display: flex; gap: 0.5rem;">
-                            <a href="{{ path('app_admin_photo_show', {'idPhoto': photo.idPhoto}) }}" class="btn btn-sm btn-info"><i class="fa-solid fa-eye"></i></a>
-                            <a href="{{ path('app_admin_photo_edit', {'idPhoto': photo.idPhoto}) }}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen"></i></a>
+                            <a href="{{ path('app_admin_photo_show', {'idPhoto': photo.idPhoto}) }}" class="btn btn-sm btn-info" title="Voir">
+                                <i class="fa-solid fa-eye"></i>
+                            </a>
+                            <a href="{{ path('app_admin_photo_edit', {'idPhoto': photo.idPhoto}) }}" class="btn btn-sm btn-warning" title="Modifier">
+                                <i class="fa-solid fa-pen"></i>
+                            </a>
                         </div>
                     </td>
                 </tr>

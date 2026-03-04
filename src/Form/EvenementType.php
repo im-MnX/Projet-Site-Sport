@@ -17,7 +17,14 @@ class EvenementType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('dateEvenement')
+            ->add('dateDebut', null, [
+                'label' => 'Date de début',
+                'widget' => 'single_text'
+            ])
+            ->add('dateFin', null, [
+                'label' => 'Date de fin',
+                'widget' => 'single_text'
+            ])
             ->add('imageFile', FileType::class, [
                 'label' => 'Image de l\'événement',
                 'mapped' => false,

@@ -1,0 +1,60 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Gestion des Catégories de Documents{% endblock %}
+
+{% block page_title %}Catégories de Documents{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <h2 class="card-title">Liste des Catégories</h2>
+            <a href="{{ path('app_admin_categorie_document_new') }}" class="btn btn-primary">
+                <i class="fa-solid fa-plus"></i> Ajouter une catégorie
+            </a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Nombre de documents</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for categorie in categories %}
+                    <tr>
+                        <td>{{ categorie.id }}</td>
+                        <td><strong>{{ categorie.nom }}</strong></td>
+                        <td>
+                            <span class="badge bg-secondary">{{ categorie.documents|length }}</span>
+                        </td>
+                        <td style="display: flex; gap: 5px;">
+                            <a href="{{ path('app_admin_categorie_document_edit', {'id': categorie.id}) }}" class="btn btn-sm btn-outline-primary">
+                                <i class="fa-solid fa-pen"></i> Modifier
+                            </a>
+                            <form method="post" action="{{ path('app_admin_categorie_document_delete', {'id': categorie.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?');" style="display: inline-block;">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ categorie.id) }}">
+                                <button class="btn btn-sm btn-outline-danger">
+                                    <i class="fa-solid fa-trash"></i> Supprimer
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4" style="text-align: center; padding: 2rem;">
+                            <p class="text-muted">Aucune catégorie trouvée</p>
+                            <a href="{{ path('app_admin_categorie_document_new') }}" class="btn btn-primary">
+                                <i class="fa-solid fa-plus"></i> Ajouter une catégorie
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

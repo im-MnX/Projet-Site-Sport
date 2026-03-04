@@ -1,0 +1,320 @@
+:root {
+    --primary: #0099cc;
+    --accent: #ffcc00;
+    --bg-pale: #f0f7ff;
+    --text-main: #334155;
+    --text-muted: #64748b;
+    --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+    --card-shadow-hover: 0 20px 50px rgba(0, 0, 0, 0.12);
+}
+
+body {
+    background-color: var(--bg-pale);
+}
+
+.page-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.events-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 50px;
+    border-left: 6px solid var(--primary);
+    padding-left: 25px;
+}
+
+.events-header h1 {
+    font-size: 3rem;
+    margin-bottom: 5px;
+    color: var(--black);
+    font-weight: 800;
+    line-height: 1;
+}
+
+.events-subtitle {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* Container Grid */
+.actualites-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 35px;
+}
+
+/* Event Card */
+.modern-card {
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+}
+
+.modern-card:hover {
+    transform: translateY(-12px);
+    box-shadow: var(--card-shadow-hover);
+}
+
+.card-image-wrapper {
+    position: relative;
+    height: 260px;
+    overflow: hidden;
+}
+
+.actualite-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.modern-card:hover .actualite-image {
+    transform: scale(1.08);
+}
+
+/* Type Badge */
+.event-type-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--primary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+}
+
+/* Date Badge on Image */
+.card-date-floating {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: var(--primary);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    box-shadow: 0 8px 16px rgba(0, 153, 204, 0.3);
+    z-index: 2;
+}
+
+.card-body {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.card-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.card-excerpt {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    flex: 1;
+}
+
+.read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--primary);
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: gap 0.2s ease;
+}
+
+.read-more:hover {
+    gap: 15px;
+}
+
+/* Empty State */
+.empty-shop {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 80px 40px;
+    background: white;
+    border-radius: 24px;
+    box-shadow: var(--card-shadow);
+}
+
+/* SHOW PAGE STYLES */
+.event-poster-header {
+    background: var(--bg-pale);
+    padding: 80px 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.poster-header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 60px;
+    align-items: center;
+}
+
+.poster-wrapper {
+    flex: 0 0 400px;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+}
+
+.poster-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.poster-info h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--primary);
+    margin-bottom: 30px;
+    line-height: 1.1;
+}
+
+.poster-meta-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.poster-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: white;
+    padding: 15px 25px;
+    border-radius: 18px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    width: fit-content;
+}
+
+.poster-meta-item i {
+    font-size: 1.5rem;
+    color: var(--primary);
+    width: 50px;
+    height: 50px;
+    background: var(--bg-pale);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+}
+
+.poster-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.poster-meta-content strong {
+    font-size: 1.1rem;
+    color: var(--text-main);
+}
+
+.event-content-section {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.action-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 60px;
+}
+
+.action-card {
+    background: white;
+    padding: 40px;
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: var(--card-shadow);
+}
+
+.btn-poster {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--primary);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.btn-poster:hover {
+    transform: translateY(-3px);
+}
+
+.btn-poster-outline {
+    background: transparent;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .poster-header-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .poster-wrapper {
+        flex: 0 0 auto;
+        max-width: 400px;
+    }
+
+    .poster-info h1 {
+        font-size: 2.5rem;
+    }
+
+    .poster-meta-item {
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .actualites-container {
+        grid-template-columns: 1fr;
+    }
+
+    .events-header h1 {
+        font-size: 2.5rem;
+    }
+}

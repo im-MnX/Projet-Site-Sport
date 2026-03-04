@@ -9,26 +9,38 @@
     </div>
     <div class="table-responsive">
         <table class="table">
-            <thead>
-                <tr><th>Email</th><th>Rôles</th><th>Actions</th></tr>
-            </thead>
-            <tbody>
-            {% for utilisateur in utilisateurs %}
-                <tr>
-                    <td style="font-weight: 500;">{{ utilisateur.email }}</td>
-                    <td>
-                        {% for role in utilisateur.roles %}
-                            <span style="background-color: var(--secondary-color); color: white; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.75rem; margin-right: 0.25rem;">{{ role }}</span>
-                        {% endfor %}
-                    </td>
-                    <td>
-                        <div style="display: flex; gap: 0.5rem;">
-                            <a href="{{ path('app_admin_utilisateur_show', {'idUtilisateur': utilisateur.idUtilisateur}) }}" class="btn btn-sm btn-info"><i class="fa-solid fa-eye"></i></a>
-                            <a href="{{ path('app_admin_utilisateur_edit', {'idUtilisateur': utilisateur.idUtilisateur}) }}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen"></i></a>
-                        </div>
-                    </td>
-                </tr>
-            {% else %}
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Rôles</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for utilisateur in utilisateurs %}
+                    <tr>
+                        <td>
+                            <div style="font-weight: 600; color: var(--text-color);">{{ utilisateur.email }}</div>
+                        </td>
+                        <td>
+                            {% for role in utilisateur.roles %}
+                                <span class="badge" style="background-color: #f1f5f9; color: var(--text-muted); border: 1px solid var(--border-color); margin-right: 0.25rem; padding: 0.3rem 0.6rem;">
+                                    {{ role }}
+                                </span>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <a href="{{ path('app_admin_utilisateur_show', {'idUtilisateur': utilisateur.idUtilisateur}) }}" class="btn btn-sm btn-info" title="Voir">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                                <a href="{{ path('app_admin_utilisateur_edit', {'idUtilisateur': utilisateur.idUtilisateur}) }}" class="btn btn-sm btn-warning" title="Modifier">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
                 <tr>
                     <td colspan="3" style="text-align: center; padding: 2rem;">
                         <div style="color: var(--text-muted); margin-bottom: 1rem;">

@@ -37,6 +37,7 @@
 										{% for a in visibleAlbums %}
 											<a href="{{ path('album_show', {'idAlbum': a.idAlbum}) }}"
 											   class="gallery-cat-link {% if a.idAlbum == album.idAlbum %}active{% endif %}">
+												<i class="far fa-folder"></i>
 												{{ a.description }}
 											</a>
 										{% endfor %}
@@ -108,6 +109,31 @@
 	{% endif %}
 
 	<script>
+		const initGalleryDropdowns = () => {
+			const dropdowns = document.querySelectorAll('.gallery-cat-dropdown');
+			
+			dropdowns.forEach(dropdown => {
+				const btn = dropdown.querySelector('.gallery-cat-btn');
+				
+				btn.addEventListener('click', (e) => {
+					e.stopPropagation();
+					
+					// Close other dropdowns
+					dropdowns.forEach(other => {
+						if (other !== dropdown) other.classList.remove('is-open');
+					});
+					
+					// Toggle current
+					dropdown.classList.toggle('is-open');
+				});
+			});
+			
+			// Close on click outside
+			document.addEventListener('click', () => {
+				dropdowns.forEach(d => d.classList.remove('is-open'));
+			});
+		};
+
 		const initLightbox = () => {
 const lightbox = document.getElementById('lightbox');
 if (! lightbox) 
@@ -211,7 +237,13 @@ nextBtn && nextBtn.click();
 };
 
 // Run on initial load and Turbo navigation
-document.addEventListener('turbo:load', initLightbox);
-document.addEventListener('DOMContentLoaded', initLightbox);
+document.addEventListener('turbo:load', () => {
+    initLightbox();
+    initGalleryDropdowns();
+});
+document.addEventListener('DOMContentLoaded', () => {
+    initLightbox();
+    initGalleryDropdowns();
+});
 	</script>
 {% endblock %}

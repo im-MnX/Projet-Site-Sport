@@ -18,8 +18,11 @@ class Evenement
     #[ORM\Column(name: "nom", length: 100)]
     private ?string $nom = null;
 
-    #[ORM\Column(name: "dateEvenement", type: Types::DATE_MUTABLE)]
-    private ?\DateTime $dateEvenement = null;
+    #[ORM\Column(name: "dateDebut", type: Types::DATE_MUTABLE)]
+    private ?\DateTime $dateDebut = null;
+
+    #[ORM\Column(name: "dateFin", type: Types::DATE_MUTABLE)]
+    private ?\DateTime $dateFin = null;
 
     #[ORM\Column(name: "images", length: 255, nullable: true)]
     private ?string $images = null;
@@ -60,14 +63,25 @@ class Evenement
         return $this;
     }
 
-    public function getDateEvenement(): ?\DateTime
+    public function getDateDebut(): ?\DateTime
     {
-        return $this->dateEvenement;
+        return $this->dateDebut;
     }
 
-    public function setDateEvenement(\DateTime $dateEvenement): static
+    public function setDateDebut(\DateTime $dateDebut): static
     {
-        $this->dateEvenement = $dateEvenement;
+        $this->dateDebut = $dateDebut;
+        return $this;
+    }
+
+    public function getDateFin(): ?\DateTime
+    {
+        return $this->dateFin;
+    }
+
+    public function setDateFin(\DateTime $dateFin): static
+    {
+        $this->dateFin = $dateFin;
         return $this;
     }
 

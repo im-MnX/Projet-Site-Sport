@@ -149,6 +149,9 @@
                 <a href="{{ path('app_admin_document_index') }}" class="nav-link {% if 'admin_document' in app.request.get('_route') %}active{% endif %}">
                     <i class="fa-solid fa-file-invoice"></i> Documents
                 </a>
+                <a href="{{ path('app_admin_categorie_document_index') }}" class="nav-link {% if 'admin_categorie_document' in app.request.get('_route') %}active{% endif %}">
+                    <i class="fa-solid fa-tags"></i> Catégories de Documents
+                </a>
                 <a href="{{ path('app_admin_about_index') }}" class="nav-link {% if 'admin_about' in app.request.get('_route') %}active{% endif %}">
                     <i class="fa-solid fa-info-circle"></i> Présentation
                 </a>

@@ -26,7 +26,22 @@
             <table class="table">
                 <tbody>
                     <tr><th style="width: 40%;">Nom</th><td>{{ evenement.nom }}</td></tr>
-                    <tr><th>Date</th><td>{{ evenement.dateEvenement ? evenement.dateEvenement|date('d/m/Y') : '-' }}</td></tr>
+                    <tr>
+                        <th style="width: 40%;">
+                            {% if evenement.dateDebut == evenement.dateFin %}
+                                Date
+                            {% else %}
+                                Dates
+                            {% endif %}
+                        </th>
+                        <td>
+                            {% if evenement.dateDebut == evenement.dateFin %}
+                                {{ evenement.dateDebut|date('d/m/Y') }}
+                            {% else %}
+                                Du {{ evenement.dateDebut|date('d/m') }} au {{ evenement.dateFin|date('d/m/Y') }}
+                            {% endif %}
+                        </td>
+                    </tr>
                     <tr><th>Horaire</th><td>{{ evenement.horaire ? evenement.horaire|date('H:i') : '-' }}</td></tr>
                     <tr><th>Description</th><td>{{ evenement.description }}</td></tr>
                 </tbody>
