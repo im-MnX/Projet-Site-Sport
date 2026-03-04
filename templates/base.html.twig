@@ -24,7 +24,7 @@
 		<header class="site-header">
 			<nav class="site-nav" role="navigation" aria-label="Main navigation">
 				<div class="nav-group-left">
-									<div class="nav-social-group">
+					<div class="nav-social-group">
 						<a class="nav-social-btn nav-social-fb" href="https://www.facebook.com/angers.nat.synchro" target="_blank" title="Facebook" aria-label="Facebook">
 							<i class="fab fa-facebook-f"></i>
 						</a>
@@ -35,7 +35,7 @@
 							<i class="bi bi-tiktok"></i>
 						</a>
 					</div>
-									<div class="site-dropdown" data-dropdown>
+					<div class="site-dropdown" data-dropdown>
 						<button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
 							Le Club
 							<i class="fas fa-chevron-down site-chevron"></i>
@@ -95,30 +95,30 @@
 
 		<script>
 			// Burger menu toggle
-			(function() {
-				const burger = document.getElementById('burgerToggle');
-				const navLeft = document.getElementById('navLeft');
-				const navRight = document.getElementById('navRight');
+(function () {
+const burger = document.getElementById('burgerToggle');
+const navLeft = document.getElementById('navLeft');
+const navRight = document.getElementById('navRight');
 
-				if (burger) {
-					burger.addEventListener('click', function() {
-						const isOpen = burger.classList.toggle('active');
-						navLeft.classList.toggle('mobile-open');
-						navRight.classList.toggle('mobile-open');
-						burger.setAttribute('aria-expanded', isOpen);
+if (burger) {
+burger.addEventListener('click', function () {
+const isOpen = burger.classList.toggle('active');
+navLeft.classList.toggle('mobile-open');
+navRight.classList.toggle('mobile-open');
+burger.setAttribute('aria-expanded', isOpen);
 
-						// Close all dropdowns when closing burger menu
-						if (!isOpen) {
-							document.querySelectorAll('.nav-item[data-dropdown]').forEach(function(d) {
-								d.classList.remove('dropdown-open');
-							});
-						}
-					});
+// Close all dropdowns when closing burger menu
+if (! isOpen) {
+document.querySelectorAll('.nav-item[data-dropdown]').forEach(function (d) {
+d.classList.remove('dropdown-open');
+});
+}
+});
 
-					// Close menu when clicking a dropdown-item link (actual page navigation)
-					document.querySelectorAll('.nav-left .dropdown-item, .nav-right .nav-item').forEach(function(link) {
-						link.addEventListener('click', function() {
-							if (window.innerWidth <= 768) {
+// Close menu when clicking a dropdown-item link (actual page navigation)
+document.querySelectorAll('.nav-left .dropdown-item, .nav-right .nav-item').forEach(function (link) {
+link.addEventListener('click', function () {
+if (window.innerWidth<= 768) {
 								burger.classList.remove('active');
 								navLeft.classList.remove('mobile-open');
 								navRight.classList.remove('mobile-open');
@@ -129,23 +129,26 @@
 				}
 
 				// Mobile dropdown toggle (click instead of hover)
-				document.querySelectorAll('.nav-item[data-dropdown] > .dropdown-toggle').forEach(function(toggle) {
-					toggle.addEventListener('click', function(e) {
-						if (window.innerWidth <= 768) {
-							e.preventDefault();
-							e.stopPropagation();
-							const parent = toggle.closest('.nav-item[data-dropdown]');
-							// Close other dropdowns
-							document.querySelectorAll('.nav-item[data-dropdown]').forEach(function(d) {
-								if (d !== parent) d.classList.remove('dropdown-open');
-							});
-							parent.classList.toggle('dropdown-open');
-						}
-					});
-				});
-			})();
-		</script>
+				document.querySelectorAll('.nav-item[data-dropdown]>.dropdown - toggle ').forEach(function(toggle) {
+ toggle.addEventListener('click', function (e) {
+if (window.innerWidth <= 768) {
+e.preventDefault();
+e.stopPropagation();
+const parent = toggle.closest('.nav-item[data-dropdown]');
+// Close other dropdowns
+document.querySelectorAll('.nav-item[data-dropdown]').forEach(function (d) {
+if (d !== parent) 
+d.classList.remove('dropdown-open');
 
-	</body>
-</html>
+});
+parent.classList.toggle('dropdown-open');
+}
+});
+}
+);
+}
+)();
+</script>
 
+				</body>
+			</html>
