@@ -1,0 +1,13 @@
+{% extends 'admin_base.html.twig' %}
+{% block title %}Nouveau Résultat{% endblock %}
+{% block page_title %}Ajouter un Résultat{% endblock %}
+{% block body %}
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">Informations du résultat</h2>
+    </div>
+    <div class="card-body">
+        {{ include('admin_resultat/_form.html.twig') }}
+    </div>
+</div>
+{% endblock %}

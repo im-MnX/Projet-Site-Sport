@@ -1,13 +1,13 @@
 {% extends 'admin_base.html.twig' %}
-
 {% block title %}Modifier la Catégorie{% endblock %}
-
 {% block page_title %}Modifier la Catégorie{% endblock %}
-
 {% block body %}
-    <div class="card">
-        <div class="card-body">
-            {{ include('admin_categorie_document/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
-        </div>
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">Informations de la catégorie</h2>
     </div>
+    <div class="card-body">
+        {{ include('admin_categorie_document/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+    </div>
+</div>
 {% endblock %}

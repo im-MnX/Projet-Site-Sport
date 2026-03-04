@@ -53,6 +53,12 @@
                                 <a href="{{ path('app_admin_actualite_edit', {'idActualite': actualite.idActualite}) }}" class="btn btn-sm btn-warning" title="Modifier">
                                     <i class="fa-solid fa-pen"></i>
                                 </a>
+                                <form method="post" action="{{ path('app_admin_actualite_delete', {'idActualite': actualite.idActualite}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette actualité ?');" style="display: inline-block;">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ actualite.idActualite) }}">
+                                    <button class="btn btn-sm btn-outline-danger" title="Supprimer">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </form>
                             </div>
                         </td>
                     </tr>

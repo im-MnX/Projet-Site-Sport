@@ -1,0 +1,50 @@
+{% extends 'admin_base.html.twig' %}
+{% block title %}Gestion des Résultats{% endblock %}
+{% block page_title %}Résultats{% endblock %}
+{% block body %}
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">Sections de la page Résultats</h2>
+        <a href="{{ path('app_admin_resultat_new') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Nouveau résultat</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr><th>Titre</th><th>Contenu</th><th>Actions</th></tr>
+            </thead>
+            <tbody>
+            {% for resultat in resultats %}
+                <tr>
+                    <td>
+                        <div style="font-weight: 500;">{{ resultat.titre }}</div>
+                    </td>
+                    <td style="color: var(--text-muted);">{{ resultat.contenu|striptags|slice(0, 80) }}...</td>
+                    <td>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <a href="{{ path('app_admin_resultat_show', {'id': resultat.idResultat}) }}" class="btn btn-sm btn-info" title="Voir"><i class="fa-solid fa-eye"></i></a>
+                            <a href="{{ path('app_admin_resultat_edit', {'id': resultat.idResultat}) }}" class="btn btn-sm btn-warning" title="Modifier"><i class="fa-solid fa-pen"></i></a>
+                            <form method="post" action="{{ path('app_admin_resultat_delete', {'id': resultat.idResultat}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce résultat ?');" style="display: inline-block;">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ resultat.idResultat) }}">
+                                <button class="btn btn-sm btn-outline-danger" title="Supprimer">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3" style="text-align: center; padding: 2rem;">
+                        <div style="color: var(--text-muted); margin-bottom: 1rem;">
+                            <i class="fa-regular fa-file-lines" style="font-size: 2rem;"></i>
+                            <p style="margin-top: 0.5rem;">Aucun résultat trouvé</p>
+                        </div>
+                        <a href="{{ path('app_admin_resultat_new') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Créer un résultat</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

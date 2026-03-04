@@ -18,8 +18,14 @@
                     <td style="font-weight: 500;">{{ typeEvenement.libelleTypeEvenement }}</td>
                     <td>
                         <div style="display: flex; gap: 0.5rem;">
-                            <a href="{{ path('app_admin_type_evenement_show', {'id': typeEvenement.idTypeEvenement}) }}" class="btn btn-sm btn-info"><i class="fa-solid fa-eye"></i></a>
-                            <a href="{{ path('app_admin_type_evenement_edit', {'id': typeEvenement.idTypeEvenement}) }}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen"></i></a>
+                            <a href="{{ path('app_admin_type_evenement_show', {'id': typeEvenement.idTypeEvenement}) }}" class="btn btn-sm btn-info" title="Voir"><i class="fa-solid fa-eye"></i></a>
+                            <a href="{{ path('app_admin_type_evenement_edit', {'id': typeEvenement.idTypeEvenement}) }}" class="btn btn-sm btn-warning" title="Modifier"><i class="fa-solid fa-pen"></i></a>
+                            <form method="post" action="{{ path('app_admin_type_evenement_delete', {'id': typeEvenement.idTypeEvenement}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce type d\'événement ?');" style="display: inline-block;">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ typeEvenement.idTypeEvenement) }}">
+                                <button class="btn btn-sm btn-outline-danger" title="Supprimer">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </form>
                         </div>
                     </td>
                 </tr>

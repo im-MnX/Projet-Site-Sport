@@ -9,10 +9,10 @@ use Symfony\Component\Routing\Attribute\Route;
 final class ResultatsController extends AbstractController
 {
     #[Route('/resultats', name: 'app_resultats')]
-    public function index(): Response
+    public function index(\App\Repository\ResultatRepository $resultatRepository): Response
     {
         return $this->render('resultats/resultats.html.twig', [
-            'controller_name' => 'ResultatsController',
+            'resultats' => $resultatRepository->findAll(),
         ]);
     }
 }
