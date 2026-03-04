@@ -74,7 +74,10 @@
 														{% if event.dateDebut == event.dateFin %}
 															{{ event.dateDebut|date('d F Y') }}
 														{% else %}
-															Du {{ event.dateDebut|date('d/m') }} au {{ event.dateFin|date('d/m/Y') }}
+															Du
+															{{ event.dateDebut|date('d/m') }}
+															au
+															{{ event.dateFin|date('d/m/Y') }}
 														{% endif %}
 													</span>
 												</div>
@@ -104,9 +107,6 @@
 										</div>
 									</div>
 								{% endfor %}
-
-								<!-- Indicators (Moved outside wrapper for z-index safety) -->
-								<!-- Removed from here to place outside -->
 
 							{% else %}
 								<div class="no-event">
@@ -141,6 +141,7 @@ if (dots.length > 0)
 dots[currentIndex].classList.remove('active');
 
 
+
 // Update index
 currentIndex = index;
 
@@ -148,6 +149,8 @@ currentIndex = index;
 slides[currentIndex].classList.add('active');
 if (dots.length > 0) 
 dots[currentIndex].classList.add('active');
+
+
 
 }
 
@@ -234,8 +237,12 @@ const itemsToShow = () => {
 if (window.innerWidth > 1024) 
 return 3;
 
+
+
 if (window.innerWidth > 640) 
 return 2;
+
+
 
 return 1;
 };
@@ -247,6 +254,7 @@ const dot = document.createElement('button');
 dot.classList.add('news-dot');
 if (i === 0) 
 dot.classList.add('active');
+
 
 
 dot.addEventListener('click', () => goToSlide(i));

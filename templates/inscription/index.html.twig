@@ -16,82 +16,90 @@
             </header>
 
             {% if inscription %}
-            <div class="registration-grid">
+            <div class="row g-4">
                 
-                <!-- Section 1 : Permanences & HelloAsso -->
-                <section class="registration-card glass-card permanences-card">
-                    <div class="card-icon">
-                        <i class="fas fa-calendar-alt"></i>
-                    </div>
-                    <h3>Permanences au club</h3>
-                    <div class="permanences-content">
-                        {{ inscription.permanencesTexte|raw }}
-                    </div>
-                    
-                    {% if inscription.lienHelloasso %}
-                    <div class="action-footer">
-                        <a href="{{ inscription.lienHelloasso }}"
-                            class="btn-helloasso-modern"
-                            target="_blank"
-                            rel="noopener noreferrer">
-                            <span>S'inscrire via HelloAsso</span>
-                            <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </div>
-                    {% endif %}
-                </section>
-
-                <!-- Section 2 : Documents -->
-                <section class="registration-card glass-card documents-card">
-                    <div class="card-icon">
-                        <i class="fas fa-file-download"></i>
-                    </div>
-                    <h3>Dossier d'inscription</h3>
-                    <p class="card-desc">Téléchargez et complétez les documents nécessaires :</p>
-                    
-                    <div class="documents-grid-modern">
-                        {% for doc in documents %}
-                            <a href="{{ asset(doc.filename) }}" class="doc-item" target="_blank">
-                                {% if doc.filename ends with '.pdf' %}
-                                    <i class="far fa-file-pdf pdf-icon"></i>
-                                {% elseif doc.filename ends with '.doc' or doc.filename ends with '.docx' %}
-                                    <i class="far fa-file-word word-icon"></i>
-                                {% else %}
-                                    <i class="far fa-file-alt"></i>
-                                {% endif %}
-                                <div class="doc-info">
-                                    <span class="doc-name">{{ doc.titre }}</span>
-                                    <span class="doc-ext">{{ doc.filename|split('.')|last|upper }}</span>
-                                </div>
+                <div class="col-md-6">
+                    <section class="registration-card glass-card permanences-card h-100">
+                        <div class="card-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3>Permanences au club</h3>
+                        <div class="permanences-content">
+                            {{ inscription.permanencesTexte|raw }}
+                        </div>
+                        
+                        {% if inscription.lienHelloasso %}
+                        <div class="action-footer">
+                            <a href="{{ inscription.lienHelloasso }}"
+                                class="btn-helloasso-modern"
+                                target="_blank"
+                                rel="noopener noreferrer">
+                                <span>S'inscrire via HelloAsso</span>
+                                <i class="fas fa-external-link-alt"></i>
                             </a>
-                        {% else %}
-                            <p class="card-desc">Aucun document disponible pour le moment.</p>
-                        {% endfor %}
-                    </div>
-                </section>
-
-                <!-- Section 3 : Contact -->
-                <section class="registration-card glass-card contact-card-modern">
-                    <div class="contact-header">
-                        <div class="contact-avatar-wrapper">
-                            <img src="{{ asset(inscription.contactPhoto ?? 'images/RachelLeBozec.jpg') }}" alt="{{ inscription.contactNom ?? 'Contact' }}">
                         </div>
-                        <div class="contact-title">
-                            <h3>{{ inscription.contactNom ?? 'Secrétariat' }}</h3>
-                            <span class="contact-role">Responsable Inscriptions</span>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-body">
-                        <p>{{ inscription.contactTexte ?? 'Pour toutes nouvelles inscriptions, contactez le secrétariat par mail' }}</p>
-                        {% if inscription.contactEmail %}
-                        <a href="mailto:{{ inscription.contactEmail }}" class="contact-email-btn">
-                            <i class="far fa-envelope"></i>
-                            {{ inscription.contactEmail }}
-                        </a>
                         {% endif %}
-                    </div>
-                </section>
+                    </section>
+                </div>
+
+                <div class="col-md-6">
+                    <section class="registration-card glass-card documents-card h-100">
+                        <div class="card-icon">
+                            <i class="fas fa-file-download"></i>
+                        </div>
+                        <h3>Dossier d'inscription</h3>
+                        <p class="card-desc">Téléchargez et complétez les documents nécessaires :</p>
+                        
+                        <div class="documents-grid-modern">
+                            {% for doc in documents %}
+                                <a href="{{ asset(doc.filename) }}" class="doc-item" target="_blank">
+                                    {% if doc.filename ends with '.pdf' %}
+                                        <i class="far fa-file-pdf pdf-icon"></i>
+                                    {% elseif doc.filename ends with '.doc' or doc.filename ends with '.docx' %}
+                                        <i class="far fa-file-word word-icon"></i>
+                                    {% else %}
+                                        <i class="far fa-file-alt"></i>
+                                    {% endif %}
+                                    <div class="doc-info">
+                                        <span class="doc-name">{{ doc.titre }}</span>
+                                        <span class="doc-ext">{{ doc.filename|split('.')|last|upper }}</span>
+                                    </div>
+                                </a>
+                            {% else %}
+                                <p class="card-desc">Aucun document disponible pour le moment.</p>
+                            {% endfor %}
+                        </div>
+                    </section>
+                </div>
+
+                <div class="col-12">
+                    <section class="registration-card glass-card contact-card-modern">
+                        <div class="row g-4 align-items-center">
+                            <div class="col-auto">
+                                <div class="contact-header">
+                                    <div class="contact-avatar-wrapper">
+                                        <img src="{{ asset(inscription.contactPhoto ?? 'images/RachelLeBozec.jpg') }}" alt="{{ inscription.contactNom ?? 'Contact' }}">
+                                    </div>
+                                    <div class="contact-title">
+                                        <h3>{{ inscription.contactNom ?? 'Secrétariat' }}</h3>
+                                        <span class="contact-role">Responsable Inscriptions</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="contact-body">
+                                    <p>{{ inscription.contactTexte ?? 'Pour toutes nouvelles inscriptions, contactez le secrétariat par mail' }}</p>
+                                    {% if inscription.contactEmail %}
+                                    <a href="mailto:{{ inscription.contactEmail }}" class="contact-email-btn">
+                                        <i class="far fa-envelope"></i>
+                                        {{ inscription.contactEmail }}
+                                    </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
 
             </div>
             {% else %}

@@ -14,39 +14,44 @@
 			<h1>Événements</h1>
 			<span class="events-subtitle">Retrouvez tous les rendez-vous du club</span>
 		</header>
-		<div class="actualites-container">
+		<div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
 			{% for item in evenements %}
 				{% set type = item.typeEvenement.libelleTypeEvenement|default('Événement') %}
-				<article class="modern-card">
-					<div class="card-image-wrapper">
-						<div class="event-type-badge">{{ type }}</div>
-						<div class="card-date-floating">
-							{% if item.dateDebut == item.dateFin %}
-								{{ item.dateDebut|date('d/m/Y') }}
-							{% else %}
-								Du {{ item.dateDebut|date('d/m') }} au {{ item.dateFin|date('d/m/Y') }}
-							{% endif %}
+				<div class="col">
+					<article class="modern-card h-100">
+						<div class="card-image-wrapper">
+							<div class="event-type-badge">{{ type }}</div>
+							<div class="card-date-floating">
+								{% if item.dateDebut == item.dateFin %}
+									{{ item.dateDebut|date('d/m/Y') }}
+								{% else %}
+									Du {{ item.dateDebut|date('d/m') }} au {{ item.dateFin|date('d/m/Y') }}
+								{% endif %}
+							</div>
+							<div class="card-placeholder-img">
+								{% if item.images %}
+									<img src="{{ asset('uploads/evenements/' ~ item.images) }}" alt="{{ item.nom }}" class="actualite-image">
+								{% endif %}
+							</div>
 						</div>
-						<div class="card-placeholder-img">
-							{% if item.images %}
-								<img src="{{ asset('uploads/evenements/' ~ item.images) }}" alt="{{ item.nom }}" class="actualite-image">
-							{% endif %}
+						<div class="card-body">
+							<h3 class="card-title">{{ item.nom }}</h3>
+							<p class="card-excerpt">{{ (item.description|striptags|slice(0, 100) ~ '...')|raw }}</p>
+							<a href="{{ path('app_evenement_show', { id: item.idEvenement }) }}" class="read-more">Lire la suite
+								<i class="fas fa-arrow-right"></i>
+							</a>
 						</div>
-					</div>
-					<div class="card-body">
-						<h3 class="card-title">{{ item.nom }}</h3>
-						<p class="card-excerpt">{{ (item.description|striptags|slice(0, 100) ~ '...')|raw }}</p>
-						<a href="{{ path('app_evenement_show', { id: item.idEvenement }) }}" class="read-more">Lire la suite
-							<i class="fas fa-arrow-right"></i>
-						</a>
-					</div>
-				</article>
+					</article>
+				</div>
 			{% else %}
-				<div class="empty-shop" style="grid-column: 1 / -1;">
-					<i class="bi bi-calendar-x" style="font-size: 3rem; margin-bottom: 20px; color: #ccc;"></i>
-					<h3>Aucun événement prévu pour le moment</h3>
+				<div class="col-12">
+					<div class="empty-shop">
+						<i class="bi bi-calendar-x" style="font-size: 3rem; margin-bottom: 20px; color: #ccc;"></i>
+						<h3>Aucun événement prévu pour le moment</h3>
+					</div>
 				</div>
 			{% endfor %}
 		</div>
 	</div>
 {% endblock %}
+

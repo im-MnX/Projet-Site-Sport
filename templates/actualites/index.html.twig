@@ -17,9 +17,10 @@
 			<h1>Actualités</h1>
 			<span class="news-subtitle">Les dernières nouvelles du club</span>
 		</header>
-		<div class="actualites-container">
+		<div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
 			{% for actualite in actualites %}
-					<article class="modern-card">
+				<div class="col">
+					<article class="modern-card h-100">
                         <div class="card-image-wrapper">
                             <div class="card-date-floating">{{ actualite.date ? actualite.date|date('d/m/Y') : '' }}</div>
                             <div class="card-placeholder-img">
@@ -32,10 +33,13 @@
                             <a href="{{ path('app_actualites_show', { id: actualite.idActualite }) }}" class="read-more">Lire la suite <i class="fas fa-arrow-right"></i></a>
                         </div>
 					</article>
+				</div>
 			{% else %}
-				<div class="empty-shop" style="grid-column: 1 / -1;">
-					<i class="bi bi-newspaper" style="font-size: 3rem; margin-bottom: 20px; color: #ccc;"></i>
-					<h3>Aucune actualité disponible pour le moment</h3>
+				<div class="col-12">
+					<div class="empty-shop">
+						<i class="bi bi-newspaper" style="font-size: 3rem; margin-bottom: 20px; color: #ccc;"></i>
+						<h3>Aucune actualité disponible pour le moment</h3>
+					</div>
 				</div>
 			{% endfor %}
 		</div>
