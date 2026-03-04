@@ -44,6 +44,12 @@
                             <a href="{{ path('app_admin_partenaires_edit', {'id': partenaire.id}) }}" class="btn btn-sm btn-warning" title="Modifier">
                                 <i class="fa-solid fa-pen"></i>
                             </a>
+                            <form method="post" action="{{ path('app_admin_partenaires_delete', {'id': partenaire.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce partenaire ?');" style="display: inline-block;">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ partenaire.id) }}">
+                                <button class="btn btn-sm btn-outline-danger" title="Supprimer">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </form>
                         </div>
                     </td>
                 </tr>

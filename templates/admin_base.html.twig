@@ -158,6 +158,9 @@
                 <a href="{{ path('app_admin_inscription_index') }}" class="nav-link {% if 'admin_inscription' in app.request.get('_route') %}active{% endif %}">
                     <i class="fa-solid fa-person-swimming"></i> Inscription
                 </a>
+                <a href="{{ path('app_admin_resultat_index') }}" class="nav-link {% if 'admin_resultat' in app.request.get('_route') %}active{% endif %}">
+                    <i class="fa-solid fa-trophy"></i> Résultats
+                </a>
                 <a href="{{ path('app_admin_quick_access_index') }}" class="nav-link {% if 'admin_quick_access' in app.request.get('_route') %}active{% endif %}">
                     <i class="fa-solid fa-house"></i> Accueil
                 </a>

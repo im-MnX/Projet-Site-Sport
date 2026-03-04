@@ -50,13 +50,15 @@
                     </td>
                     <td>
                         <div style="display: flex; gap: 0.5rem;">
-                            <a href="{{ path('app_admin_quick_access_edit', {'id': qa.id}) }}" class="btn btn-sm btn-warning">
+                            <a href="{{ path('app_admin_quick_access_edit', {'id': qa.id}) }}" class="btn btn-sm btn-warning" title="Modifier">
                                 <i class="fa-solid fa-pen"></i>
                             </a>
                             <form method="post" action="{{ path('app_admin_quick_access_delete', {'id': qa.id}) }}"
                                   onsubmit="return confirm('Supprimer cette case ?');">
                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ qa.id) }}">
-                                <button class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></button>
+                                <button class="btn btn-sm btn-outline-danger" title="Supprimer">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
                             </form>
                         </div>
                     </td>

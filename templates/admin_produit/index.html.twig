@@ -50,12 +50,18 @@
 									<a href="{{ produit.lien }}" class="btn btn-sm btn-outline-primary" title="Lien Boutique" target="_blank">
 										<i class="fa-solid fa-link"></i>
 									</a>
-									<a href="{{ path('app_admin_produit_show', {'idProduit': produit.idProduit}) }}" class="btn btn-sm btn-info" title="Voir details">
+									<a href="{{ path('app_admin_produit_show', {'idProduit': produit.idProduit}) }}" class="btn btn-sm btn-info" title="Voir">
 										<i class="fa-solid fa-eye"></i>
 									</a>
 									<a href="{{ path('app_admin_produit_edit', {'idProduit': produit.idProduit}) }}" class="btn btn-sm btn-warning" title="Modifier">
 										<i class="fa-solid fa-pen"></i>
 									</a>
+									<form method="post" action="{{ path('app_admin_produit_delete', {'idProduit': produit.idProduit}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');" style="display: inline-block;">
+										<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ produit.idProduit) }}">
+										<button class="btn btn-sm btn-outline-danger" title="Supprimer">
+											<i class="fa-solid fa-trash"></i>
+										</button>
+									</form>
 								</div>
 							</td>
 						</tr>

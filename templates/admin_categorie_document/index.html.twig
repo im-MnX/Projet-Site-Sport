@@ -1,60 +1,52 @@
 {% extends 'admin_base.html.twig' %}
-
 {% block title %}Gestion des Catégories de Documents{% endblock %}
-
 {% block page_title %}Catégories de Documents{% endblock %}
-
 {% block body %}
-    <div class="card">
-        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
-            <h2 class="card-title">Liste des Catégories</h2>
-            <a href="{{ path('app_admin_categorie_document_new') }}" class="btn btn-primary">
-                <i class="fa-solid fa-plus"></i> Ajouter une catégorie
-            </a>
-        </div>
-
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nom</th>
-                        <th>Nombre de documents</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for categorie in categories %}
-                    <tr>
-                        <td>{{ categorie.id }}</td>
-                        <td><strong>{{ categorie.nom }}</strong></td>
-                        <td>
-                            <span class="badge bg-secondary">{{ categorie.documents|length }}</span>
-                        </td>
-                        <td style="display: flex; gap: 5px;">
-                            <a href="{{ path('app_admin_categorie_document_edit', {'id': categorie.id}) }}" class="btn btn-sm btn-outline-primary">
-                                <i class="fa-solid fa-pen"></i> Modifier
-                            </a>
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">Liste des Catégories</h2>
+        <a href="{{ path('app_admin_categorie_document_new') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Ajouter une catégorie</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr><th>Nom</th><th>Documents</th><th style="width: 150px;">Actions</th></tr>
+            </thead>
+            <tbody>
+            {% for categorie in categories %}
+                <tr>
+                    <td>
+                        <div style="font-weight: 500;">{{ categorie.nom }}</div>
+                    </td>
+                    <td>
+                        <span class="badge" style="background: var(--bg-light); color: var(--primary-color); border: 1px solid var(--border-color); padding: 0.4rem 0.8rem; border-radius: 6px;">{{ categorie.documents|length }} documents</span>
+                    </td>
+                    <td>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <a href="{{ path('app_admin_categorie_document_edit', {'id': categorie.id}) }}" class="btn btn-sm btn-warning" title="Modifier"><i class="fa-solid fa-pen"></i></a>
+                            
                             <form method="post" action="{{ path('app_admin_categorie_document_delete', {'id': categorie.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?');" style="display: inline-block;">
                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ categorie.id) }}">
-                                <button class="btn btn-sm btn-outline-danger">
-                                    <i class="fa-solid fa-trash"></i> Supprimer
+                                <button class="btn btn-sm btn-outline-danger" title="Supprimer">
+                                    <i class="fa-solid fa-trash"></i>
                                 </button>
                             </form>
-                        </td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="4" style="text-align: center; padding: 2rem;">
-                            <p class="text-muted">Aucune catégorie trouvée</p>
-                            <a href="{{ path('app_admin_categorie_document_new') }}" class="btn btn-primary">
-                                <i class="fa-solid fa-plus"></i> Ajouter une catégorie
-                            </a>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3" style="text-align: center; padding: 4rem 2rem;">
+                        <div style="color: var(--text-muted); margin-bottom: 1.5rem;">
+                            <i class="fa-solid fa-folder-open" style="font-size: 3rem; opacity: 0.3;"></i>
+                            <p style="margin-top: 1rem; font-size: 1.1rem;">Aucune catégorie trouvée</p>
+                        </div>
+                        <a href="{{ path('app_admin_categorie_document_new') }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Créer une catégorie</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
+</div>
 {% endblock %}
