@@ -39,7 +39,7 @@
 
 body {
   font-family: 'Outfit', 'Inter', -apple-system, sans-serif;
-  background-color: var(--bg-main);
+  background-color: var(--bg-pale-blue) !important;
   color: var(--text-main);
   margin: 0;
   display: flex;
@@ -611,8 +611,8 @@ h1 {
 }
 
 .btn-hero:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 20px 40px rgba(var(--accent-rgb), 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(var(--accent-rgb), 0.3);
   background-color: var(--white);
   color: var(--primary);
 }

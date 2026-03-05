@@ -14,7 +14,7 @@
 }
 
 body {
-    background-color: var(--bg-pale);
+    background-color: var(--bg-pale-blue, #f0f7ff) !important;
 }
 
 .page-container {

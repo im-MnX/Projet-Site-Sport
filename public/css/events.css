@@ -9,7 +9,7 @@
 }
 
 body {
-    background-color: var(--bg-pale);
+    background-color: var(--bg-pale-blue, #f0f7ff) !important;
 }
 
 .page-container {
@@ -65,7 +65,7 @@ body {
 }
 
 .modern-card:hover {
-    transform: translateY(-12px);
+    transform: translateY(-4px);
     box-shadow: var(--card-shadow-hover);
 }
 
@@ -83,7 +83,7 @@ body {
 }
 
 .modern-card:hover .actualite-image {
-    transform: scale(1.08);
+    transform: none;
 }
 
 /* Type Badge */

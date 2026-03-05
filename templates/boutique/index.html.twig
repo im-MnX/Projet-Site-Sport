@@ -9,7 +9,11 @@
 
 {% block body %}
 <div class="page-container">
-    <h1>La Boutique du Club</h1>
+
+    <header class="boutique-header">
+        <h1>La Boutique du Club</h1>
+        <span class="boutique-subtitle">Articles &amp; équipements</span>
+    </header>
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4">
         {% for produit in produits %}

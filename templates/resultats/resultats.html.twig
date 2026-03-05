@@ -2,19 +2,32 @@
 
 {% block title %}Résultats{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/resultats.css') }}">
+{% endblock %}
+
 {% block body %}
 <div class="page-container">
-    <h1>Résultats</h1>
 
-    <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: var(--shadow-md);">
+    <header class="resultats-header">
+        <h1>Résultats</h1>
+        <span class="resultats-subtitle">Compétitions &amp; palmarès</span>
+    </header>
+
+    <div class="resultats-list">
         {% for resultat in resultats %}
-            <h2>{{ resultat.titre }}</h2>
-            <div style="margin-bottom: 20px;">
+            <div class="resultat-section">
+                <h2>
+                    <span class="resultat-num">{{ loop.index }}</span>
+                    {{ resultat.titre }}
+                </h2>
                 {{ resultat.contenu|raw }}
             </div>
         {% else %}
-            <p style="color: var(--text-muted); text-align: center; padding: 2rem;">Aucun résultat disponible pour le moment.</p>
+            <p class="resultats-empty"><i class="fa-solid fa-trophy"></i> Aucun résultat disponible pour le moment.</p>
         {% endfor %}
     </div>
+
 </div>
 {% endblock %}
