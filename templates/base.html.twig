@@ -88,66 +88,115 @@
 			</nav>
 
 		</header>
+
+		<!-- Header Mobile / Tablette -->
+		<header class="site-header-mobile d-xl-none">
+			<div class="mobile-navbar">
+				<a href="{{ path('home') }}"><img src="{{ asset('images/Logo_60ans.png') }}" alt="logo" class="site-logo-mobile"></a>
+				<div class="menu-btn" id="menu-toggle">
+					<div class="menu-btn_burger"></div>
+				</div>
+			</div>
+			
+			<div class="mobile-menu-container" id="navbarNav">
+				<nav class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+					<div class="nav-social-group justify-content-center mb-3">
+						<a class="nav-social-btn nav-social-fb" href="https://www.facebook.com/angers.nat.synchro" target="_blank" title="Facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+						<a class="nav-social-btn nav-social-ig" href="https://www.instagram.com/angers_nat_synchro/" target="_blank" title="Instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+						<a class="nav-social-btn nav-social-tt" href="https://www.tiktok.com/@angersnatsynchro" target="_blank" title="TikTok" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+					</div>
+					
+					<div class="mobile-dropdown-group">
+						<button class="nav-dropdown-toggle w-100 justify-content-between mobile-submenu-toggle">
+							Le Club
+							<i class="fas fa-chevron-down site-chevron"></i>
+						</button>
+						<div class="mobile-submenu">
+							<a class="nav-dropdown-link" href="{{ path('app_about') }}">Présentations du club</a>
+							<a class="nav-dropdown-link" href="{{ path('app_evenement') }}">Événements</a>
+							<a class="nav-dropdown-link" href="{{ path('app_actualites') }}">Actualités</a>
+							<a class="nav-dropdown-link" href="{{ asset(get_document_path('PLANNING_COURS')|default('PlanningCours/PlanningCours.pdf')) }}" target="_blank">Planning des cours</a>
+							<a class="nav-dropdown-link" href="{{ asset(get_document_path('PLANNING_COMPETITIONS')|default('PlanningCompetitions/PlanningCompetitions.pdf')) }}" target="_blank">Planning des compétitions</a>
+							<a class="nav-dropdown-link" href="{{ path('app_resultats') }}">Résultats</a>
+						</div>
+					</div>
+
+					<div class="mobile-dropdown-group mt-2">
+						<button class="nav-dropdown-toggle w-100 justify-content-between mobile-submenu-toggle">
+							Inscriptions
+							<i class="fas fa-chevron-down site-chevron"></i>
+						</button>
+						<div class="mobile-submenu">
+							<a class="nav-dropdown-link" href="{{ path('app_inscription') }}">Inscriptions annuelles</a>
+						</div>
+					</div>
+
+					<div class="nav-link-group flex-column mt-3 w-100" style="gap: 5px;">
+						<a class="nav-link-item w-100 justify-content-center" href="{{ path('album_show') }}">Galerie</a>
+						<a class="nav-link-item w-100 justify-content-center" href="{{ path('app_boutique') }}">Boutique</a>
+					</div>
+
+					<div class="d-flex justify-content-center mt-4 gap-3 border-top pt-3 border-secondary border-opacity-25">
+					{% if app.user %}
+						{% if is_granted('ROLE_ADMIN') %}
+							<a class="nav-link-item" href="{{ path('app_admin_dashboard') }}" title="Administration">
+								<i class="fa-solid fa-screwdriver-wrench"></i>
+							</a>
+						{% endif %}
+						<a class="nav-link-item site-logout-btn mx-0" href="{{ path('app_logout') }}" title="Déconnexion">
+							<i class="fa-solid fa-power-off"></i>
+						</a>
+					{% else %}
+						<a class="nav-link-item" href="{{ path('app_login') }}" title="Connexion">
+							<i class="fa-solid fa-user"></i>
+						</a>
+					{% endif %}
+					</div>
+				</nav>
+			</div>
+		</header>
 		{% block body %}{% endblock %}
 
 		{% include 'partials/footer.html.twig' %}
 
 		<script>
-			// Burger menu toggle
-(function () {
-const burger = document.getElementById('burgerToggle');
-const navLeft = document.getElementById('navLeft');
-const navRight = document.getElementById('navRight');
-
-if (burger) {
-burger.addEventListener('click', function () {
-const isOpen = burger.classList.toggle('active');
-navLeft.classList.toggle('mobile-open');
-navRight.classList.toggle('mobile-open');
-burger.setAttribute('aria-expanded', isOpen);
-
-// Close all dropdowns when closing burger menu
-if (! isOpen) {
-document.querySelectorAll('.nav-item[data-dropdown]').forEach(function (d) {
-d.classList.remove('dropdown-open');
-});
-}
-});
-
-// Close menu when clicking a dropdown-item link (actual page navigation)
-document.querySelectorAll('.nav-left .dropdown-item, .nav-right .nav-item').forEach(function (link) {
-link.addEventListener('click', function () {
-if (window.innerWidth<= 768) {
-								burger.classList.remove('active');
-								navLeft.classList.remove('mobile-open');
-								navRight.classList.remove('mobile-open');
-								burger.setAttribute('aria-expanded', 'false');
-							}
-						});
+			document.addEventListener('DOMContentLoaded', () => {
+				// Burger Menu Logic
+				const menuBtn = document.querySelector('.menu-btn');
+				const navbar = document.getElementById('navbarNav');
+				let menuOpen = false;
+				
+				if (menuBtn && navbar) {
+					menuBtn.addEventListener('click', () => {
+						if (!menuOpen) {
+							menuBtn.classList.add('open');
+							navbar.classList.add('show');
+							menuOpen = true;
+						} else {
+							menuBtn.classList.remove('open');
+							navbar.classList.remove('show');
+							menuOpen = false;
+						}
 					});
 				}
 
-				// Mobile dropdown toggle (click instead of hover)
-				document.querySelectorAll('.nav-item[data-dropdown]>.dropdown - toggle ').forEach(function(toggle) {
- toggle.addEventListener('click', function (e) {
-if (window.innerWidth <= 768) {
-e.preventDefault();
-e.stopPropagation();
-const parent = toggle.closest('.nav-item[data-dropdown]');
-// Close other dropdowns
-document.querySelectorAll('.nav-item[data-dropdown]').forEach(function (d) {
-if (d !== parent) 
-d.classList.remove('dropdown-open');
-
-});
-parent.classList.toggle('dropdown-open');
-}
-});
-}
-);
-}
-)();
-</script>
+				// Mobile Submenu Logic
+				const submenuToggles = document.querySelectorAll('.mobile-submenu-toggle');
+				submenuToggles.forEach(toggle => {
+					toggle.addEventListener('click', (e) => {
+						const submenu = e.currentTarget.nextElementSibling;
+						const icon = e.currentTarget.querySelector('.site-chevron');
+						if (submenu.classList.contains('open')) {
+							submenu.classList.remove('open');
+							icon.style.transform = 'rotate(0deg)';
+						} else {
+							submenu.classList.add('open');
+							icon.style.transform = 'rotate(180deg)';
+						}
+					});
+				});
+			});
+		</script>
 
 				</body>
 			</html>
