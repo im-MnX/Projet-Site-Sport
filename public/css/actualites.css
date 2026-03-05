@@ -63,6 +63,7 @@ body {
     display: flex;
     flex-direction: column;
     height: 100%;
+    position: relative;
 }
 
 .modern-card:hover {
@@ -134,6 +135,17 @@ body {
     text-decoration: none;
     font-size: 0.95rem;
     transition: gap 0.2s ease;
+}
+
+/* Stretched link to make the whole card clickable */
+.read-more::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
 }
 
 .read-more:hover {

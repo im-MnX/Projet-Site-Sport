@@ -97,6 +97,7 @@ body {
 
 .nav-group-right {
   justify-content: flex-end;
+  padding-right: 8vw;
 }
 
 .nav-link-group {
@@ -221,10 +222,10 @@ body {
 .nav-dropdown-card::before {
   content: '';
   position: absolute;
-  top: -15px;
-  left: 0;
-  width: 100%;
-  height: 20px;
+  top: -30px;
+  left: -20px;
+  width: calc(100% + 40px);
+  height: 40px;
   background: transparent;
 }
 
